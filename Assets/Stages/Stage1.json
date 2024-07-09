@@ -1,0 +1,25 @@
+{
+    "qaList": [
+        {
+            "answer": "RIZAL",
+            "question": "Best known for his political writings that inspired the Philippine revolution and ultimately led to his execution by the Spanish colonizers."
+        },
+        {
+            "answer": "MABINI",
+            "question": "Regarded as the \"utak ng himagsikan\" or \"brain of the revolution\" and is also considered as a national hero in the Philippines."
+        },
+        {
+            "answer": "KKK",
+            "question": "A revolutionary society founded in the Philippines by anti-Spanish colonialism Filipinos in 1892, whose ultimate goal was to regain independence for the country from Spain."
+        },
+        {
+            "answer": "BONIFACIO",
+            "question": "The founder of the Katipunan, a militant nationalist secret society that led the rebellion against Spain."
+        },
+        {
+            "answer": "DELPILAR",
+            "question": "He founded the Diariong Tagalog where he exposed the atrocities committed by the Spanish friars against the Filipinos of the time. The articles by Del Pilar sparked the defiance of ordinary Filipinos against the friars."
+        }
+
+    ]
+}
