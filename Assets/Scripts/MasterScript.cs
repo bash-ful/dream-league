@@ -1,23 +1,25 @@
 using System.Collections;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MasterScript : MonoBehaviour
 {
-    private const float BASE_ANSWER_TIME = 61.0f;
+    private const float BASE_ANSWER_TIME = 60;
     private bool isSomeCoroutineRunning = false;
-
+    public DialogueScript dialogueScript;
     public AnswerScript answerScript;
     public LetterScript letterScript;
     public StringGenerator stringGenerator;
     public TextAsset qaJson;
-    private QuestionsAndAnswers questionsAndAnswers;
+    private QAList qaList;
     public MonsterScript player, enemy;
     public SceneScript sceneScript;
     public TimerUI timerUI;
 
     private float answerTime;
+    private MonsterList monsterList;
+    public TextAsset monstersJson;
+
 
 
     void Start()
@@ -25,8 +27,15 @@ public class MasterScript : MonoBehaviour
         GameObject.Find("GameWin").GetComponent<Image>().enabled = false;
         GameObject.Find("GameLose").GetComponent<Image>().enabled = false;
         ResetAnswerTime(BASE_ANSWER_TIME);
-        questionsAndAnswers = JsonUtility.FromJson<QuestionsAndAnswers>(qaJson.text);
-        answerScript.ChangeQA(questionsAndAnswers);
+
+        dialogueScript.BeginDialogue();
+
+        monsterList = JsonUtility.FromJson<MonsterList>(monstersJson.text);
+        player.MonsterInit(monsterList);
+        enemy.MonsterInit(monsterList);
+
+        qaList = JsonUtility.FromJson<QAList>(qaJson.text);
+        answerScript.ChangeQA(qaList);
         ResetButtonLetters();
     }
 
@@ -37,7 +46,7 @@ public class MasterScript : MonoBehaviour
 
     void Update()
     {
-        if (isSomeCoroutineRunning)
+        if (isSomeCoroutineRunning || dialogueScript.dialogueActive)
         {
             return;
         }
@@ -52,29 +61,38 @@ public class MasterScript : MonoBehaviour
 
         string answer = answerScript.getAnswer();
         string inputtedAnswer = answerScript.GetInputtedAnswerText().text;
-        inputtedAnswer = Regex.Replace(inputtedAnswer, @"\s+", "");
+        if (inputtedAnswer.Contains("_"))
+        {
+            return;
+        }
         if (answer.Equals(inputtedAnswer))
         {
+            print("correct answer!");
             StartCoroutine(OnCorrectAnswer());
+        }
+        else
+        {
+            StartCoroutine(OnTimerEnd());
         }
 
     }
 
-    private void HideUI() {
+    private void HideUI()
+    {
         GameObject.Find("Letters").SetActive(false);
         GameObject.Find("QA").SetActive(false);
         GameObject.Find("Timer").SetActive(false);
+        GameObject.Find("Player").SetActive(false);
+        GameObject.Find("Enemy").SetActive(false);
+        GameObject.Find("Return").SetActive(false);
     }
 
     public IEnumerator OnCorrectAnswer()
     {
         isSomeCoroutineRunning = true;
-        yield return new WaitForSeconds(1);
         player.DealDamage(enemy);
-        Debug.Log($"correct! {player.GetName()} deals {player.GetDamage()} damage!");
         if (enemy.IsDead())
         {
-
             HideUI();
             GameObject.Find("GameWin").GetComponent<Image>().enabled = true;
             GiveRewards();
@@ -86,7 +104,8 @@ public class MasterScript : MonoBehaviour
         isSomeCoroutineRunning = false;
     }
 
-    private void GiveRewards() {
+    private void GiveRewards()
+    {
         GameObject.Find("DataSaverRealtime").GetComponent<DataSaver>().dts.dreamCoinAmount += 50;
         GameObject.Find("DataSaverRealtime").GetComponent<DataSaver>().SaveDataFn();
     }
@@ -95,7 +114,7 @@ public class MasterScript : MonoBehaviour
     {
         answerScript.ResetAnswerText();
         letterScript.EnableAllButtons();
-        answerScript.ChangeQA(questionsAndAnswers);
+        answerScript.ChangeQA(qaList);
         ResetButtonLetters();
     }
 

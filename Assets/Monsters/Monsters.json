@@ -1,0 +1,70 @@
+{
+    "monsterList": [
+        {
+            "name": "Chameleon Gecko",
+            "baseHealth": 50,
+            "baseDamage": 10,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Chameleon_Gecko"
+        },
+        {
+            "name": "Comet Behemoth",
+            "baseHealth": 100,
+            "baseDamage": 20,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Comet_Behemoth"
+        },
+        {
+            "name": "Crystal Golem",
+            "baseHealth": 500,
+            "baseDamage": 20,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Crystal_Golem"
+        },
+        {
+            "name": "Hippo",
+            "baseHealth": 250,
+            "baseDamage": 20,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Hippo"
+        },
+        {
+            "name": "Meteor Mantis",
+            "baseHealth": 20,
+            "baseDamage": 75,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Meteor_Mantis"
+        },
+        {
+            "name": "Phantom Owl",
+            "baseHealth": 50,
+            "baseDamage": 35,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Phantom_Owl"
+        },
+        {
+            "name": "Rock Tortoise",
+            "baseHealth": 250,
+            "baseDamage": 50,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Rock_Tortoise"
+        },
+        {
+            "name": "Ruin Jaguar",
+            "baseHealth": 250,
+            "baseDamage": 250,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Ruin_Jaguar"
+        },
+        {
+            "name": "Ruin Serpent",
+            "baseHealth": 100,
+            "baseDamage": 250,
+            "spritePath": "Aseprite/Entities/Static/Chapter 1/Ruin_Serpent"
+        },
+        {
+            "name": "Ancient Rhino",
+            "baseHealth": 100,
+            "baseDamage": 20,
+            "spritePath": "Assets/Resources/Aseprite/Entities/Animated/Ancient-Rhino"
+        },
+        {
+            "name": "Sleepy Bunny",
+            "baseHealth": 100,
+            "baseDamage": 20,
+            "spritePath": "Assets/Resources/Aseprite/Entities/Animated/Sleepy-Bunny"
+        }
+    ]
+}

@@ -1,24 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class QA
+{
+    public string answer;
+    public string question;
+}
+
+[System.Serializable]
+public class QAList
+{
+    public QA[] qaList;
+}
 public class AnswerScript : MonoBehaviour
 {
     private int nextIndex = 0;
     private string hiddenAnswer;
     private string answer, question;
-    private int questionIndex;
-    private int listMaxIndex;
+    private int qaIndex, qaCount;
 
-    public void ChangeQA(QuestionsAndAnswers questionsAndAnswers)
+    public void ChangeQA(QAList questionsAndAnswers)
     {
-        listMaxIndex = questionsAndAnswers.qaList.Count() - 1;
-        questionIndex = Random.Range(0, listMaxIndex);
-        answer = questionsAndAnswers.qaList[questionIndex].answer;
-        question = questionsAndAnswers.qaList[questionIndex].question;
+        qaCount = questionsAndAnswers.qaList.Count();
+        qaIndex = Random.Range(0, qaCount);
+        answer = questionsAndAnswers.qaList[qaIndex].answer;
+        question = questionsAndAnswers.qaList[qaIndex].question;
 
         ResetQuestionText();
         ResetAnswerText();
@@ -32,18 +41,15 @@ public class AnswerScript : MonoBehaviour
     public void ResetAnswerText()
     {
         nextIndex = 0;
-        // Create a string of underscores with spaces in between
-        hiddenAnswer = string.Join(" ", new string('_', answer.Length).ToCharArray());
+        hiddenAnswer = new string('_', answer.Length);
         GetInputtedAnswerText().text = hiddenAnswer;
     }
 
-    // Method to append a letter to the text
     public void AppendLetter(Text AnswerText, string letter)
     {
         if (nextIndex < hiddenAnswer.Length)
         {
-            // Find the index of the next underscore to replace, considering spaces
-            int realIndex = nextIndex * 2;
+            int realIndex = nextIndex;
             hiddenAnswer = hiddenAnswer.Remove(realIndex, 1).Insert(realIndex, letter);
             nextIndex++;
             AnswerText.text = hiddenAnswer;
