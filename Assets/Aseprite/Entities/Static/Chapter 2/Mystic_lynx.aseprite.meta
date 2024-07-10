@@ -152,6 +152,7 @@ ScriptedImporter:
     cells:
     - name: Mystic_lynx
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 25
         y: 11

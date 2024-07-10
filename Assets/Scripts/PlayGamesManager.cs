@@ -8,10 +8,6 @@ using UnityEngine.UI;
 public class PlayGamesManager : MonoBehaviour
 {
     public Text StatusText;
-    void Start()
-    {
-        SignIn();
-    }
 
     public void SignIn()
     {

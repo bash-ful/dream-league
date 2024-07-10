@@ -765,6 +765,7 @@ ScriptedImporter:
     cells:
     - name: torso
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
@@ -782,6 +783,7 @@ ScriptedImporter:
     cells:
     - name: right_arm
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 0
@@ -799,6 +801,7 @@ ScriptedImporter:
     cells:
     - name: left_arm
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 18
         y: 0
@@ -816,6 +819,7 @@ ScriptedImporter:
     cells:
     - name: head
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 12

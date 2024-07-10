@@ -152,6 +152,7 @@ ScriptedImporter:
     cells:
     - name: Maron
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 6

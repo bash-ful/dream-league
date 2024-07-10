@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "353750873554",
+    "firebase_url": "https://dream-league-8604a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "dream-league-8604a",
+    "storage_bucket": "dream-league-8604a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353750873554:android:5bde1f8b5677af27bc440b",
+        "android_client_info": {
+          "package_name": "com.Group8.DreamLeague"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCySwd9L0c042Mm4caJyPTJiJyZ14h9KJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

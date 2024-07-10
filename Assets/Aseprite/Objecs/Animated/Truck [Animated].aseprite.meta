@@ -292,6 +292,7 @@ ScriptedImporter:
     cells:
     - name: Truck [Animated]_Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -300,6 +301,7 @@ ScriptedImporter:
       spriteId: 9d265ff640cbc5847bcd5f4f53a2cd6e
     - name: Truck [Animated]_Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -308,6 +310,7 @@ ScriptedImporter:
       spriteId: abcb9f0edef3e9247a13c51b7e6214ef
     - name: Truck [Animated]_Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -316,6 +319,7 @@ ScriptedImporter:
       spriteId: 1c8bcb78ff0227540bbd643844d06900
     - name: Truck [Animated]_Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -324,6 +328,7 @@ ScriptedImporter:
       spriteId: d093ec71da57904439fe8a094a00dbf2
     - name: Truck [Animated]_Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -332,6 +337,7 @@ ScriptedImporter:
       spriteId: 1973204727a23f74b9b10c9413ba1d88
     - name: Truck [Animated]_Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -340,6 +346,7 @@ ScriptedImporter:
       spriteId: 71a931fdb8cf26d4194afd34abcfbff7
     - name: Truck [Animated]_Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -348,6 +355,7 @@ ScriptedImporter:
       spriteId: 439d8ebfe64239a4ebcb49bfc3f3e71f
     - name: Truck [Animated]_Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0

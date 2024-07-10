@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MasterScript : MonoBehaviour
 {
-    private const float BASE_ANSWER_TIME = 11.0f;
+    private const float BASE_ANSWER_TIME = 61.0f;
     private bool isSomeCoroutineRunning = false;
 
     public AnswerScript answerScript;
@@ -74,15 +74,21 @@ public class MasterScript : MonoBehaviour
         Debug.Log($"correct! {player.GetName()} deals {player.GetDamage()} damage!");
         if (enemy.IsDead())
         {
-            Debug.Log("you are winrar!");
+
             HideUI();
             GameObject.Find("GameWin").GetComponent<Image>().enabled = true;
+            GiveRewards();
             yield return ReturnToMainMenu();
             yield break;
         }
         ResetQuestionnaire();
         ResetAnswerTime(BASE_ANSWER_TIME);
         isSomeCoroutineRunning = false;
+    }
+
+    private void GiveRewards() {
+        GameObject.Find("DataSaverRealtime").GetComponent<DataSaver>().dts.dreamCoinAmount += 50;
+        GameObject.Find("DataSaverRealtime").GetComponent<DataSaver>().SaveDataFn();
     }
 
     public void ResetQuestionnaire()
@@ -96,7 +102,7 @@ public class MasterScript : MonoBehaviour
     public IEnumerator ReturnToMainMenu()
     {
         yield return new WaitForSeconds(2);
-        sceneScript.MoveScene(0);
+        sceneScript.MoveScene(1);
     }
 
     public void ResetAnswerTime(float seconds)
@@ -107,11 +113,9 @@ public class MasterScript : MonoBehaviour
     private IEnumerator OnTimerEnd()
     {
         isSomeCoroutineRunning = true;
-        Debug.Log($"ran out of time! Enemy deals {enemy.GetDamage()} damage!");
         enemy.DealDamage(player);
         if (player.IsDead())
         {
-            Debug.Log("You lose!!1");
             GameObject.Find("GameLose").GetComponent<Image>().enabled = true;
             yield return ReturnToMainMenu();
             yield break;

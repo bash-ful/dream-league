@@ -152,6 +152,7 @@ ScriptedImporter:
     cells:
     - name: Folklore_Frog
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 12

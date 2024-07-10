@@ -432,6 +432,7 @@ ScriptedImporter:
     cells:
     - name: Sleepy Bunny Idle_Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
@@ -440,6 +441,7 @@ ScriptedImporter:
       spriteId: 55939c5fcf765ac47819b262c5229710
     - name: Sleepy Bunny Idle_Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0
@@ -448,6 +450,7 @@ ScriptedImporter:
       spriteId: c32db1f9ab933894a9e200b0fa31b144
     - name: Sleepy Bunny Idle_Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0
@@ -456,6 +459,7 @@ ScriptedImporter:
       spriteId: 142621d27d487164c98e1b0db3aa3a5c
     - name: Sleepy Bunny Idle_Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
@@ -464,6 +468,7 @@ ScriptedImporter:
       spriteId: 46ab774e386a35c40bb664d95d9d4c99
     - name: Sleepy Bunny Idle_Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
@@ -472,6 +477,7 @@ ScriptedImporter:
       spriteId: e088cfda8c9a4414d87de1fb6c0e385a
     - name: Sleepy Bunny Idle_Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0
@@ -480,6 +486,7 @@ ScriptedImporter:
       spriteId: fa88ad35e25752244b4b6f0b274d982a
     - name: Sleepy Bunny Idle_Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0
@@ -488,6 +495,7 @@ ScriptedImporter:
       spriteId: 79d0903d98398234fae56fa8138305c8
     - name: Sleepy Bunny Idle_Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
@@ -496,6 +504,7 @@ ScriptedImporter:
       spriteId: 2c1a2c9137667964d9e2c67574453dda
     - name: Sleepy Bunny Idle_Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
@@ -504,6 +513,7 @@ ScriptedImporter:
       spriteId: ddbca2436b586c0449706eb0cea5ab21
     - name: Sleepy Bunny Idle_Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0
@@ -512,6 +522,7 @@ ScriptedImporter:
       spriteId: 79d94d23f92f4264db1f670b43f26dcf
     - name: Sleepy Bunny Idle_Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
@@ -520,6 +531,7 @@ ScriptedImporter:
       spriteId: fc84a4c575d77c84096b868f95da54fc
     - name: Sleepy Bunny Idle_Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
@@ -528,6 +540,7 @@ ScriptedImporter:
       spriteId: 653102f627788cb43b37c4b82653a742
     - name: Sleepy Bunny Idle_Frame_12
       frameIndex: 12
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
@@ -536,6 +549,7 @@ ScriptedImporter:
       spriteId: 3f892a7c3e2b0c849bc64ea8bbee20c0
     - name: Sleepy Bunny Idle_Frame_13
       frameIndex: 13
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
@@ -544,6 +558,7 @@ ScriptedImporter:
       spriteId: 4c3c6c8b563077749bc661c74f063613
     - name: Sleepy Bunny Idle_Frame_14
       frameIndex: 14
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0

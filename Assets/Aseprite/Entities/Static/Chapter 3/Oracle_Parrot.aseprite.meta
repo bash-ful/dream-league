@@ -152,6 +152,7 @@ ScriptedImporter:
     cells:
     - name: Oracle_Parrot
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 26
         y: 4

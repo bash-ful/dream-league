@@ -152,6 +152,7 @@ ScriptedImporter:
     cells:
     - name: Win
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 74
         y: 40

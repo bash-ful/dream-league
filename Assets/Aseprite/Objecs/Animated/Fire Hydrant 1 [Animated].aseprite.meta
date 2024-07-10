@@ -212,6 +212,7 @@ ScriptedImporter:
     cells:
     - name: Fire Hydrant 1 [Animated]_Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -220,6 +221,7 @@ ScriptedImporter:
       spriteId: 5ae79e20a24d92d4ab78a69dd3872b06
     - name: Fire Hydrant 1 [Animated]_Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -228,6 +230,7 @@ ScriptedImporter:
       spriteId: 9421640c1643ca344ba3f65dcddb0e2c
     - name: Fire Hydrant 1 [Animated]_Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -236,6 +239,7 @@ ScriptedImporter:
       spriteId: 474aa59840a43a44ea9c30b62b1e6fa9
     - name: Fire Hydrant 1 [Animated]_Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0

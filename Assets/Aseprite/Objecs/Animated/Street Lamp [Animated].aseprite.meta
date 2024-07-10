@@ -212,6 +212,7 @@ ScriptedImporter:
     cells:
     - name: Street Lamp [Animated]_Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -220,6 +221,7 @@ ScriptedImporter:
       spriteId: e8bac87994fcafe438eed27099f9d784
     - name: Street Lamp [Animated]_Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 0
@@ -228,6 +230,7 @@ ScriptedImporter:
       spriteId: 6fd6a6445e5423a46b8a66e9be2a4573
     - name: Street Lamp [Animated]_Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -236,6 +239,7 @@ ScriptedImporter:
       spriteId: da0283e58ac22c74ea3d36000c691c92
     - name: Street Lamp [Animated]_Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 0
