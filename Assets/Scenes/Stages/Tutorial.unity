@@ -1652,7 +1652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 3.5900269, y: 540}
+  m_AnchoredPosition: {x: 3.590088, y: 540}
   m_SizeDelta: {x: 525, y: 1080}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &360375546
@@ -1677,7 +1677,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 505493760}
   animator: {fileID: 505493761}
   damageIndicator: {fileID: 1973020206}
-  something: {fileID: 2007878947}
+  damageIndicatorSpawnPosition: {fileID: 1921604679}
 --- !u!1 &428218115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,7 +2726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98adc6652dbc5d042a993d66665f6e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: 2007878947}
+  indicatorTextPrefab: {fileID: 2007878947}
   canvas: {fileID: 250788319}
 --- !u!1 &779232104
 GameObject:
@@ -10286,7 +10286,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 959750248}
   animator: {fileID: 959750249}
   damageIndicator: {fileID: 681241277}
-  something: {fileID: 1921604679}
+  damageIndicatorSpawnPosition: {fileID: 2007878947}
 --- !u!1 &1973020204
 GameObject:
   m_ObjectHideFlags: 0
@@ -10335,7 +10335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98adc6652dbc5d042a993d66665f6e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: 1921604679}
+  indicatorTextPrefab: {fileID: 1921604679}
   canvas: {fileID: 250788319}
 --- !u!1 &2007878947 stripped
 GameObject:
