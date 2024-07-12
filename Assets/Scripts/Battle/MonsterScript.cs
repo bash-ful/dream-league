@@ -17,13 +17,16 @@ public class MonsterScript : MonoBehaviour
 {
     public int monsterID;
 
-    private float health, damage, maxHP;
+    public float health, damage, maxHP, baseDamage;
+    public float damageTakenModifier = 1;
+    public float damageDealtModifier = 1;
+
     private string playerName, spritePath;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
-    public DamageIndicator damageIndicator;
+    public FloatingIndicator damageIndicator;
 
-    public GameObject something;
+    public GameObject damageIndicatorSpawnPosition;
 
     public void MonsterInit(MonsterList monsterList)
     {
@@ -38,7 +41,9 @@ public class MonsterScript : MonoBehaviour
         if (animController != null)
         {
             animator.runtimeAnimatorController = animController;
-        } else {
+        }
+        else
+        {
             Debug.LogError("cannot find animcontroller");
         }
 
@@ -55,19 +60,31 @@ public class MonsterScript : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if ((health - damage) < 0)
-        {
-            health = 0;
-            return;
-        }
-
-        health -= damage;
+        health = Mathf.Clamp(health - (damage * damageTakenModifier), 0, health);
+        damageIndicator.ShowIndicator($"DMG {damage}", IndicatorType.BaseDamage, damageIndicatorSpawnPosition.transform.position);
     }
 
     public void DealDamage(MonsterScript opponent)
     {
-        opponent.TakeDamage(damage);
-        damageIndicator.ShowDamageIndicator(damage, something.transform.position);
+        float modifiedDamage = damage * damageDealtModifier;
+        opponent.TakeDamage(modifiedDamage);
+
+    }
+
+    public void Heal(float healAmount)
+    {
+        if (healAmount <= 0)
+        {
+            return;
+        }
+
+        float currentHealth = GetHealth();
+        float maxHP = GetMaxHP();
+
+        float amountHealed = Mathf.Min(healAmount, maxHP - currentHealth); // Calculate actual amount that can be healed
+
+        health += amountHealed; // Increase health by the healed amount
+        damageIndicator.ShowIndicator($"HEAL {amountHealed}", IndicatorType.Heal, damageIndicatorSpawnPosition.transform.position);
     }
 
     public bool IsDead()
@@ -93,5 +110,16 @@ public class MonsterScript : MonoBehaviour
     public float GetMaxHP()
     {
         return maxHP;
+    }
+
+    public float DamageTakenModifier
+    {
+        get { return damageTakenModifier; }
+        set { damageTakenModifier = value; }
+    }
+    public float DamageDealtModifier
+    {
+        get { return damageDealtModifier; }
+        set { damageDealtModifier = value; }
     }
 }

@@ -18,8 +18,11 @@ public class MasterScript : MonoBehaviour
 
     private float answerTime;
     private MonsterList monsterList;
+    private ItemList itemList;
     public TextAsset monstersJson;
+    public TextAsset itemsJson;
 
+    private float damageTakenReduction, damageDealtReduction;
 
 
     void Start()
@@ -37,6 +40,20 @@ public class MasterScript : MonoBehaviour
         qaList = JsonUtility.FromJson<QAList>(qaJson.text);
         answerScript.ChangeQA(qaList);
         ResetButtonLetters();
+
+        itemList = JsonUtility.FromJson<ItemList>(itemsJson.text);
+        Debug.Log("Items loaded successfully");
+        Debug.Log("Number of items: " + itemList.itemList.Count);
+        foreach (var item in itemList.itemList)
+        {
+            Debug.Log("Item name: " + item.name);
+            foreach (var effect in item.effects)
+            {
+                Debug.Log("Effect type: " + effect.type + ", value: " + effect.value);
+            }
+        }
+
+
     }
 
     private void ResetButtonLetters()
@@ -108,6 +125,30 @@ public class MasterScript : MonoBehaviour
     {
         GameObject.Find("DataSaverRealtime").GetComponent<DataSaver>().dts.dreamCoinAmount += 50;
         GameObject.Find("DataSaverRealtime").GetComponent<DataSaver>().SaveDataFn();
+    }
+
+    public void UseItem(int itemID)
+    {
+        Item item = itemList.itemList[itemID];
+        foreach (var effect in item.effects)
+        {
+            print(effect.type);
+            switch (effect.type)
+            {
+                case "HealPercentageOfMaxHP":
+                    player.Heal(effect.value);
+                    break;
+                case "DamagePercentageOfMaxHP":
+                    enemy.TakeDamage(enemy.maxHP * effect.value);
+                    break;
+                case "ModifyDamageTakenPercentage":
+                    player.DamageTakenModifier = effect.value;
+                    break;
+                case "ModifyDamageDealtPercentage":
+                    player.DamageDealtModifier = effect.value;
+                    break;
+            }
+        }
     }
 
     public void ResetQuestionnaire()

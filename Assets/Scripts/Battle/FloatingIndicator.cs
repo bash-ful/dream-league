@@ -2,35 +2,60 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class DamageIndicator : MonoBehaviour
+
+public enum IndicatorType
 {
-    public GameObject damageTextPrefab; // Assign your TMP_Text prefab in the Inspector
+    BaseDamage,
+    WeakenedDamage,
+    BoostedDamage,
+    Heal
+}
+public class FloatingIndicator : MonoBehaviour
+{
+    public GameObject indicatorTextPrefab; // Assign your TMP_Text prefab in the Inspector
     public Canvas canvas;
 
-    public void ShowDamageIndicator(float damageAmount, Vector3 worldPosition)
+    public void ShowIndicator(string text, IndicatorType type, Vector3 worldPosition)
     {
-        GameObject instance = Instantiate(damageTextPrefab, canvas.transform); // Instantiate as child of Canvas
+        GameObject instance = Instantiate(indicatorTextPrefab, canvas.transform); // Instantiate as child of Canvas
         instance.transform.position = worldPosition; // Set initial world position
 
         TMP_Text textComponent = instance.GetComponent<TMP_Text>();
 
         // Set the text to display the damage amount
-        textComponent.text = damageAmount.ToString();
+        textComponent.text = text;
 
         // Start animation coroutine
-        StartCoroutine(AnimateDamageIndicator(instance));
+        StartCoroutine(AnimateIndicator(instance, type));
     }
 
-    private IEnumerator AnimateDamageIndicator(GameObject instance)
+    private Color GetColor(IndicatorType type)
+    {
+        switch (type)
+        {
+            case IndicatorType.BaseDamage:
+                return Color.white;
+            case IndicatorType.Heal:
+                return Color.green;
+            case IndicatorType.WeakenedDamage:
+                return Color.blue;
+            case IndicatorType.BoostedDamage:
+                return Color.red;
+            default:
+                return Color.white;
+        }
+    }
+
+    private IEnumerator AnimateIndicator(GameObject instance, IndicatorType type)
     {
         TMP_Text textComponent = instance.GetComponent<TMP_Text>();
 
         // Optional: Fade in animation (you can customize this)
-        float fadeInDuration = 0.3f;
-        float fadeOutDuration = 0.2f;
-        float moveUpSpeed = 600f;
+        float fadeInDuration = 0.25f;
+        float fadeOutDuration = 0.5f;
+        float moveUpSpeed = 750f;
 
-        Color textColor = textComponent.color;
+        Color textColor = GetColor(type);
         textColor.a = 0f;
         textComponent.color = textColor;
 
