@@ -56,15 +56,15 @@
         },
         {
             "name": "Ancient Rhino",
-            "baseHealth": 100,
-            "baseDamage": 20,
-            "spritePath": "Assets/Resources/Aseprite/Entities/Animated/Ancient-Rhino"
+            "baseHealth": 301,
+            "baseDamage": 50,
+            "spritePath": "Aseprite/Entities/Animated/Ancient Rhino/Ancient-Rhino"
         },
         {
             "name": "Sleepy Bunny",
-            "baseHealth": 100,
-            "baseDamage": 20,
-            "spritePath": "Assets/Resources/Aseprite/Entities/Animated/Sleepy-Bunny"
+            "baseHealth": 250,
+            "baseDamage": 25,
+            "spritePath": "Aseprite/Entities/Animated/Sleepy Bunny Idle"
         }
     ]
 }

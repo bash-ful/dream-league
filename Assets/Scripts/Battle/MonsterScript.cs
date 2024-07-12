@@ -1,9 +1,10 @@
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 [System.Serializable]
 public class Monster
 {
-    public string name, spritePath;
+    public string name, spritePath, spritePathFirstFrame;
     public float baseHealth, baseDamage;
 }
 
@@ -32,25 +33,23 @@ public class MonsterScript : MonoBehaviour
         damage = monsterList.monsterList[monsterID].baseDamage;
         spritePath = monsterList.monsterList[monsterID].spritePath;
         Sprite newSprite = Resources.Load<Sprite>(spritePath);
-        // RuntimeAnimatorController newAnimController = Resources.Load<AnimatorController>(spritePath);
-        Texture2D texture = Resources.Load<Texture2D>(spritePath);
+        RuntimeAnimatorController animController = Resources.Load<RuntimeAnimatorController>(spritePath);
 
-        // if(newAnimController != null) {
-        //     animator.runtimeAnimatorController = newAnimController;
-        // }
+        if (animController != null)
+        {
+            animator.runtimeAnimatorController = animController;
+        } else {
+            Debug.LogError("cannot find animcontroller");
+        }
 
-        // if (texture != null)
-        // {
-        //     spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
-        // }
-        // else if (newSprite != null)
-        // {
-        //     spriteRenderer.sprite = newSprite;
-        // }
-        // else
-        // {
-        //     Debug.LogError("Failed to load sprite from Resources folder.");
-        // }
+        if (newSprite != null)
+        {
+            spriteRenderer.sprite = newSprite;
+        }
+        else
+        {
+            Debug.LogError("Failed to load sprite from Resources folder.");
+        }
 
     }
 

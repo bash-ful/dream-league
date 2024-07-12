@@ -26,9 +26,9 @@ public class DamageIndicator : MonoBehaviour
         TMP_Text textComponent = instance.GetComponent<TMP_Text>();
 
         // Optional: Fade in animation (you can customize this)
-        float fadeInDuration = 0.33f;
-        float fadeOutDuration = 0.5f;
-        float moveUpSpeed = 100f;
+        float fadeInDuration = 0.3f;
+        float fadeOutDuration = 0.2f;
+        float moveUpSpeed = 600f;
 
         Color textColor = textComponent.color;
         textColor.a = 0f;
