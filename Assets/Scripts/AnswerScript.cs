@@ -1,7 +1,6 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [System.Serializable]
 public class QA
@@ -35,7 +34,7 @@ public class AnswerScript : MonoBehaviour
 
     private void ResetQuestionText()
     {
-        GameObject.Find("QuestionText").GetComponent<Text>().text = question;
+        GameObject.Find("QuestionText").GetComponent<TMP_Text>().text = question;
     }
 
     public void ResetAnswerText()
@@ -45,7 +44,7 @@ public class AnswerScript : MonoBehaviour
         GetInputtedAnswerText().text = hiddenAnswer;
     }
 
-    public void AppendLetter(Text AnswerText, string letter)
+    public void AppendLetter(TMP_Text AnswerText, string letter)
     {
         if (nextIndex < hiddenAnswer.Length)
         {
@@ -56,9 +55,9 @@ public class AnswerScript : MonoBehaviour
         }
     }
 
-    public Text GetInputtedAnswerText()
+    public TMP_Text GetInputtedAnswerText()
     {
-        return GameObject.Find("AnswerText").GetComponent<Text>();
+        return GameObject.Find("AnswerText").GetComponent<TMP_Text>();
     }
 
     public string getAnswer()

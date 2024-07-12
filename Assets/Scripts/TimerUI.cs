@@ -1,11 +1,9 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TimerUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Text DisplayedTimeText;
-    // Update is called once per frame
+    public TMP_Text DisplayedTimeText;
     public void SetDisplayedTimeText(float timeInSeconds)
     {
         int seconds = (int)timeInSeconds % 60;

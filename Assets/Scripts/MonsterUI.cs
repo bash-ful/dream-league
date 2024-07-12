@@ -5,19 +5,22 @@ using UnityEngine.UI;
 public class MonsterUI : MonoBehaviour
 {
     public MonsterScript monster;
-    // public DamageIndicatorPool damageIndicatorPool;
-    public Text nameText, healthText, damageText;
-    public TMP_Text damageIndicator;
+    public TMP_Text damageIndicator, nameText, healthText, damageText;
+    private float monsterMaxHP;
 
+
+    void Start()
+    {
+
+        monsterMaxHP = monster.GetMaxHP();
+    }
 
     void Update()
     {
         nameText.text = monster.GetName();
-        healthText.text = $"{(int)monster.GetHealth()}/{(int)monster.GetMaxHP()}";
         damageText.text = monster.GetDamage().ToString();
+        healthText.text = $"{(int)monster.GetHealth()}/{monsterMaxHP}";
     }
 
-    // public void ShowDamageIndicator(float damage){
-    //     damageIndicatorPool.ShowDamageIndicatorScript(transform.position, damage);
-    // }
+
 }

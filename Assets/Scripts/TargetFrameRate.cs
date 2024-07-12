@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetFrameRate : MonoBehaviour
 {
-    public int target = 60;
+    private const int TARGET_FRAMERATE = 60;
 
     // Update is called once per frame
     void Update()
     {
-        if (target != Application.targetFrameRate) {
-            Application.targetFrameRate = target;
+        if (TARGET_FRAMERATE != Application.targetFrameRate) {
+            Application.targetFrameRate = TARGET_FRAMERATE;
         }
     }
 }

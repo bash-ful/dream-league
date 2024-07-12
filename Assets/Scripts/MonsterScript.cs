@@ -15,9 +15,8 @@ public class MonsterList
 public class MonsterScript : MonoBehaviour
 {
     public int monsterID;
-    public MonsterUI monsterUI;
 
-    public float health, damage, maxHP;
+    private float health, damage, maxHP;
     private string playerName, spritePath;
     public SpriteRenderer spriteRenderer;
     public Animator animator;

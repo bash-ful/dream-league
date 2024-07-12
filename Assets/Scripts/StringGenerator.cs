@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Text;
-using UnityEngine.UI;
+using TMPro;
 
 public class StringGenerator : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class StringGenerator : MonoBehaviour
         StringBuilder Letters = GenerateRandomString(answer);
         for (int i = 0; i <= 17; i++)
         {
-            GameObject.Find(i.ToString()).GetComponentInChildren<Text>().text = Letters[i].ToString();
+            GameObject.Find(i.ToString()).GetComponentInChildren<TMP_Text>().text = Letters[i].ToString();
         }
     }
 }

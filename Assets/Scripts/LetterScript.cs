@@ -1,9 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LetterScript : MonoBehaviour
 {
-    private Text InputtedAnswerText;
+    private TMP_Text InputtedAnswerText;
     public AnswerScript answerScript;
 
 
@@ -28,7 +29,7 @@ public class LetterScript : MonoBehaviour
     public void LetterPress(int ButtonIndex)
     {
         Button buttonPressed = GameObject.Find(ButtonIndex.ToString()).GetComponent<Button>();
-        string buttonPressedLetter = buttonPressed.GetComponentInChildren<Text>().text;
+        string buttonPressedLetter = buttonPressed.GetComponentInChildren<TMP_Text>().text;
         answerScript.AppendLetter(InputtedAnswerText, buttonPressedLetter);
         buttonPressed.interactable = false;
 
