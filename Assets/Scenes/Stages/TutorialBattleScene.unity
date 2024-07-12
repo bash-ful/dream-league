@@ -9660,7 +9660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 55:55
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ff1420d24e6d8744683b37f10f8d8634, type: 2}
   m_sharedMaterial: {fileID: -1909914416230418639, guid: ff1420d24e6d8744683b37f10f8d8634, type: 2}
@@ -10335,7 +10335,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1282414160521359135, guid: e3689b57f81a03349b3075d5fe8de295, type: 3}
       propertyPath: m_Name
-      value: PlayerDamageTakenIndicator
+      value: DamageIndicator
       objectReference: {fileID: 0}
     - target: {fileID: 5161105828842482146, guid: e3689b57f81a03349b3075d5fe8de295, type: 3}
       propertyPath: m_Pivot.x
@@ -10528,7 +10528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8073373903311044859, guid: ceb4a92c6d34e914b8e0c24c530a6371, type: 3}
       propertyPath: m_Name
-      value: EnemyDamageTakenIndicator
+      value: DamageIndicator
       objectReference: {fileID: 0}
     - target: {fileID: 8903567329581798699, guid: ceb4a92c6d34e914b8e0c24c530a6371, type: 3}
       propertyPath: m_text
