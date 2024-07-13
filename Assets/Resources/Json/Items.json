@@ -1,0 +1,162 @@
+{
+    "itemList": [
+        {
+            "itemID": 0,
+            "name": "Super Healing Potion",
+            "buffInfo": "Restores 100% of the player's HP.",
+            "debuffInfo": "reduces damage dealt by 10% for the next 2 turns.",
+            "effects": [
+                {
+                    "type": "HealPercentageOfMaxHP",
+                    "value": 100,
+                    "effectDuration": 1
+                },
+                {
+                    "type": "DecreaseSelfDamageTakenPercentage",
+                    "value": 10,
+                    "effectDuration": 2
+                }
+            ],
+            "price": 100,
+            "rarity": 5,
+            "spriteResourcesPath": "",
+            "backgroundResourcesPath": ""
+        },
+        {
+            "itemID": 1,
+            "name": "Matcha Mochi",
+            "buffInfo": "Increases the player's attack by 75% for the next 2 turns.",
+            "debuffInfo": "Reduces HP by 10%.",
+            "effects": [
+                {
+                    "type": "IncreaseSelfDamageDealtPercentage",
+                    "value": 75,
+                    "effectDuration": 2
+                }
+            ],
+            "price": 500,
+            "rarity": 1,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Matcha Mochi",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Electric Mixer"
+        },
+        {
+            "itemID": 2,
+            "name": "Flan",
+            "buffInfo": "Revive 2 time with 50% HP.",
+            "debuffInfo": "Increases the opponent's attack by 25% for 1 turn each time.",
+            "effects": [
+                {
+                    "type": "IncraseEnemyDamageDealtPercentage",
+                    "value": 25
+                }
+            ],
+            "price": 1000,
+            "rarity": 4,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Flan",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Cooker"
+        },
+        {
+            "itemID": 3,
+            "name": "Taco",
+            "buffInfo": "Reflects 50% of damage back to the attacker for 3 turns.",
+            "debuffInfo": "",
+            "effects": [
+                {
+                    "type": "ReflectDamagePercentage",
+                    "value": 50
+                }
+            ],
+            "price": 500,
+            "rarity": 3,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Taco",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Oven"
+        },
+        {
+            "itemID": 4,
+            "name": "Maguro Nigiri",
+            "buffInfo": "Restores 10% of the player's HP.",
+            "debuffInfo": "",
+            "effects": [
+                {
+                    "type": "HealPercentageOfMaxHP",
+                    "value": 10,
+                    "effectDuration": 1
+                }
+            ],
+            "price": 100,
+            "rarity": 5,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Maguro Nigiri",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
+        },
+        {
+            "itemID": 5,
+            "name": "Kwek-Kwek",
+            "buffInfo": "Stun the opponent, preventing it from attacking 1 time.",
+            "debuffInfo": "Reduces the timer by 10 seconds.",
+            "effects": [
+                {
+                    "type": "Stun",
+                    "effectDuration": 1
+                },
+                {
+                    "type": "ModifyTimerBySeconds",
+                    "value": -10
+                }
+            ],
+            "price": 500,
+            "rarity": 2,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Kwek-Kwek",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
+        },
+        {
+            "itemID": 6,
+            "name": "Fried Shrimp",
+            "buffInfo": "Deals 15% of opponent HP.",
+            "debuffInfo": "reduces damage dealt by 10% for the next 2 turns.",
+            "effects": [
+                {
+                    "type": "DamagePercentageOfMaxHP",
+                    "value": 15,
+                    "effectDuration": 1
+                },
+                {
+                    "type": "DecreaseSelfDamageDealtPercentage",
+                    "value": 10,
+                    "effectDuration": 2
+                }
+            ],
+            "price": 500,
+            "rarity": 3,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Fried Shrimp",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
+        },
+        {
+            "itemID": 7,
+            "name": "Coffee",
+            "buffInfo": "Prevents the player from taking damage for 2 turn.",
+            "debuffInfo": "",
+            "effects": [],
+            "price": 1000,
+            "rarity": 1,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Coffee",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Coffee Maker"
+        },
+        {
+            "itemID": 8,
+            "name": "Burger",
+            "buffInfo": "Reflects 75% of damage back to the attacker for 3 turns.",
+            "debuffInfo": "",
+            "effects": [
+                {
+                    "type": "ReflectDamagePercentage",
+                    "value": 75,
+                    "effectDuration": 3
+                }
+            ],
+            "price": 1000,
+            "rarity": 3,
+            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Burger",
+            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
+        }
+    ]
+}

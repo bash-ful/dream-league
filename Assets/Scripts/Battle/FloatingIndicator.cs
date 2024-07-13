@@ -51,8 +51,8 @@ public class FloatingIndicator : MonoBehaviour
         TMP_Text textComponent = instance.GetComponent<TMP_Text>();
 
         // Optional: Fade in animation (you can customize this)
-        float fadeInDuration = 0.25f;
-        float fadeOutDuration = 0.5f;
+        float fadeInDuration = 0.2f;
+        float fadeOutDuration = 0.4f;
         float moveUpSpeed = 750f;
 
         Color textColor = GetColor(type);

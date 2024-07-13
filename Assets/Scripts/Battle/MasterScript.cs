@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,12 +19,8 @@ public class MasterScript : MonoBehaviour
     public TimerUI timerUI;
 
     private float answerTime;
-    private MonsterList monsterList;
-    private ItemList itemList;
-    public TextAsset monstersJson;
-    public TextAsset itemsJson;
-
-    private float damageTakenReduction, damageDealtReduction;
+    public ItemManager itemManager;
+    public List<ActiveEffect> activeEffects = new();
 
 
     void Start()
@@ -33,32 +31,12 @@ public class MasterScript : MonoBehaviour
 
         dialogueScript.BeginDialogue();
 
-        monsterList = JsonUtility.FromJson<MonsterList>(monstersJson.text);
-        player.MonsterInit(monsterList);
-        enemy.MonsterInit(monsterList);
+        player.MonsterInit();
+        enemy.MonsterInit();
 
         qaList = JsonUtility.FromJson<QAList>(qaJson.text);
         answerScript.ChangeQA(qaList);
         ResetButtonLetters();
-
-        itemList = JsonUtility.FromJson<ItemList>(itemsJson.text);
-        Debug.Log("Items loaded successfully");
-        Debug.Log("Number of items: " + itemList.itemList.Count);
-        foreach (var item in itemList.itemList)
-        {
-            Debug.Log("Item name: " + item.name);
-            foreach (var effect in item.effects)
-            {
-                Debug.Log("Effect type: " + effect.type + ", value: " + effect.value);
-            }
-        }
-
-
-    }
-
-    private void ResetButtonLetters()
-    {
-        stringGenerator.ApplyGeneratedStringToButtons(answerScript.getAnswer());
     }
 
     void Update()
@@ -94,6 +72,11 @@ public class MasterScript : MonoBehaviour
 
     }
 
+    private void ResetButtonLetters()
+    {
+        stringGenerator.ApplyGeneratedStringToButtons(answerScript.getAnswer());
+    }
+
     private void HideUI()
     {
         GameObject.Find("Letters").SetActive(false);
@@ -118,6 +101,7 @@ public class MasterScript : MonoBehaviour
         }
         ResetQuestionnaire();
         ResetAnswerTime(BASE_ANSWER_TIME);
+        ApplyActiveEffects();
         isSomeCoroutineRunning = false;
     }
 
@@ -129,27 +113,63 @@ public class MasterScript : MonoBehaviour
 
     public void UseItem(int itemID)
     {
-        Item item = itemList.itemList[itemID];
+        Item item = itemManager.GetItemFromID(itemID);
         foreach (var effect in item.effects)
         {
-            print(effect.type);
-            switch (effect.type)
+            Enum.TryParse(effect.type, out EffectType eff);
+            switch (eff)
             {
-                case "HealPercentageOfMaxHP":
+                case EffectType.HealPercentageOfMaxHP:
                     player.Heal(effect.value);
                     break;
-                case "DamagePercentageOfMaxHP":
-                    enemy.TakeDamage(enemy.maxHP * effect.value);
+                case EffectType.DamagePercentageOfMaxHP:
+                    enemy.TakeDamage(enemy.GetMaxHP() * effect.value);
                     break;
-                case "ModifyDamageTakenPercentage":
-                    player.DamageTakenModifier = effect.value;
+                case EffectType.IncreaseSelfDamageTakenPercentage:
+                    player.DamageTakenModifier *= effect.value;
+                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration });
                     break;
-                case "ModifyDamageDealtPercentage":
-                    player.DamageDealtModifier = effect.value;
+                case EffectType.IncreaseSelfDamageDealtPercentage:
+                    player.DamageDealtModifier *= effect.value;
+                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration });
                     break;
             }
         }
     }
+
+    private void ApplyActiveEffects()
+    {
+        float selfTotalDamageDealtModifier = 1;
+        float selfTotalDamageTakenModifier = 1;
+        float enemyTotalDamageDealtModifier = 1;
+        float enemyTotalDamageTakenModifier = 1;
+
+        for (int i = activeEffects.Count - 1; i >= 0; i--)
+        {
+            var effect = activeEffects[i];
+            effect.remainingDuration--;
+
+            switch (effect.type)
+            {
+                case EffectType.IncreaseSelfDamageTakenPercentage:
+                    selfTotalDamageTakenModifier *= effect.value;
+                    break;
+                case EffectType.IncreaseSelfDamageDealtPercentage:
+                    selfTotalDamageDealtModifier *= effect.value;
+                    break;
+            }
+
+            if (effect.remainingDuration <= 0)
+            {
+                activeEffects.RemoveAt(i);
+            }
+        }
+
+        player.DamageTakenModifier = selfTotalDamageTakenModifier;
+        player.DamageDealtModifier = selfTotalDamageDealtModifier;
+    }
+
+
 
     public void ResetQuestionnaire()
     {
@@ -182,6 +202,7 @@ public class MasterScript : MonoBehaviour
         }
         ResetQuestionnaire();
         ResetAnswerTime(BASE_ANSWER_TIME);
+        ApplyActiveEffects();
         isSomeCoroutineRunning = false;
     }
 }

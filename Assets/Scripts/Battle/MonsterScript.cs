@@ -1,40 +1,33 @@
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
-[System.Serializable]
-public class Monster
-{
-    public string name, spritePath, spritePathFirstFrame;
-    public float baseHealth, baseDamage;
-}
-
-[System.Serializable]
-public class MonsterList
-{
-    public Monster[] monsterList;
-}
 public class MonsterScript : MonoBehaviour
 {
     public int monsterID;
 
-    public float health, damage, maxHP, baseDamage;
-    public float damageTakenModifier = 1;
-    public float damageDealtModifier = 1;
+    private float health, maxHP, baseDamage, modifiedDamage;
+    private float damageTakenModifier = 1;
+    private float damageDealtModifier = 1;
 
     private string playerName, spritePath;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     public FloatingIndicator damageIndicator;
+    private readonly MonsterManager monsterManager;
 
     public GameObject damageIndicatorSpawnPosition;
 
-    public void MonsterInit(MonsterList monsterList)
+    void Update()
     {
-        playerName = monsterList.monsterList[monsterID].name;
-        health = monsterList.monsterList[monsterID].baseHealth;
+        modifiedDamage = baseDamage * damageDealtModifier;
+    }
+    public void MonsterInit()
+    {
+        Monster playerMonster = monsterManager.GetMonsterFromID(monsterID);
+        playerName = playerMonster.name;
+        health = playerMonster.baseHealth;
         maxHP = health;
-        damage = monsterList.monsterList[monsterID].baseDamage;
-        spritePath = monsterList.monsterList[monsterID].spritePath;
+        baseDamage = playerMonster.baseDamage;
+        spritePath = playerMonster.spritePath;
         Sprite newSprite = Resources.Load<Sprite>(spritePath);
         RuntimeAnimatorController animController = Resources.Load<RuntimeAnimatorController>(spritePath);
 
@@ -66,7 +59,6 @@ public class MonsterScript : MonoBehaviour
 
     public void DealDamage(MonsterScript opponent)
     {
-        float modifiedDamage = damage * damageDealtModifier;
         opponent.TakeDamage(modifiedDamage);
 
     }
@@ -104,7 +96,11 @@ public class MonsterScript : MonoBehaviour
 
     public float GetDamage()
     {
-        return damage;
+        return baseDamage;
+    }
+
+    public float GetModifiedDamage() {
+        return modifiedDamage;
     }
 
     public float GetMaxHP()

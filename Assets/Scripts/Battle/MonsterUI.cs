@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MonsterUI : MonoBehaviour
 {
@@ -18,7 +17,7 @@ public class MonsterUI : MonoBehaviour
     void Update()
     {
         nameText.text = monster.GetName();
-        damageText.text = monster.GetDamage().ToString();
+        damageText.text = monster.GetModifiedDamage().ToString();
         healthText.text = $"{(int)monster.GetHealth()}/{monsterMaxHP}";
     }
 
