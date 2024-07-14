@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Monster
 {
+    public int id;
     public string name, spritePath, spritePathFirstFrame;
     public float baseHealth, baseDamage;
 }
@@ -21,6 +22,7 @@ public class MonsterManager : MonoBehaviour
 
     void Start()
     {
+        print("MonsterManager Init");
         Init();
     }
     public void Init()
@@ -30,12 +32,19 @@ public class MonsterManager : MonoBehaviour
         if (monstersJson != null)
         {
             monsterList = JsonUtility.FromJson<MonsterList>(monstersJson.text);
-        } else {
+            foreach (Monster monster in monsterList.monsterList)
+            {
+                print($"name: {monster.name}");
+            }
+        }
+        else
+        {
             Debug.LogError("error loading monsters json");
         }
     }
 
-    public Monster GetMonsterFromID(int monsterID) {
-        return monsterList.monsterList[monsterID];
+    public Monster GetMonsterFromID(int itemID)
+    {
+        return monsterList.monsterList.Find(monster => monster.id == itemID);
     }
 }

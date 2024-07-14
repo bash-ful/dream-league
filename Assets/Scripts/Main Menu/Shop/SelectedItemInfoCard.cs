@@ -64,26 +64,36 @@ public class SelectedItemInfoCard : MonoBehaviour
         ResetBuffIcons();
         for (int i = 0; i < buffImages.Length && i < item.effects.Count; i++)
         {
-            Enum.TryParse(item.effects[i].type, out EffectType eff);
+            Effect effect = item.effects[i];
+            Enum.TryParse(effect.type, out EffectType eff);
             switch (eff)
             {
                 case EffectType.HealPercentageOfMaxHP:
                     buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Instant Heal");
                     break;
                 case EffectType.DamagePercentageOfMaxHP:
-                case EffectType.IncreaseSelfDamageDealtPercentage:
-                case EffectType.IncreaseEnemyDamageDealtPercentage:
-                    buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Stronger Damage");
+                case EffectType.ModifySelfDamageDealtModifier:
+                case EffectType.ModifyEnemyDamageDealtModifier:
+                    if (effect.value > 1)
+                    {
+                        buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Stronger Damage");
+                    }
+                    else
+                    {
+                        buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Weaker Damage");
+                    }
                     break;
-                case EffectType.DecreaseSelfDamageDealtPercentage:
-                case EffectType.DecreaseEnemyDamageDealtPercentage:
-                    buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Weaker Damage");
+                case EffectType.ModifySelfDamageTakenModifier:
+                case EffectType.ModifyEnemyDamageTakenModifier:
+                    if (effect.value > 1)
+                    {
+                        buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Stronger Defense");
+                    }
+                    else
+                    {
+                    }
                     break;
-                case EffectType.DecreaseSelfDamageTakenPercentage:
-                case EffectType.DecreaseEnemyDamageTakenPercentage:
-                    buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Stronger Defense");
-                    break;
-                case EffectType.ReflectDamagePercentage:
+                case EffectType.ReflectDamage:
                     buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Reflect Damage");
                     break;
                 case EffectType.ModifyTimerBySeconds:

@@ -11,6 +11,8 @@ public class DataToSave
     public int maxLevelCleared;
     public bool tutorialCleared;
     public int dreamCoinAmount;
+
+    public int[] equippedItems;
 }
 
 public class DataSaver : MonoBehaviour

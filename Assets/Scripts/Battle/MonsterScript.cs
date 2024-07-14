@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MonsterScript : MonoBehaviour
@@ -7,12 +8,15 @@ public class MonsterScript : MonoBehaviour
     private float health, maxHP, baseDamage, modifiedDamage;
     private float damageTakenModifier = 1;
     private float damageDealtModifier = 1;
+    private float damageReflectModifier = 0;
+    private int cheatDeathCount = 0;
+    private float cheatDeathPercentage = 0;
 
     private string playerName, spritePath;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     public FloatingIndicator damageIndicator;
-    private readonly MonsterManager monsterManager;
+    public MonsterManager monsterManager;
 
     public GameObject damageIndicatorSpawnPosition;
 
@@ -20,8 +24,10 @@ public class MonsterScript : MonoBehaviour
     {
         modifiedDamage = baseDamage * damageDealtModifier;
     }
+
     public void MonsterInit()
     {
+        monsterManager.Init();
         Monster playerMonster = monsterManager.GetMonsterFromID(monsterID);
         playerName = playerMonster.name;
         health = playerMonster.baseHealth;
@@ -55,11 +61,32 @@ public class MonsterScript : MonoBehaviour
     {
         health = Mathf.Clamp(health - (damage * damageTakenModifier), 0, health);
         damageIndicator.ShowIndicator($"DMG {damage}", IndicatorType.BaseDamage, damageIndicatorSpawnPosition.transform.position);
+
+        if (health <= 0 && cheatDeathCount > 0)
+        {
+            StartCoroutine(WaitAndRevive());
+        }
+    }
+
+    public IEnumerator WaitAndRevive()
+    {
+        yield return new WaitForSeconds(1);
+        float reviveAmount = maxHP * (cheatDeathPercentage / 100);
+        health = Mathf.Clamp(reviveAmount, 0, maxHP);
+        cheatDeathCount--;
+
+        damageIndicator.ShowIndicator($"REVIVE {reviveAmount}", IndicatorType.Heal, damageIndicatorSpawnPosition.transform.position);
     }
 
     public void DealDamage(MonsterScript opponent)
     {
         opponent.TakeDamage(modifiedDamage);
+
+        if (opponent.DamageReflectModifier > 0)
+        {
+            float reflectDamage = baseDamage * opponent.DamageReflectModifier;
+            TakeDamage(reflectDamage);
+        }
 
     }
 
@@ -81,7 +108,7 @@ public class MonsterScript : MonoBehaviour
 
     public bool IsDead()
     {
-        return health == 0;
+        return health == 0 && cheatDeathCount <= 0; ;
     }
 
     public float GetHealth()
@@ -99,7 +126,8 @@ public class MonsterScript : MonoBehaviour
         return baseDamage;
     }
 
-    public float GetModifiedDamage() {
+    public float GetModifiedDamage()
+    {
         return modifiedDamage;
     }
 
@@ -118,4 +146,24 @@ public class MonsterScript : MonoBehaviour
         get { return damageDealtModifier; }
         set { damageDealtModifier = value; }
     }
+
+    public float DamageReflectModifier
+    {
+        get { return damageReflectModifier; }
+        set { damageReflectModifier += value; }
+    }
+
+    public int CheatDeathCount
+    {
+        get { return cheatDeathCount; }
+        set { cheatDeathCount = value; }
+    }
+
+    public float CheatDeathPercentage
+    {
+        get { return cheatDeathPercentage; }
+        set { cheatDeathPercentage = value; }
+    }
+
+
 }

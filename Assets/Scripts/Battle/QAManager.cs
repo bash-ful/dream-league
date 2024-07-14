@@ -14,19 +14,33 @@ public class QAList
 {
     public QA[] qaList;
 }
-public class AnswerScript : MonoBehaviour
+public class QAManager : MonoBehaviour
 {
     private int nextIndex = 0;
     private string hiddenAnswer;
     private string answer, question;
     private int qaIndex, qaCount;
+    private QAList qaList;
+    public TMP_Text QuestionText, AnswerText;
 
-    public void ChangeQA(QAList questionsAndAnswers)
+    public void Init()
     {
-        qaCount = questionsAndAnswers.qaList.Count();
+        TextAsset qaJson = Resources.Load<TextAsset>("Json/Stages/Stage1");
+        if (qaJson != null)
+        {
+            qaList = JsonUtility.FromJson<QAList>(qaJson.text);
+        }
+        else
+        {
+            Debug.LogError("error loading qaJson");
+        }
+    }
+    public void ChangeQA()
+    {
+        qaCount = qaList.qaList.Count();
         qaIndex = Random.Range(0, qaCount);
-        answer = questionsAndAnswers.qaList[qaIndex].answer;
-        question = questionsAndAnswers.qaList[qaIndex].question;
+        answer = qaList.qaList[qaIndex].answer;
+        question = qaList.qaList[qaIndex].question;
 
         ResetQuestionText();
         ResetAnswerText();
@@ -41,7 +55,7 @@ public class AnswerScript : MonoBehaviour
     {
         nextIndex = 0;
         hiddenAnswer = new string('_', answer.Length);
-        GetInputtedAnswerText().text = hiddenAnswer;
+        AnswerText.text = hiddenAnswer;
     }
 
     public void AppendLetter(TMP_Text AnswerText, string letter)
@@ -55,18 +69,18 @@ public class AnswerScript : MonoBehaviour
         }
     }
 
-    public TMP_Text GetInputtedAnswerText()
+    public TMP_Text InputtedAnswerText
     {
-        return GameObject.Find("AnswerText").GetComponent<TMP_Text>();
+        get { return AnswerText; }
     }
 
-    public string getAnswer()
+    public string Answer
     {
-        return answer;
+        get { return answer; }
     }
 
-    public string getQuestion()
+    public string Question
     {
-        return question;
+        get { return question; }
     }
 }

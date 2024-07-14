@@ -1,66 +1,77 @@
 {
     "monsterList": [
         {
+            "id": 0,
             "name": "Chameleon Gecko",
             "baseHealth": 50,
             "baseDamage": 10,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Chameleon_Gecko"
         },
         {
+            "id": 1,
             "name": "Comet Behemoth",
             "baseHealth": 100,
             "baseDamage": 20,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Comet_Behemoth"
         },
         {
+            "id": 2,
             "name": "Crystal Golem",
             "baseHealth": 500,
             "baseDamage": 20,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Crystal_Golem"
         },
         {
+            "id": 3,
             "name": "Hippo",
             "baseHealth": 250,
             "baseDamage": 20,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Hippo"
         },
         {
+            "id": 4,
             "name": "Meteor Mantis",
             "baseHealth": 20,
             "baseDamage": 75,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Meteor_Mantis"
         },
         {
+            "id": 5,
             "name": "Phantom Owl",
             "baseHealth": 50,
             "baseDamage": 35,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Phantom_Owl"
         },
         {
+            "id": 6,
             "name": "Rock Tortoise",
             "baseHealth": 250,
             "baseDamage": 50,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Rock_Tortoise"
         },
         {
+            "id": 7,
             "name": "Ruin Jaguar",
             "baseHealth": 250,
             "baseDamage": 250,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Ruin_Jaguar"
         },
         {
+            "id": 8,
             "name": "Ruin Serpent",
             "baseHealth": 100,
             "baseDamage": 250,
             "spritePath": "Aseprite/Entities/Static/Chapter 1/Ruin_Serpent"
         },
         {
+            "id": 9,
             "name": "Ancient Rhino",
             "baseHealth": 300,
             "baseDamage": 50,
             "spritePath": "Aseprite/Entities/Animated/Ancient Rhino/Ancient-Rhino"
         },
         {
+            "id": 10,
             "name": "Sleepy Bunny",
             "baseHealth": 250,
             "baseDamage": 100,

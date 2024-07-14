@@ -5,18 +5,15 @@ public enum EffectType
 {
     HealPercentageOfMaxHP,
     DamagePercentageOfMaxHP,
-    IncreaseSelfDamageTakenPercentage,
-    DecreaseSelfDamageTakenPercentage,
-    IncreaseSelfDamageDealtPercentage,
-    DecreaseSelfDamageDealtPercentage,
+    ModifySelfDamageTakenModifier,
+    ModifySelfDamageDealtModifier,
 
-    IncreaseEnemyDamageTakenPercentage,
-    DecreaseEnemyDamageTakenPercentage,
+    ModifyEnemyDamageTakenModifier,
 
-    IncreaseEnemyDamageDealtPercentage,
-    DecreaseEnemyDamageDealtPercentage,
+    ModifyEnemyDamageDealtModifier,
 
-    ReflectDamagePercentage,
+    ReflectDamage,
+    CheatDeath,
     ModifyTimerBySeconds,
     Stun
 }
@@ -27,6 +24,7 @@ public class Effect
     public string type;
     public float value;
     public int effectDuration;
+    public bool keepStacking;
 }
 
 [System.Serializable]
@@ -35,6 +33,7 @@ public class ActiveEffect
     public EffectType type;
     public float value;
     public int remainingDuration;
+    public bool keepStacking;
 }
 
 [System.Serializable]

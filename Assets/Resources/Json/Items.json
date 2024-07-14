@@ -12,8 +12,8 @@
                     "effectDuration": 1
                 },
                 {
-                    "type": "DecreaseSelfDamageTakenPercentage",
-                    "value": 10,
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": 0.9,
                     "effectDuration": 2
                 }
             ],
@@ -29,9 +29,13 @@
             "debuffInfo": "Reduces HP by 10%.",
             "effects": [
                 {
-                    "type": "IncreaseSelfDamageDealtPercentage",
-                    "value": 75,
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": 1.75,
                     "effectDuration": 2
+                },
+                {
+                    "type": "DamagePercentageOfMaxHP",
+                    "value": 10
                 }
             ],
             "price": 500,
@@ -42,12 +46,18 @@
         {
             "itemID": 2,
             "name": "Flan",
-            "buffInfo": "Revive 2 time with 50% HP.",
+            "buffInfo": "Revive 2 times with 50% HP.",
             "debuffInfo": "Increases the opponent's attack by 25% for 1 turn each time.",
             "effects": [
                 {
-                    "type": "IncraseEnemyDamageDealtPercentage",
-                    "value": 25
+                    "type": "CheatDeath",
+                    "value": 50,
+                    "effectDuration": 2
+                },
+                {
+                    "type": "ModifyEnemyDamageDealtModifier",
+                    "value": 1.25,
+                    "effectDuration": -1
                 }
             ],
             "price": 1000,
@@ -62,8 +72,8 @@
             "debuffInfo": "",
             "effects": [
                 {
-                    "type": "ReflectDamagePercentage",
-                    "value": 50
+                    "type": "ReflectDamage",
+                    "value": 0.5
                 }
             ],
             "price": 500,
@@ -112,7 +122,7 @@
             "itemID": 6,
             "name": "Fried Shrimp",
             "buffInfo": "Deals 15% of opponent HP.",
-            "debuffInfo": "reduces damage dealt by 10% for the next 2 turns.",
+            "debuffInfo": "Reduces damage dealt by 10% for the next 2 turns.",
             "effects": [
                 {
                     "type": "DamagePercentageOfMaxHP",
@@ -120,8 +130,8 @@
                     "effectDuration": 1
                 },
                 {
-                    "type": "DecreaseSelfDamageDealtPercentage",
-                    "value": 10,
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": 0.9,
                     "effectDuration": 2
                 }
             ],
@@ -133,7 +143,7 @@
         {
             "itemID": 7,
             "name": "Coffee",
-            "buffInfo": "Prevents the player from taking damage for 2 turn.",
+            "buffInfo": "Prevents the player from taking damage for 2 turns.",
             "debuffInfo": "",
             "effects": [],
             "price": 1000,
@@ -148,8 +158,8 @@
             "debuffInfo": "",
             "effects": [
                 {
-                    "type": "ReflectDamagePercentage",
-                    "value": 75,
+                    "type": "ReflectDamage",
+                    "value": 0.75,
                     "effectDuration": 3
                 }
             ],

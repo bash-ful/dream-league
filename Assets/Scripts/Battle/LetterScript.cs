@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class LetterScript : MonoBehaviour
 {
     private TMP_Text InputtedAnswerText;
-    public AnswerScript answerScript;
+    public QAManager qaManager;
 
 
     public void Start() {
-        InputtedAnswerText = answerScript.GetInputtedAnswerText();
+        InputtedAnswerText = qaManager.AnswerText;
     }
     public void EnableAllButtons()
     {
@@ -30,7 +30,7 @@ public class LetterScript : MonoBehaviour
     {
         Button buttonPressed = GameObject.Find(ButtonIndex.ToString()).GetComponent<Button>();
         string buttonPressedLetter = buttonPressed.GetComponentInChildren<TMP_Text>().text;
-        answerScript.AppendLetter(InputtedAnswerText, buttonPressedLetter);
+        qaManager.AppendLetter(InputtedAnswerText, buttonPressedLetter);
         buttonPressed.interactable = false;
 
     }
