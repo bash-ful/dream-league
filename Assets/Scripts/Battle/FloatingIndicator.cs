@@ -12,38 +12,31 @@ public enum IndicatorType
 }
 public class FloatingIndicator : MonoBehaviour
 {
-    public GameObject indicatorTextPrefab; // Assign your TMP_Text prefab in the Inspector
+    public GameObject indicatorTextPrefab;
     public Canvas canvas;
 
     public void ShowIndicator(string text, IndicatorType type, Vector3 worldPosition)
     {
-        GameObject instance = Instantiate(indicatorTextPrefab, canvas.transform); // Instantiate as child of Canvas
-        instance.transform.position = worldPosition; // Set initial world position
+        GameObject instance = Instantiate(indicatorTextPrefab, canvas.transform);
+        instance.transform.position = worldPosition;
 
         TMP_Text textComponent = instance.GetComponent<TMP_Text>();
 
-        // Set the text to display the damage amount
         textComponent.text = text;
 
-        // Start animation coroutine
         StartCoroutine(AnimateIndicator(instance, type));
     }
 
     private Color GetColor(IndicatorType type)
     {
-        switch (type)
+        return type switch
         {
-            case IndicatorType.BaseDamage:
-                return Color.white;
-            case IndicatorType.Heal:
-                return Color.green;
-            case IndicatorType.WeakenedDamage:
-                return Color.blue;
-            case IndicatorType.BoostedDamage:
-                return Color.red;
-            default:
-                return Color.white;
-        }
+            IndicatorType.BaseDamage => Color.white,
+            IndicatorType.Heal => Color.green,
+            IndicatorType.WeakenedDamage => Color.blue,
+            IndicatorType.BoostedDamage => Color.red,
+            _ => Color.white,
+        };
     }
 
     private IEnumerator AnimateIndicator(GameObject instance, IndicatorType type)

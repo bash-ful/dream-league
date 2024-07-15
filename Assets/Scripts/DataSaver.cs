@@ -1,22 +1,25 @@
 using System.Collections;
 using UnityEngine;
-using System;
 using Firebase.Database;
 using Firebase.Auth;
+using System.Collections.Generic;
+using System;
 
-[Serializable]
+
+[System.Serializable]
 public class DataToSave
 {
     public string userName;
     public int maxLevelCleared;
     public bool tutorialCleared;
-    public int dreamCoinAmount;
-
-    public int[] equippedItems;
+    public int dreamCoinAmount, specialCurrencyAmount;
+    public List<InventoryItem> inventory;
 }
 
 public class DataSaver : MonoBehaviour
 {
+    private const int INVENTORY_LIMIT = 40;
+
     public static DataSaver Instance;
     public DataToSave dts;
     private DatabaseReference dbRef;
@@ -39,7 +42,7 @@ public class DataSaver : MonoBehaviour
     private string GetUserId()
     {
         FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
-        return user != null ? user.UserId : null;
+        return user?.UserId;
     }
 
     public void SaveDataFn()
@@ -53,6 +56,33 @@ public class DataSaver : MonoBehaviour
 
         string json = JsonUtility.ToJson(dts);
         dbRef.Child("users").Child(userId).SetRawJsonValueAsync(json);
+    }
+
+    public void AddDreamCoins(int amount)
+    {
+        Instance.dts.dreamCoinAmount += amount;
+        SaveDataFn();
+    }
+
+    public void DeductDreamCoins(int amount)
+    {
+        AddDreamCoins(-amount);
+    }
+
+    public void AddSpecialCurrency(int amount)
+    {
+        Instance.dts.specialCurrencyAmount += amount;
+        SaveDataFn();
+    }
+
+    public void DeductSpecialCurrency(int amount)
+    {
+        AddSpecialCurrency(-amount);
+    }
+
+    public List<InventoryItem> GetInventoryList()
+    {
+        return dts.inventory;
     }
 
     public void LoadDataFn()
@@ -87,4 +117,28 @@ public class DataSaver : MonoBehaviour
             print("no data found");
         }
     }
+
+    public void AddItemToInventory(int itemId)
+    {
+        if (dts.inventory.Count >= INVENTORY_LIMIT)
+        {
+            Debug.LogError("Inventory limit reached. Cannot add more items.");
+            return;
+        }
+        string uniqueId = Guid.NewGuid().ToString();
+        InventoryItem newItem = new() { itemId = itemId, uniqueId = uniqueId };
+        dts.inventory.Add(newItem);
+        SaveDataFn();
+    }
+
+    public void RemoveItemFromInventory(string uniqueId)
+    {
+        InventoryItem itemToRemove = dts.inventory.Find(item => item.uniqueId == uniqueId);
+        if (itemToRemove != null)
+        {
+            dts.inventory.Remove(itemToRemove);
+            SaveDataFn();
+        }
+    }
+
 }

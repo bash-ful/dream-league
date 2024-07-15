@@ -9,6 +9,8 @@ public class ShopEntry : MonoBehaviour
     public Image entryImage;
     private Sprite itemSprite;
     public SelectedItemInfoCard card;
+    public ShopManager shopManager;
+    public int entryIndex;
 
 
     public Item EntryItem
@@ -26,7 +28,9 @@ public class ShopEntry : MonoBehaviour
         entryImage.preserveAspect = true;
     }
 
-    public void OnImagePress() {
-        card.UpdateCard(item.itemID);
+    public void OnImagePress()
+    {
+        shopManager.selectedShopEntrySlot = entryIndex;
+        card.UpdateCard(item.itemID, false);
     }
 }

@@ -17,7 +17,6 @@ public class MasterScript : MonoBehaviour
     public TimerUI timerUI;
 
     private float answerTime;
-    public ItemManager itemManager;
     public List<ActiveEffect> activeEffects = new();
 
 
@@ -33,8 +32,6 @@ public class MasterScript : MonoBehaviour
 
         qaManager.Init();
         ResetQuestionnaire();
-
-        itemManager.Init();
     }
 
     void Update()
@@ -93,7 +90,7 @@ public class MasterScript : MonoBehaviour
 
     public void UseItem(int itemID)
     {
-        Item item = itemManager.GetItemFromID(itemID);
+        Item item = ItemManager.Instance.GetItemFromID(itemID);
         print($"using item {item.name}");
         foreach (var effect in item.effects)
         {

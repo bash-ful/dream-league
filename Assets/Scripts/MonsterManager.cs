@@ -6,7 +6,7 @@ using UnityEngine;
 public class Monster
 {
     public int id;
-    public string name, spritePath, spritePathFirstFrame;
+    public string name, abilityName, abilityDescription, spritePath, profileSpritePath;
     public float baseHealth, baseDamage;
 }
 
@@ -18,24 +18,33 @@ public class MonsterList
 
 public class MonsterManager : MonoBehaviour
 {
+    public static MonsterManager Instance { get; private set; }
     private MonsterList monsterList;
 
-    void Start()
+    void Awake()
     {
-        print("MonsterManager Init");
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         Init();
+
     }
-    public void Init()
+
+    private void Init()
     {
         TextAsset monstersJson = Resources.Load<TextAsset>("Json/Monsters");
 
         if (monstersJson != null)
         {
             monsterList = JsonUtility.FromJson<MonsterList>(monstersJson.text);
-            foreach (Monster monster in monsterList.monsterList)
-            {
-                print($"name: {monster.name}");
-            }
+            // foreach (Monster monster in monsterList.monsterList)
+            // {
+            //     print($"name: {monster.name}");
+            // }
         }
         else
         {
@@ -46,5 +55,20 @@ public class MonsterManager : MonoBehaviour
     public Monster GetMonsterFromID(int itemID)
     {
         return monsterList.monsterList.Find(monster => monster.id == itemID);
+    }
+
+    public Sprite GetMonsterSprite(Monster monster)
+    {
+        return Resources.Load<Sprite>(monster.spritePath);
+    }
+
+    public Sprite GetMonsterProfileSprite(Monster monster)
+    {
+        return Resources.Load<Sprite>(monster.profileSpritePath);
+    }
+
+    public List<Monster> MonsterList
+    {
+        get { return new List<Monster>(monsterList.monsterList); }
     }
 }

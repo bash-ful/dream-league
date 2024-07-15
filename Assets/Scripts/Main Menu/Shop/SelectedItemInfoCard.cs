@@ -1,14 +1,22 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class SelectedItemInfoCard : MonoBehaviour
 {
     public GameObject StarsPanel, BuffIconsPanel;
     public Image itemBackground, itemImage;
     public TMP_Text itemNameText, itemBuffDescriptionText, itemDebuffDescriptionText, itemPriceText;
-    public ItemManager itemManager;
     private Image[] starImages, buffImages;
+    public int invEntry;
+    public InventoryManager inventoryManager;
+
+    void OnDisable()
+    {
+        ResetCard();
+    }
 
     void Start()
     {
@@ -23,8 +31,11 @@ public class SelectedItemInfoCard : MonoBehaviour
         itemBuffDescriptionText.text = "";
         itemDebuffDescriptionText.text = "";
         itemPriceText.text = "";
+        itemImage.sprite = null;
+        itemBackground.sprite = null;
+        ResetBuffIcons();
+        ResetStars();
         UpdateItemImages();
-        UpdateBuffIcons();
     }
 
     private void UpdateItemImages()
@@ -33,17 +44,22 @@ public class SelectedItemInfoCard : MonoBehaviour
         ImageTransparencyScript.UpdateImageTransparency(itemBackground);
     }
 
-    public void UpdateCard(int itemID)
+    public void UpdateCard(int itemID, bool isSelling)
     {
         ResetCard();
-        Item item = itemManager.GetItemFromID(itemID);
+        Item item = ItemManager.Instance.GetItemFromID(itemID);
 
         itemNameText.text = item.name;
         itemBuffDescriptionText.text = item.buffInfo;
         itemDebuffDescriptionText.text = item.debuffInfo;
-        itemPriceText.text = item.price.ToString();
-        itemImage.sprite = itemManager.GetItemSprite(item);
-        itemBackground.sprite = itemManager.GetBackgroundSprite(item);
+        int price = item.price;
+        if (isSelling)
+        {
+            price /= 2;
+        }
+        itemPriceText.text = price.ToString();
+        itemImage.sprite = ItemManager.Instance.GetItemSprite(item);
+        itemBackground.sprite = ItemManager.Instance.GetBackgroundSprite(item);
         UpdateItemImages();
         ShowStars(item.rarity);
         ShowBuffIcons(item.itemID);
@@ -60,7 +76,7 @@ public class SelectedItemInfoCard : MonoBehaviour
 
     public void ShowBuffIcons(int itemID)
     {
-        Item item = itemManager.GetItemFromID(itemID);
+        Item item = ItemManager.Instance.GetItemFromID(itemID);
         ResetBuffIcons();
         for (int i = 0; i < buffImages.Length && i < item.effects.Count; i++)
         {
@@ -69,38 +85,38 @@ public class SelectedItemInfoCard : MonoBehaviour
             switch (eff)
             {
                 case EffectType.HealPercentageOfMaxHP:
-                    buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Instant Heal");
+                    buffImages[i].sprite = Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Instant Heal");
                     break;
                 case EffectType.DamagePercentageOfMaxHP:
                 case EffectType.ModifySelfDamageDealtModifier:
                 case EffectType.ModifyEnemyDamageDealtModifier:
                     if (effect.value > 1)
                     {
-                        buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Stronger Damage");
+                        buffImages[i].sprite = Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stronger Damage");
                     }
                     else
                     {
-                        buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Weaker Damage");
+                        buffImages[i].sprite = Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Weaker Damage");
                     }
                     break;
                 case EffectType.ModifySelfDamageTakenModifier:
                 case EffectType.ModifyEnemyDamageTakenModifier:
                     if (effect.value > 1)
                     {
-                        buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Stronger Defense");
+                        buffImages[i].sprite = Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stronger Defense");
                     }
                     else
                     {
                     }
                     break;
                 case EffectType.ReflectDamage:
-                    buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Reflect Damage");
+                    buffImages[i].sprite = Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Reflect Damage");
                     break;
                 case EffectType.ModifyTimerBySeconds:
-                    buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Time");
+                    buffImages[i].sprite = Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Time");
                     break;
                 case EffectType.Stun:
-                    buffImages[i].sprite = Resources.Load<Sprite>("Aseprite/UI Scenes/Shop/Card/Item Effects Icon/Stun");
+                    buffImages[i].sprite = Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stun");
                     break;
             }
 
@@ -124,4 +140,13 @@ public class SelectedItemInfoCard : MonoBehaviour
             ImageTransparencyScript.UpdateImageTransparency(image);
         }
     }
+
+    private void ResetStars()
+    {
+        foreach (Image image in starImages)
+        {
+            image.gameObject.SetActive(false);
+        }
+    }
+
 }

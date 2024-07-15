@@ -2,80 +2,313 @@
     "monsterList": [
         {
             "id": 0,
-            "name": "Chameleon Gecko",
-            "baseHealth": 50,
-            "baseDamage": 10,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Chameleon_Gecko"
+            "name": "Feral Wolf",
+            "baseHealth": 100,
+            "baseDamage": 20,
+            "abilityName": "Ferocious Bite",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word within the time limit.",
+            "spritePath": "Entities/Animated/Feral Wolf",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Feral_Wolf"
         },
         {
             "id": 1,
-            "name": "Comet Behemoth",
-            "baseHealth": 100,
-            "baseDamage": 20,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Comet_Behemoth"
+            "name": "Rock Tortoise",
+            "baseHealth": 120,
+            "baseDamage": 15,
+            "abilityName": "Shell Defense",
+            "abilityDescription": "Will not take damage 1 time if the opponent fails to input a word.",
+            "spritePath": "Entities/Static/Chapter 1/Rock_Tortoise",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Rock_Tortoise"
         },
         {
             "id": 2,
             "name": "Crystal Golem",
-            "baseHealth": 500,
-            "baseDamage": 20,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Crystal_Golem"
+            "baseHealth": 140,
+            "baseDamage": 25,
+            "abilityName": "Crystallize",
+            "abilityDescription": "restores 10% of HP if the opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 1/Crystal_Golem",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Crystal_Golem"
         },
         {
             "id": 3,
-            "name": "Hippo",
-            "baseHealth": 250,
-            "baseDamage": 20,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Hippo"
+            "name": "Herbivorous Hippo",
+            "baseHealth": 200,
+            "baseDamage": 30,
+            "abilityName": "Herbivore's Endurance",
+            "abilityDescription": "Restores 50% of HP if the opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 1/Hippo",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Hippo"
         },
         {
             "id": 4,
-            "name": "Meteor Mantis",
-            "baseHealth": 20,
-            "baseDamage": 75,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Meteor_Mantis"
+            "name": "Chameleon Gecko",
+            "baseHealth": 180,
+            "baseDamage": 35,
+            "abilityName": "Camouflage",
+            "abilityDescription": "Opponent loses their next move if opponent use the same word.",
+            "spritePath": "Entities/Static/Chapter 1/Chameleon_Gecko",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Chameleon_Gecko"
         },
         {
             "id": 5,
-            "name": "Phantom Owl",
-            "baseHealth": 50,
-            "baseDamage": 35,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Phantom_Owl"
+            "name": "Meteor Mantis",
+            "baseHealth": 220,
+            "baseDamage": 25,
+            "abilityName": "Meteoric Strike",
+            "abilityDescription": "Deals 50% more damage to the opponent if opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 1/Meteor_Mantis",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Meteor_Mantis"
         },
         {
             "id": 6,
-            "name": "Rock Tortoise",
-            "baseHealth": 250,
-            "baseDamage": 50,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Rock_Tortoise"
+            "name": "Ruin Jaguar",
+            "baseHealth": 300,
+            "baseDamage": 40,
+            "abilityName": "Ancient Roar",
+            "abilityDescription": "Deals 10% more damage to the opponent if opponent use the same word.",
+            "spritePath": "Entities/Static/Chapter 1/Ruin_Jaguar",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Ruin_Jaguar"
         },
         {
             "id": 7,
-            "name": "Ruin Jaguar",
-            "baseHealth": 250,
-            "baseDamage": 250,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Ruin_Jaguar"
+            "name": "Phantom Owl",
+            "baseHealth": 280,
+            "baseDamage": 45,
+            "abilityName": "Shadow Swoop",
+            "abilityDescription": "Opponent loses their next move if opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 1/Phantom_Owl",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Phantom_Owl"
         },
         {
             "id": 8,
-            "name": "Ruin Serpent",
-            "baseHealth": 100,
-            "baseDamage": 250,
-            "spritePath": "Aseprite/Entities/Static/Chapter 1/Ruin_Serpent"
+            "name": "Guardian Serpent",
+            "baseHealth": 320,
+            "baseDamage": 35,
+            "abilityName": "Guardian's Coil",
+            "abilityDescription": "Guardian Serpent fully restores HP if the opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 1/Ruin_Serpent",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Ruin_Serpent"
         },
         {
             "id": 9,
-            "name": "Ancient Rhino",
-            "baseHealth": 300,
+            "name": "Comet Behemoth",
+            "baseHealth": 400,
             "baseDamage": 50,
-            "spritePath": "Aseprite/Entities/Animated/Ancient Rhino/Ancient-Rhino"
+            "abilityName": "Comet Crash",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word within the time limit.",
+            "spritePath": "Entities/Static/Chapter 1/Comet_Behemoth",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Comet_Behemoth"
         },
         {
             "id": 10,
+            "name": "Mythical Deer",
+            "baseHealth": 200,
+            "baseDamage": 40,
+            "abilityName": "Legendary Antlers",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word within the time limit.",
+            "spritePath": "Entities/Static/Chapter 2/Mythical_Deer",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Mythical_Deer"
+        },
+        {
+            "id": 11,
+            "name": "Ancestral Eagle",
+            "baseHealth": 180,
+            "baseDamage": 45,
+            "abilityName": "Soaring Strike",
+            "abilityDescription": "Deals 50% more damage to the opponent if opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 2/Ancestral_Eagle",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Ancestral_Eagle"
+        },
+        {
+            "id": 12,
+            "name": "Folklore Frog",
+            "baseHealth": 220,
+            "baseDamage": 35,
+            "abilityName": "Enchanted Croak",
+            "abilityDescription": "Will not take damage 1 time if the opponent fails to input a word.",
+            "spritePath": "Entities/Static/Chapter 2/Folklore_Frog",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Folklore_Frog"
+        },
+        {
+            "id": 13,
+            "name": "Aquatic Leviathan",
+            "baseHealth": 250,
+            "baseDamage": 50,
+            "abilityName": "Oceanic Fury",
+            "abilityDescription": "Deals 10% more damage to the opponent if opponent use the same word.",
+            "spritePath": "Entities/Static/Chapter 2/Aquatic_Leviathan",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Aquatic_Leviathan"
+        },
+        {
+            "id": 14,
+            "name": "Script Moth",
+            "baseHealth": 230,
+            "baseDamage": 55,
+            "abilityName": "Ancient Glyphs",
+            "abilityDescription": "Opponent loses their next move if opponent use the same word.",
+            "spritePath": "Entities/Static/Chapter 2/Script_Moth",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Script_Moth"
+        },
+        {
+            "id": 15,
+            "name": "Relic Beetle",
+            "baseHealth": 270,
+            "baseDamage": 45,
+            "abilityName": "Fossilized Shell",
+            "abilityDescription": "Restores 10% of HP if the opponent fails to input a word.",
+            "spritePath": "Entities/Static/Chapter 2/Relic_Beetle",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Relic_Beetle"
+        },
+        {
+            "id": 16,
+            "name": "Valley Titan",
+            "baseHealth": 350,
+            "baseDamage": 60,
+            "abilityName": "Titan's Strength",
+            "abilityDescription": "Fully restores HP if the opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 2/Valley_Titan",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Valley_Titan"
+        },
+        {
+            "id": 17,
+            "name": "Mystic Lynx",
+            "baseHealth": 320,
+            "baseDamage": 65,
+            "abilityName": "Mystical Pounce",
+            "abilityDescription": "Deals 50% more damage to the opponent if opponent fail to input a word.",
+            "spritePath": "Entities/Static/Chapter 2/Mystic_Lynx",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Mystic_Lynx"
+        },
+        {
+            "id": 18,
+            "name": "Ancient Rhino",
+            "baseHealth": 380,
+            "baseDamage": 55,
+            "abilityName": "Primeval Charge",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word within the time limit.",
+            "spritePath": "Entities/Animated/Ancient Rhino/Ancient-Rhino",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Ancient_Rhino"
+        },
+        {
+            "id": 19,
+            "name": "Colossal Dragon",
+            "baseHealth": 500,
+            "baseDamage": 70,
+            "abilityName": "Dragon's Breath",
+            "abilityDescription": "Deals double damage to the opponent if opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 2/Colossal_Dragon",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 2/Monster_Profile/Colossal_Dragon"
+        },
+        {
+            "id": 20,
+            "name": "Signal Hawk",
+            "baseHealth": 350,
+            "baseDamage": 60,
+            "abilityName": "Echoing Screech",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word within the time limit.",
+            "spritePath": "Entities/Static/Chapter 3/Signal_Hawk",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Signal_Hawk"
+        },
+        {
+            "id": 21,
+            "name": "Echoing Bat",
+            "baseHealth": 320,
+            "baseDamage": 65,
+            "abilityName": "Sonar Blast",
+            "abilityDescription": "Deals 50% more damage to the opponent if opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 3/Echoing_Bat",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Echoing_Bat"
+        },
+        {
+            "id": 22,
+            "name": "Translation Ape",
+            "baseHealth": 380,
+            "baseDamage": 55,
+            "abilityName": "Linguistic Mimicry",
+            "abilityDescription": "Restores 10% of HP if the opponent fails to input a word.",
+            "spritePath": "Entities/Static/Chapter 3/Translation_Ape",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Translation_Ape"
+        },
+        {
+            "id": 23,
+            "name": "Prophet Owl",
+            "baseHealth": 400,
+            "baseDamage": 70,
+            "abilityName": "Ancient Insight",
+            "abilityDescription": "Restores 50% of HP if the opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 3/Prophet_Owl",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Prophet_Owl"
+        },
+        {
+            "id": 24,
+            "name": "Secret Squirrel",
+            "baseHealth": 370,
+            "baseDamage": 75,
+            "abilityName": "Whispering Whiskers",
+            "abilityDescription": "Opponent loses their next move if opponent use the same word.",
+            "spritePath": "Entities/Static/Chapter 3/Secret_Squirrel",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Secret_Squirrel"
+        },
+        {
+            "id": 25,
+            "name": "Whispering Snake",
+            "baseHealth": 420,
+            "baseDamage": 65,
+            "abilityName": "Serpentine Suggestion",
+            "abilityDescription": "Will not take damage 1 time if the opponent fails to input a word.",
+            "spritePath": "Entities/Static/Chapter 3/Whispering_Snake",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Whispering_Snake"
+        },
+        {
+            "id": 26,
+            "name": "Wise Tortoise",
+            "baseHealth": 500,
+            "baseDamage": 80,
+            "abilityName": "Ancient Wisdom",
+            "abilityDescription": "Fully restores HP if the opponent used an incorrect word.",
+            "spritePath": "Entities/Static/Chapter 3/Wise_Tortoise",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Wise_Tortoise"
+        },
+        {
+            "id": 27,
+            "name": "Friendly Panther",
+            "baseHealth": 450,
+            "baseDamage": 85,
+            "abilityName": "Feline Diplomacy",
+            "abilityDescription": "Deals 10% more damage to the opponent if opponent use the same word.",
+            "spritePath": "Entities/Static/Chapter 3/Friendly_Panther",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Friendly_Panther"
+        },
+        {
+            "id": 28,
+            "name": "Cipher Fox",
+            "baseHealth": 550,
+            "baseDamage": 75,
+            "abilityName": "Enigmatic Aura",
+            "abilityDescription": "Opponent loses their next 2 moves if opponent fail to input a word.",
+            "spritePath": "Entities/Static/Chapter 3/Cipher_Fox",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Cipher_Fox"
+        },
+        {
+            "id": 29,
+            "name": "Oracle Parrot",
+            "baseHealth": 800,
+            "baseDamage": 90,
+            "abilityName": "Mystical Chant",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word.",
+            "spritePath": "Entities/Static/Chapter 3/Oracle_Parrot",
+            "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Oracle_Parrot"
+        },
+        {
+            "id": 666,
             "name": "Sleepy Bunny",
             "baseHealth": 250,
             "baseDamage": 100,
-            "spritePath": "Aseprite/Entities/Animated/Sleepy Bunny Idle"
+            "abilityName": "",
+            "abilityDescription": "",
+            "spritePath": "Entities/Animated/Sleepy Bunny Idle",
+            "profileSpritePath": ""
         }
     ]
 }

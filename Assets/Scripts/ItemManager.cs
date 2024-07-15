@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EffectType
@@ -48,6 +49,7 @@ public class Item
     public int rarity;
     public string spriteResourcesPath;
     public string backgroundResourcesPath;
+    public int selectedShopEntrySlot;
 }
 
 [System.Serializable]
@@ -58,23 +60,33 @@ public class ItemList
 
 public class ItemManager : MonoBehaviour
 {
+    public static ItemManager Instance;
     private ItemList itemList;
 
-    void Start()
+
+    void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         Init();
+
     }
-    public void Init()
+    private void Init()
     {
         TextAsset itemsJson = Resources.Load<TextAsset>("Json/Items");
 
         if (itemsJson != null)
         {
             itemList = JsonUtility.FromJson<ItemList>(itemsJson.text);
-            foreach (Item item in itemList.itemList)
-            {
-                print($"name: {item.name}");
-            }
+            // foreach (Item item in itemList.itemList)
+            // {
+            //     print($"name: {item.name}");
+            // }
         }
         else
         {
@@ -87,9 +99,9 @@ public class ItemManager : MonoBehaviour
         return itemList.itemList.Find(item => item.itemID == itemID);
     }
 
-    public List<Item> GetItemList()
+    public List<Item> ItemList
     {
-        return itemList.itemList;
+        get { return new List<Item>(itemList.itemList); }
     }
 
     public Sprite GetItemSprite(Item item)

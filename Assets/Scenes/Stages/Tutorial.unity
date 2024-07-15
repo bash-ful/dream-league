@@ -1654,11 +1654,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90415d253cf56c045bae7898af1a50d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterID: 9
+  monsterID: 18
   spriteRenderer: {fileID: 505493760}
   animator: {fileID: 505493761}
   damageIndicator: {fileID: 1973020206}
-  monsterManager: {fileID: 1433308832}
   damageIndicatorSpawnPosition: {fileID: 1921604679}
 --- !u!1 &428218115
 GameObject:
@@ -2323,7 +2322,6 @@ MonoBehaviour:
   enemy: {fileID: 1966046006}
   sceneScript: {fileID: 519420034}
   timerUI: {fileID: 234389536}
-  itemManager: {fileID: 1777990799}
   activeEffects: []
 --- !u!114 &519420034
 MonoBehaviour:
@@ -5726,6 +5724,7 @@ MonoBehaviour:
         rarity: 0
         spriteResourcesPath: 
         backgroundResourcesPath: 
+        selectedShopEntrySlot: 0
       button: {fileID: 1181341258}
     - item:
         itemID: 0
@@ -5737,6 +5736,7 @@ MonoBehaviour:
         rarity: 0
         spriteResourcesPath: 
         backgroundResourcesPath: 
+        selectedShopEntrySlot: 0
       button: {fileID: 1209299422}
     - item:
         itemID: 0
@@ -5748,8 +5748,8 @@ MonoBehaviour:
         rarity: 0
         spriteResourcesPath: 
         backgroundResourcesPath: 
+        selectedShopEntrySlot: 0
       button: {fileID: 1184338036}
-  itemManager: {fileID: 1777990799}
   masterScript: {fileID: 519420033}
 --- !u!4 &1231582831
 Transform:
@@ -11059,11 +11059,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90415d253cf56c045bae7898af1a50d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterID: 10
+  monsterID: 666
   spriteRenderer: {fileID: 959750248}
   animator: {fileID: 959750249}
   damageIndicator: {fileID: 681241277}
-  monsterManager: {fileID: 1433308832}
   damageIndicatorSpawnPosition: {fileID: 2007878947}
 --- !u!1 &1973020204
 GameObject:

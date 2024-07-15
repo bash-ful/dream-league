@@ -40,8 +40,8 @@
             ],
             "price": 500,
             "rarity": 1,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Matcha Mochi",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Electric Mixer"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Matcha Mochi",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Electric Mixer"
         },
         {
             "itemID": 2,
@@ -62,8 +62,8 @@
             ],
             "price": 1000,
             "rarity": 4,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Flan",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Cooker"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Flan",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Cooker"
         },
         {
             "itemID": 3,
@@ -78,8 +78,8 @@
             ],
             "price": 500,
             "rarity": 3,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Taco",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Oven"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Taco",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Oven"
         },
         {
             "itemID": 4,
@@ -95,8 +95,8 @@
             ],
             "price": 100,
             "rarity": 5,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Maguro Nigiri",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Maguro Nigiri",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
         },
         {
             "itemID": 5,
@@ -115,8 +115,8 @@
             ],
             "price": 500,
             "rarity": 2,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Kwek-Kwek",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Kwek-Kwek",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
         },
         {
             "itemID": 6,
@@ -137,8 +137,8 @@
             ],
             "price": 500,
             "rarity": 3,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Fried Shrimp",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Fried Shrimp",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
         },
         {
             "itemID": 7,
@@ -148,8 +148,8 @@
             "effects": [],
             "price": 1000,
             "rarity": 1,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Coffee",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Coffee Maker"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Coffee",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Coffee Maker"
         },
         {
             "itemID": 8,
@@ -165,8 +165,8 @@
             ],
             "price": 1000,
             "rarity": 3,
-            "spriteResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item/Burger",
-            "backgroundResourcesPath": "Aseprite/UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
+            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Burger",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
         }
     ]
 }

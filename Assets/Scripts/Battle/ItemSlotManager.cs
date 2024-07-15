@@ -18,7 +18,6 @@ public class ItemSlotManager : MonoBehaviour
 {
 
     public ItemSlots itemSlots;
-    public ItemManager itemManager;
     public MasterScript masterScript;
 
     void Start()
@@ -29,20 +28,19 @@ public class ItemSlotManager : MonoBehaviour
 
     private void Init()
     {
-        itemManager.Init();
         Sprite itemSpriteToAdd;
         Item item;
         for (int i = 0; i < 3; i++)
         {
             int randItemIndex = Random.Range(0, 8);
-            item = itemManager.GetItemFromID(randItemIndex);
+            item = ItemManager.Instance.GetItemFromID(randItemIndex);
             if (item == null)
             {
                 ImageTransparencyScript.UpdateImageTransparency(itemSlots.itemSlots[i].button.image);
                 continue;
             }
 
-            itemSpriteToAdd = itemManager.GetItemSprite(item);
+            itemSpriteToAdd = ItemManager.Instance.GetItemSprite(item);
             if (itemSpriteToAdd == null)
             {
                 ImageTransparencyScript.UpdateImageTransparency(itemSlots.itemSlots[i].button.image);

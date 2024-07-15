@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Firebase.Auth;
 using TMPro;
@@ -13,15 +14,14 @@ public class MainMenuUI : MonoBehaviour
         StartCoroutine(InitializeUI());
     }
 
-    IEnumerator InitializeUI()
+    private IEnumerator InitializeUI()
     {
-        while (DataSaver.Instance.dts.userName == "")
+        while (string.IsNullOrEmpty(DataSaver.Instance.dts.userName))
         {
             yield return null;
         }
 
         usernameText.text = $"Welcome, {DataSaver.Instance.dts.userName}!";
-        dreamCoinAmountText.text = $"Dream Coins: {DataSaver.Instance.dts.dreamCoinAmount}";
         userIDText.text = $"UID: {FirebaseAuth.DefaultInstance.CurrentUser.UserId}";
     }
 }

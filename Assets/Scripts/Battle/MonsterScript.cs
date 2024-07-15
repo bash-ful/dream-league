@@ -16,7 +16,6 @@ public class MonsterScript : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     public FloatingIndicator damageIndicator;
-    public MonsterManager monsterManager;
 
     public GameObject damageIndicatorSpawnPosition;
 
@@ -27,8 +26,7 @@ public class MonsterScript : MonoBehaviour
 
     public void MonsterInit()
     {
-        monsterManager.Init();
-        Monster playerMonster = monsterManager.GetMonsterFromID(monsterID);
+        Monster playerMonster = MonsterManager.Instance.GetMonsterFromID(monsterID);
         playerName = playerMonster.name;
         health = playerMonster.baseHealth;
         maxHP = health;
