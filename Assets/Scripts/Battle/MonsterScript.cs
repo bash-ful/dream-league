@@ -13,6 +13,7 @@ public class MonsterScript : MonoBehaviour
     public int cheatDeathCount = 0;
     private float cheatDeathPercentage = 0;
     private int stunDuration = 0;
+    private readonly int[] moves = new int[4];
 
     public float AllInExtraDamage = 0;
     public float AllInExtraDamageTaken = 0;
@@ -184,6 +185,12 @@ public class MonsterScript : MonoBehaviour
         get { return stunDuration; }
         set { stunDuration = value; }
 
+    }
+
+    public void LearnMove(int movesetIndex, int moveIndex){
+        if(movesetIndex < 4 && movesetIndex >= 0) {
+            moves[movesetIndex] = moveIndex;
+        }
     }
 
 }
