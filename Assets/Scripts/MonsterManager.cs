@@ -8,6 +8,7 @@ public class Monster
     public int id;
     public string name, abilityName, abilityDescription, spritePath, profileSpritePath;
     public float baseHealth, baseDamage;
+    public int[] moves = new int[4];
 }
 
 [System.Serializable]

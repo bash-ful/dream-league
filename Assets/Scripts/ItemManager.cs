@@ -4,8 +4,10 @@ using UnityEngine;
 
 public enum EffectType
 {
-    HealPercentageOfMaxHP,
-    DamagePercentageOfMaxHP,
+    HealPlayerPercentageOfMaxHP,
+    HealEnemyPercentageOfMaxHP,
+    DamagePlayerPercentageOfMaxHP,
+    DamageEnemyPercentageOfMaxHP,
     ModifySelfDamageTakenModifier,
     ModifySelfDamageDealtModifier,
 
@@ -16,7 +18,9 @@ public enum EffectType
     ReflectDamage,
     CheatDeath,
     ModifyTimerBySeconds,
-    Stun
+    Stun,
+    PlayerVampirism,
+    AllIn
 }
 
 [System.Serializable]
@@ -49,7 +53,6 @@ public class Item
     public int rarity;
     public string spriteResourcesPath;
     public string backgroundResourcesPath;
-    public int selectedShopEntrySlot;
 }
 
 [System.Serializable]

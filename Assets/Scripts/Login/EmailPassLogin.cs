@@ -160,7 +160,7 @@ public class EmailPassLogin : MonoBehaviour
             }
             else
             {
-                uiManager.ShowLoginTextResult("Verification email sent successfully");
+                uiManager.ShowRegisterTextResult("Verification email sent successfully");
             }
         }
     }

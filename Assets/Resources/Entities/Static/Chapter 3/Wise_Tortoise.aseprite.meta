@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Wise_Tortoise
     originalName: 
-    pivot: {x: 0.5, y: -0.17073171}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -154,8 +154,8 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 3
-        y: 7
+        x: 0
+        y: 0
         width: 84
         height: 41
       spriteId: f9255405ac345b74696339590fd29749
@@ -165,4 +165,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 90, y: 60}
+  canvasSize: {x: 84, y: 41}

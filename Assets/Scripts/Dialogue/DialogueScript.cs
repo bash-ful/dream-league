@@ -33,14 +33,22 @@ public class DialogueScript : MonoBehaviour
         StartCoroutine(PlayDialogue());
     }
 
-    IEnumerator PlayDialogue()
+    private IEnumerator PlayDialogue()
     {
         foreach (Dialogue dialogue in dialogueList.dialogueList)
         {
             NameText.text = dialogue.name;
             DialogueText.text = dialogue.dialogue;
             characterImage.sprite = dialogue.characterImage;
-            tutorialImage.sprite = dialogue.tutorialImage;
+            if (tutorialImage == null)
+            {
+                tutorialImage.sprite = null;
+                ImageTransparencyScript.UpdateImageTransparency(tutorialImage);
+            }
+            else
+            {
+                tutorialImage.sprite = dialogue.tutorialImage;
+            }
 
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             yield return new WaitUntil(() => !Input.GetMouseButton(0));

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +15,20 @@ public class InventoryEntry : MonoBehaviour
     {
         if (invItem == null)
         {
-            print("inv item is null now!");
             GetComponent<Button>().image.sprite = null;
+            GetComponentInChildren<TMP_Text>(true).gameObject.SetActive(false);
             ImageTransparencyScript.UpdateImageTransparency(GetComponent<Button>().image);
             return;
+        }
+        if (DataSaver.Instance.IsItemEquipped(invItem.uniqueId))
+        {
+            GetComponentInChildren<TMP_Text>(true).gameObject.SetActive(true);
+            int slotIndex = DataSaver.Instance.dts.equippedItems.FindIndex(x => x.uniqueId == invItem.uniqueId) + 1;
+            GetComponentInChildren<TMP_Text>(true).text = slotIndex.ToString();
+        }
+        else
+        {
+            GetComponentInChildren<TMP_Text>(true).gameObject.SetActive(false);
         }
         Item item = ItemManager.Instance.GetItemFromID(invItem.itemId);
         Sprite itemSprite = Resources.Load<Sprite>(item.spriteResourcesPath);
@@ -26,14 +37,15 @@ public class InventoryEntry : MonoBehaviour
         GetComponent<Button>().image.preserveAspect = true;
     }
 
-    public void ClearEntry() {
+    public void ClearEntry()
+    {
         invItem = null;
         UpdateEntry();
     }
 
     public void OnImagePress()
     {
-        card.UpdateCard(invItem.itemId, true);
+        card.UpdateCard(invItem.uniqueId, true, false);
         inventoryManager.selectedInventorySlot = inventoryIndex;
     }
 }

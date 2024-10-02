@@ -7,11 +7,11 @@ public class ShopEntry : MonoBehaviour
     private Item item;
     public TMP_Text entryPriceText;
     public Image entryImage;
+    public Button entryButton;
     private Sprite itemSprite;
     public SelectedItemInfoCard card;
     public ShopManager shopManager;
     public int entryIndex;
-
 
     public Item EntryItem
     {
@@ -19,18 +19,46 @@ public class ShopEntry : MonoBehaviour
         set { item = value; }
     }
 
-    public void UpdateEntry()
+    public void UpdateEntry(bool isSpecialCurrencyShop)
     {
-        entryPriceText.text = item.price.ToString();
+        if (item == null)
+        {
+            ClearEntry();
+            entryButton.interactable = false;
+            return;
+        }
+        entryButton.interactable = true;
+        int price = item.price;
+        if (isSpecialCurrencyShop)
+        {
+            price /= 50;
+        }
+        entryPriceText.text = price.ToString();
         itemSprite = Resources.Load<Sprite>(item.spriteResourcesPath);
         entryImage.sprite = itemSprite;
         ImageTransparencyScript.UpdateImageTransparency(entryImage);
         entryImage.preserveAspect = true;
     }
 
-    public void OnImagePress()
+    public void ClearEntry()
+    {
+        entryPriceText.text = "";
+        entryImage.sprite = null;
+        ImageTransparencyScript.UpdateImageTransparency(entryImage);
+    }
+
+    public void OnImagePress(bool isSpecialCurrencyShop)
     {
         shopManager.selectedShopEntrySlot = entryIndex;
-        card.UpdateCard(item.itemID, false);
+        if (isSpecialCurrencyShop)
+        {
+            shopManager.isSpecialCurrencyShop = true;
+            
+        }
+        else
+        {
+            shopManager.isSpecialCurrencyShop = false;
+        }
+        card.UpdateCard(item.itemID, isSpecialCurrencyShop);
     }
 }

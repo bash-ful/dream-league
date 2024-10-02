@@ -32,6 +32,11 @@
             "answer": "AGUINALDO",
             "question": "Also known as Magdalo, he was elected the first president of the new republic of the Philippines under the Malolos Congress."
         }
+    ],
 
-    ]
+    "rewards": {
+        "itemID": 2,
+        "specialCoins": 500,
+        "dreamCoins": 1000
+    }
 }

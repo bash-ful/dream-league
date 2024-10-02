@@ -4,6 +4,7 @@ using Firebase.Database;
 using Firebase.Auth;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 
 [System.Serializable]
@@ -14,6 +15,8 @@ public class DataToSave
     public bool tutorialCleared;
     public int dreamCoinAmount, specialCurrencyAmount;
     public List<InventoryItem> inventory;
+    public List<InventoryItem> equippedItems;
+
 }
 
 public class DataSaver : MonoBehaviour
@@ -23,6 +26,8 @@ public class DataSaver : MonoBehaviour
     public static DataSaver Instance;
     public DataToSave dts;
     private DatabaseReference dbRef;
+    public GameObject inventoryFullPanelPrefab;
+
 
     private void Awake()
     {
@@ -118,11 +123,16 @@ public class DataSaver : MonoBehaviour
         }
     }
 
+    public bool IsInventoryFull()
+    {
+        return dts.inventory.Count >= INVENTORY_LIMIT;
+    }
+
     public void AddItemToInventory(int itemId)
     {
-        if (dts.inventory.Count >= INVENTORY_LIMIT)
+        if (IsInventoryFull())
         {
-            Debug.LogError("Inventory limit reached. Cannot add more items.");
+            Debug.LogError("inventory is full");
             return;
         }
         string uniqueId = Guid.NewGuid().ToString();
@@ -131,14 +141,78 @@ public class DataSaver : MonoBehaviour
         SaveDataFn();
     }
 
+
+
     public void RemoveItemFromInventory(string uniqueId)
     {
         InventoryItem itemToRemove = dts.inventory.Find(item => item.uniqueId == uniqueId);
         if (itemToRemove != null)
         {
+            RemoveItemFromEquipped(itemToRemove.uniqueId);
             dts.inventory.Remove(itemToRemove);
-            SaveDataFn();
         }
+        SaveDataFn();
+
     }
 
+    public void AddItemToEquipped(string uniqueId)
+    {
+        if (dts.equippedItems.Count >= 3)
+        {
+            Debug.LogError("maximum equipped items reached.");
+            return;
+        }
+        InventoryItem itemToEquip = dts.inventory.Find(item => item.uniqueId == uniqueId);
+        if (itemToEquip != null)
+        {
+            dts.equippedItems.Add(itemToEquip);
+        }
+        SaveDataFn();
+
+    }
+
+    public void RemoveItemFromEquipped(string uniqueId)
+    {
+        InventoryItem itemToRemove = dts.equippedItems.Find(item => item.uniqueId == uniqueId);
+        if (itemToRemove != null)
+        {
+            dts.equippedItems.Remove(itemToRemove);
+        }
+        SaveDataFn();
+
+    }
+
+    public bool IsItemEquipped(string uniqueId)
+    {
+        return dts.equippedItems.Any(x => x.uniqueId == uniqueId);
+    }
+
+    public void ShowInventoryFullPanel()
+    {
+        StartCoroutine(ThrowAndDestroyObject());
+    }
+
+    private IEnumerator ThrowAndDestroyObject()
+    {
+        GameObject canvas = GameObject.Find("UI");
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas not found in the target scene!");
+            yield break;
+        }
+
+        // Calculate spawn position relative to the Canvas
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+        Vector3 spawnPosition = canvasRect.position + new Vector3(0, 0, 0f);
+
+        // Instantiate the prefab under the Canvas
+        GameObject obj = Instantiate(inventoryFullPanelPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        // Wait for a few seconds
+        yield return new WaitForSeconds(1);
+
+        // Destroy or deactivate the object
+        Destroy(obj);
+        // Alternatively, you can deactivate it:
+        // obj.SetActive(false);
+    }
 }

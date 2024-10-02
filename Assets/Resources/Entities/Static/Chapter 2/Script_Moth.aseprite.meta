@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Script_Moth
     originalName: 
-    pivot: {x: 0.45901638, y: -0.06557377}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -154,8 +154,8 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 7
-        y: 4
+        x: 0
+        y: 0
         width: 61
         height: 61
       spriteId: a948971a7f7aa864d96655b14bf4e841
@@ -165,4 +165,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 70, y: 70}
+  canvasSize: {x: 61, y: 61}

@@ -66,7 +66,6 @@ public class SelectedMonsterInfoCard : MonoBehaviour
     {
         ResetCard();
         Monster monster = MonsterManager.Instance.GetMonsterFromID(monsterID);
-        print($"displaying monster: {monster.name}");
 
         monsterNameText.text = monster.name;
         monsterHPText.text = monster.baseHealth.ToString();

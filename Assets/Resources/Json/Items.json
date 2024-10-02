@@ -2,49 +2,27 @@
     "itemList": [
         {
             "itemID": 0,
-            "name": "Super Healing Potion",
-            "buffInfo": "Restores 100% of the player's HP.",
-            "debuffInfo": "reduces damage dealt by 10% for the next 2 turns.",
-            "effects": [
-                {
-                    "type": "HealPercentageOfMaxHP",
-                    "value": 100,
-                    "effectDuration": 1
-                },
-                {
-                    "type": "ModifySelfDamageDealtModifier",
-                    "value": 0.9,
-                    "effectDuration": 2
-                }
-            ],
-            "price": 100,
-            "rarity": 5,
-            "spriteResourcesPath": "",
-            "backgroundResourcesPath": ""
-        },
-        {
-            "itemID": 1,
             "name": "Matcha Mochi",
             "buffInfo": "Increases the player's attack by 75% for the next 2 turns.",
             "debuffInfo": "Reduces HP by 10%.",
             "effects": [
                 {
                     "type": "ModifySelfDamageDealtModifier",
-                    "value": 1.75,
+                    "value": -0.1,
                     "effectDuration": 2
                 },
                 {
-                    "type": "DamagePercentageOfMaxHP",
+                    "type": "DamageEnemyPercentageOfMaxHP",
                     "value": 10
                 }
             ],
             "price": 500,
             "rarity": 1,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Matcha Mochi",
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Matcha Mochi",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Electric Mixer"
         },
         {
-            "itemID": 2,
+            "itemID": 1,
             "name": "Flan",
             "buffInfo": "Revive 2 times with 50% HP.",
             "debuffInfo": "Increases the opponent's attack by 25% for 1 turn each time.",
@@ -56,17 +34,17 @@
                 },
                 {
                     "type": "ModifyEnemyDamageDealtModifier",
-                    "value": 1.25,
+                    "value": 0.25,
                     "effectDuration": -1
                 }
             ],
             "price": 1000,
             "rarity": 4,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Flan",
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Flan",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Cooker"
         },
         {
-            "itemID": 3,
+            "itemID": 2,
             "name": "Taco",
             "buffInfo": "Reflects 50% of damage back to the attacker for 3 turns.",
             "debuffInfo": "",
@@ -78,28 +56,28 @@
             ],
             "price": 500,
             "rarity": 3,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Taco",
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Taco",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Oven"
         },
         {
-            "itemID": 4,
+            "itemID": 3,
             "name": "Maguro Nigiri",
             "buffInfo": "Restores 10% of the player's HP.",
             "debuffInfo": "",
             "effects": [
                 {
-                    "type": "HealPercentageOfMaxHP",
+                    "type": "HealPlayerPercentageOfMaxHP",
                     "value": 10,
                     "effectDuration": 1
                 }
             ],
             "price": 100,
-            "rarity": 5,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Maguro Nigiri",
+            "rarity": 1,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Maguro Nigiri",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
         },
         {
-            "itemID": 5,
+            "itemID": 4,
             "name": "Kwek-Kwek",
             "buffInfo": "Stun the opponent, preventing it from attacking 1 time.",
             "debuffInfo": "Reduces the timer by 10 seconds.",
@@ -115,44 +93,44 @@
             ],
             "price": 500,
             "rarity": 2,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Kwek-Kwek",
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Kwek-Kwek",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
         },
         {
-            "itemID": 6,
+            "itemID": 5,
             "name": "Fried Shrimp",
             "buffInfo": "Deals 15% of opponent HP.",
             "debuffInfo": "Reduces damage dealt by 10% for the next 2 turns.",
             "effects": [
                 {
-                    "type": "DamagePercentageOfMaxHP",
+                    "type": "DamageEnemyPercentageOfMaxHP",
                     "value": 15,
                     "effectDuration": 1
                 },
                 {
                     "type": "ModifySelfDamageDealtModifier",
-                    "value": 0.9,
+                    "value": -0.1,
                     "effectDuration": 2
                 }
             ],
             "price": 500,
             "rarity": 3,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Fried Shrimp",
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Fried Shrimp",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
         },
         {
-            "itemID": 7,
+            "itemID": 6,
             "name": "Coffee",
             "buffInfo": "Prevents the player from taking damage for 2 turns.",
             "debuffInfo": "",
             "effects": [],
             "price": 1000,
             "rarity": 1,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Coffee",
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Coffee",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Coffee Maker"
         },
         {
-            "itemID": 8,
+            "itemID": 7,
             "name": "Burger",
             "buffInfo": "Reflects 75% of damage back to the attacker for 3 turns.",
             "debuffInfo": "",
@@ -165,8 +143,305 @@
             ],
             "price": 1000,
             "rarity": 3,
-            "spriteResourcesPath": "UI Scenes/Shop/Card/Item/Burger",
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Burger",
             "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
+        },
+        {
+            "itemID": 8,
+            "name": "California Maki Sushi",
+            "buffInfo": "Restores 25% of the player's HP each turn for the next 4 turns.",
+            "debuffInfo": "Reduce attack by 10% during this period.",
+            "effects": [
+                {
+                    "type": "HealPlayerPercentageOfMaxHP",
+                    "value": 25,
+                    "effectDuration": 4
+                },
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": -0.1,
+                    "effectDuration": 4
+                }
+            ],
+            "price": 500,
+            "rarity": 4,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/California Maki Sushi",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
+        },
+        {
+            "itemID": 9,
+            "name": "Premium Ice Cream",
+            "buffInfo": "Restores 50% of the player's HP.",
+            "debuffInfo": "Reduces attack by 25% for 2 turns.",
+            "effects": [
+                {
+                    "type": "HealPlayerPercentageOfMaxHP",
+                    "value": 50
+                },
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": -0.25,
+                    "effectDuration": 2
+                }
+            ],
+            "price": 500,
+            "rarity": 3,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Premium Icecream",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Wheat Bag"
+        },
+        {
+            "itemID": 10,
+            "name": "Ice Cream",
+            "buffInfo": "Restores 25% of the player's HP.",
+            "debuffInfo": "Reduces attack by 25% for 2 turns.",
+            "effects": [
+                {
+                    "type": "HealPlayerPercentageOfMaxHP",
+                    "value": 25
+                },
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": -0.25,
+                    "effectDuration": 2
+                }
+            ],
+            "price": 500,
+            "rarity": 2,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Icecream",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Wheat Bag"
+        },
+        {
+            "itemID": 11,
+            "name": "Maki Sushi",
+            "buffInfo": "Fully restores the player's HP and reduces damage taken by 25% for 2 turns.",
+            "debuffInfo": "Reduces attack by 25% for 2 turns.",
+            "effects": [
+                {
+                    "type": "HealPlayerPercentageOfMaxHP",
+                    "value": 100
+                },
+                {
+                    "type": "ModifySelfDamageTakenModifier",
+                    "value": -0.25,
+                    "effectDuration": 2
+                },
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": 0.75,
+                    "effectDuration": 2
+                }
+            ],
+            "price": 2500,
+            "rarity": 5,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Maki Sushi",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
+        },
+        {
+            "itemID": 12,
+            "name": "Maguro Tamago Nigiri",
+            "buffInfo": "Restores 75% of the player's HP.",
+            "debuffInfo": "Reduces next attack by 25%.",
+            "effects": [
+                {
+                    "type": "HealPlayerPercentageOfMaxHP",
+                    "value": 75
+                },
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": -0.25,
+                    "effectDuration": 1
+                }
+            ],
+            "price": 1000,
+            "rarity": 4,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Maguro Tamago Nigiri",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
+        },
+        {
+            "itemID": 13,
+            "name": "Tamago Nigiri",
+            "buffInfo": "Restores 50% of the player's HP.",
+            "debuffInfo": "",
+            "effects": [
+                {
+                    "type": "HealPlayerPercentageOfMaxHP",
+                    "value": 50
+                }
+            ],
+            "price": 500,
+            "rarity": 3,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Tamago Nigiri",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
+        },
+        {
+            "itemID": 14,
+            "name": "Onigiri",
+            "buffInfo": "Restores 10% of the player's HP.",
+            "debuffInfo": "Reduces next attack by 10%.",
+            "effects": [
+                {
+                    "type": "HealPlayerPercentageOfMaxHP",
+                    "value": 10
+                },
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": -0.1,
+                    "effectDuration": 1
+                }
+            ],
+            "price": 500,
+            "rarity": 3,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Onigiri",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
+        },
+        {
+            "itemID": 15,
+            "name": "Soba Noodles",
+            "buffInfo": "Increases the player's attack by 75% for the next 3 turns.",
+            "debuffInfo": "Reduces HP by 75%.",
+            "effects": [
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": 0.75,
+                    "effectDuration": 3
+                },
+                {
+                    "type": "DamagePlayerPercentageOfMaxHP",
+                    "value": 75
+                }
+            ],
+            "price": 1000,
+            "rarity": 4,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Soba Noodles",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
+        },
+        {
+            "itemID": 16,
+            "name": "Strawberry Mochi",
+            "buffInfo": "Increases the player's attack by 50% for the next 3 turns.",
+            "debuffInfo": "Reduces HP by 50%.",
+            "effects": [
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": 0.5,
+                    "effectDuration": 3
+                },
+                {
+                    "type": "DamagePlayerPercentageOfMaxHP",
+                    "value": 50
+                }
+            ],
+            "price": 500,
+            "rarity": 4,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Strawberry Mochi",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
+        },
+        {
+            "itemID": 17,
+            "name": "Caramel Mochi",
+            "buffInfo": "Increases the player's attack by 25% for the next 3 turns.",
+            "debuffInfo": "Reduces HP by 25%.",
+            "effects": [
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": 0.25
+                },
+                {
+                    "type": "DamagePlayerPercentageOfMaxHP",
+                    "value": 25
+                }
+            ],
+            "price": 500,
+            "rarity": 4,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Caramel Mochi",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine Cooker"
+        },
+        {
+            "itemID": 18,
+            "name": "Croissant",
+            "buffInfo": "Reduces damage taken by 25% for the entire battle.",
+            "debuffInfo": "Reduces the player's attack by 10% for the entire battle.",
+            "effects": [
+                {
+                    "type": "ModifySelfDamageTakenModifier",
+                    "value": -0.25,
+                    "effectDuration": -1
+                },
+                {
+                    "type": "DamagePlayerPercentageOfMaxHP",
+                    "value": -0.1,
+                    "effectDuration": -1
+                }
+            ],
+            "price": 2500,
+            "rarity": 5,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Croissant",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Cooker"
+        },
+        {
+            "itemID": 19,
+            "name": "Matcha Tea",
+            "buffInfo": "Prevents the player from taking damage for 3 turn.",
+            "debuffInfo": "",
+            "effects": [],
+            "price": 2500,
+            "rarity": 5,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Matcha Tea",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Asian Cuisine"
+        },
+        {
+            "itemID": 20,
+            "name": "Footlong",
+            "buffInfo": "Drains 75% of the opponent's HP and adds it to the player's HP.",
+            "debuffInfo": "Reduces attack by 30% for 2 turns.",
+            "effects": [
+                {
+                    "type": "PlayerVampirism",
+                    "value": 75
+                },
+                {
+                    "type": "ModifySelfDamageDealtModifier",
+                    "value": -0.30,
+                    "effectDuration": 2
+                }
+            ],
+            "price": 2500,
+            "rarity": 5,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Footlong",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Fast Food Chain Pan"
+        },
+        {
+            "itemID": 21,
+            "name": "Pie",
+            "buffInfo": "Instantly vanquishes the opponent.",
+            "debuffInfo": "",
+            "effects": [
+                {
+                    "type": "DamageEnemyPercentageOfMaxHP",
+                    "value": 100
+                }
+            ],
+            "price": 2500,
+            "rarity": 5,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Cupcake",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Cooker"
+        },
+        {
+            "itemID": 22,
+            "name": "Pancake",
+            "buffInfo": "Increase attack by 25% the opponent's HP.",
+            "debuffInfo": "Increase damage taken by 25% the opponent's HP.",
+            "effects": [
+                {
+                    "type": "AllIn",
+                    "value": 25,
+                    "effectDuration": -1
+                }
+            ],
+            "price": 2500,
+            "rarity": 5,
+            "spriteResourcesPath": "UI Scenes/Shop/Buttons/Item/Pancake",
+            "backgroundResourcesPath": "UI Scenes/Shop/Card/Item Card Background/Classic Restaurant Cooker"
         }
     ]
 }

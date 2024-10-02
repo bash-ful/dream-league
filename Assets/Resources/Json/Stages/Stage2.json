@@ -1,0 +1,29 @@
+{
+    "qaList": [
+        {
+            "answer": "CONCEPCION",
+            "question": "A sibling of Jose rizal who died early and is said to have been his first sorrow."
+        },
+        {
+            "answer": "LEGAZPI",
+            "question": "The first Governor of the Philippines during the Hispanic Period."
+        },
+        {
+            "answer": "DAGOHOY",
+            "question": "He led the longest revolt in the Philippines during the Spanish times."
+        },
+        {
+            "answer": "QUEZON",
+            "question": "The first Philippine President of the Commonwealth and the Father of the Philippine language."
+        },
+        {
+            "answer": "BAYBAYIN",
+            "question": "Considered the earliest form of writing in the Philippines."
+        }
+    ],
+    "rewards": {
+        "itemID": 4,
+        "specialCoins": 10,
+        "dreamCoins": 200
+    }
+}

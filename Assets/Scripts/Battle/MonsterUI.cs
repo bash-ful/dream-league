@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterUI : MonoBehaviour
 {
@@ -7,19 +9,18 @@ public class MonsterUI : MonoBehaviour
     public TMP_Text damageIndicator, nameText, healthText, damageText;
     private float monsterMaxHP;
 
-
     void Start()
     {
-
+        nameText.text = monster.GetName();
         monsterMaxHP = monster.GetMaxHP();
     }
 
     void Update()
     {
-        nameText.text = monster.GetName();
         damageText.text = monster.GetModifiedDamage().ToString();
         healthText.text = $"{(int)monster.GetHealth()}/{monsterMaxHP}";
     }
+
 
 
 }

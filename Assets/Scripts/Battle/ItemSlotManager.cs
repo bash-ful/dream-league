@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class ItemSlot
 {
+    public string itemGUID;
     public Item item;
     public Button button;
 }
@@ -30,16 +31,23 @@ public class ItemSlotManager : MonoBehaviour
     {
         Sprite itemSpriteToAdd;
         Item item;
+        DataSaver.Instance.LoadDataFn();
+        List<InventoryItem> equippedItems = DataSaver.Instance.dts.equippedItems;
         for (int i = 0; i < 3; i++)
         {
-            int randItemIndex = Random.Range(0, 8);
-            item = ItemManager.Instance.GetItemFromID(randItemIndex);
+            if (i >= equippedItems.Count)
+            {
+                itemSlots.itemSlots[i].button.interactable = false;
+                ImageTransparencyScript.UpdateImageTransparency(itemSlots.itemSlots[i].button.image);
+                continue;
+            }
+            InventoryItem equippedItem = equippedItems[i];
+            item = ItemManager.Instance.GetItemFromID(equippedItem.itemId);
             if (item == null)
             {
                 ImageTransparencyScript.UpdateImageTransparency(itemSlots.itemSlots[i].button.image);
                 continue;
             }
-
             itemSpriteToAdd = ItemManager.Instance.GetItemSprite(item);
             if (itemSpriteToAdd == null)
             {
@@ -49,7 +57,7 @@ public class ItemSlotManager : MonoBehaviour
             {
                 itemSlots.itemSlots[i].button.image.sprite = itemSpriteToAdd;
             }
-
+            itemSlots.itemSlots[i].itemGUID = equippedItem.uniqueId;
             itemSlots.itemSlots[i].item = item;
 
         }
@@ -58,5 +66,8 @@ public class ItemSlotManager : MonoBehaviour
     public void OnItemSlotClick(int buttonIndex)
     {
         masterScript.UseItem(itemSlots.itemSlots[buttonIndex].item.itemID);
+        DataSaver.Instance.RemoveItemFromInventory(itemSlots.itemSlots[buttonIndex].itemGUID);
+        itemSlots.itemSlots[buttonIndex].button.image.sprite = null;
+        ImageTransparencyScript.UpdateImageTransparency(itemSlots.itemSlots[buttonIndex].button.image);
     }
 }

@@ -1,0 +1,33 @@
+{
+    "moveList": [
+        {
+            "id": 0,
+            "name": "-",
+            "type": "status",
+            "baseDamage": 0,
+            "info": "-",
+            "effects": []
+        },
+        {
+            "id": 1,
+            "name": "Tackle",
+            "type": "attack",
+            "baseDamage": 10,
+            "info": "Deal damage to the enemy.",
+            "effects": []
+        },
+        {
+            "id": 2,
+            "name": "Defense Curl",
+            "type": "status",
+            "info": "Decrease damage taken for 2 turns.",
+            "effects": [
+                {
+                    "type": "ModifySelfDamageTakenModifier",
+                    "value": -0.25,
+                    "effectDuration": 2
+                }
+            ]
+        }
+    ]
+}

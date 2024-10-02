@@ -38,7 +38,6 @@ public class InventoryManager : MonoBehaviour
         }
         dreamCoinAmountText.text = DataSaver.Instance.dts.dreamCoinAmount.ToString();
         specialCurrencyAmountText.text = DataSaver.Instance.dts.specialCurrencyAmount.ToString();
-
     }
 
     private IEnumerator WaitForInventoryLoad()
@@ -47,7 +46,7 @@ public class InventoryManager : MonoBehaviour
         {
             yield return null;
         }
-
+        DataSaver.Instance.LoadDataFn();
         inventoryList = DataSaver.Instance.dts.inventory;
         InventoryItem inventoryItem;
         Transform parentTransform = ItemsPanel.transform;
@@ -78,7 +77,8 @@ public class InventoryManager : MonoBehaviour
 
     public void SellItem()
     {
-        if(selectedInventorySlot == -1) {
+        if (selectedInventorySlot == -1)
+        {
             return;
         }
         InventoryEntry entry = ItemsPanel.transform.GetChild(selectedInventorySlot).GetComponent<InventoryEntry>();
@@ -92,10 +92,24 @@ public class InventoryManager : MonoBehaviour
         selectedInventorySlot = -1;
     }
 
-
-    public void Debug1()
+    public void EquipItem()
     {
-        DataSaver.Instance.AddItemToInventory(Random.Range(0, 8));
+        if (selectedInventorySlot == -1)
+        {
+            return;
+        }
+        InventoryEntry entry = ItemsPanel.transform.GetChild(selectedInventorySlot).GetComponent<InventoryEntry>();
+        InventoryItem invItem = DataSaver.Instance.dts.inventory.Find(x => x.uniqueId == entry.invItem.uniqueId);
+        if (DataSaver.Instance.IsItemEquipped(invItem.uniqueId))
+        {
+            DataSaver.Instance.RemoveItemFromEquipped(invItem.uniqueId);
+        }
+        else
+        {
+            DataSaver.Instance.AddItemToEquipped(invItem.uniqueId);
+        }
+        ReloadInventory();
+        card.UpdateCard(invItem.uniqueId, true, false);
     }
 
 }

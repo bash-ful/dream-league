@@ -184,7 +184,7 @@
             "id": 18,
             "name": "Ancient Rhino",
             "baseHealth": 380,
-            "baseDamage": 55,
+            "baseDamage": 60,
             "abilityName": "Primeval Charge",
             "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word within the time limit.",
             "spritePath": "Entities/Animated/Ancient Rhino/Ancient-Rhino",

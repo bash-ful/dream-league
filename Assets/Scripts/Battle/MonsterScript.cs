@@ -4,14 +4,21 @@ using UnityEngine;
 public class MonsterScript : MonoBehaviour
 {
     public int monsterID;
+    #region Monster Stats
 
     private float health, maxHP, baseDamage, modifiedDamage;
     private float damageTakenModifier = 1;
     private float damageDealtModifier = 1;
     private float damageReflectModifier = 0;
-    private int cheatDeathCount = 0;
+    public int cheatDeathCount = 0;
     private float cheatDeathPercentage = 0;
+    private int stunDuration = 0;
 
+    public float AllInExtraDamage = 0;
+    public float AllInExtraDamageTaken = 0;
+
+    #endregion
+    #region UI
     private string playerName, spritePath;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -19,9 +26,11 @@ public class MonsterScript : MonoBehaviour
 
     public GameObject damageIndicatorSpawnPosition;
 
+    #endregion
+
     void Update()
     {
-        modifiedDamage = baseDamage * damageDealtModifier;
+        modifiedDamage = (baseDamage * damageDealtModifier) + AllInExtraDamage;
     }
 
     public void MonsterInit()
@@ -57,7 +66,7 @@ public class MonsterScript : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health = Mathf.Clamp(health - (damage * damageTakenModifier), 0, health);
+        health = Mathf.Clamp(health - ((damage * damageTakenModifier) + AllInExtraDamageTaken), 0, health);
         damageIndicator.ShowIndicator($"DMG {damage}", IndicatorType.BaseDamage, damageIndicatorSpawnPosition.transform.position);
 
         if (health <= 0 && cheatDeathCount > 0)
@@ -76,8 +85,15 @@ public class MonsterScript : MonoBehaviour
         damageIndicator.ShowIndicator($"REVIVE {reviveAmount}", IndicatorType.Heal, damageIndicatorSpawnPosition.transform.position);
     }
 
+
+
     public void DealDamage(MonsterScript opponent)
     {
+        if (stunDuration > 0)
+        {
+            damageIndicator.ShowIndicator("STUNNED", IndicatorType.WeakenedDamage, damageIndicatorSpawnPosition.transform.position);
+            return;
+        }
         opponent.TakeDamage(modifiedDamage);
 
         if (opponent.DamageReflectModifier > 0)
@@ -148,7 +164,7 @@ public class MonsterScript : MonoBehaviour
     public float DamageReflectModifier
     {
         get { return damageReflectModifier; }
-        set { damageReflectModifier += value; }
+        set { damageReflectModifier = value; }
     }
 
     public int CheatDeathCount
@@ -163,5 +179,11 @@ public class MonsterScript : MonoBehaviour
         set { cheatDeathPercentage = value; }
     }
 
+    public int StunDuration
+    {
+        get { return stunDuration; }
+        set { stunDuration = value; }
+
+    }
 
 }

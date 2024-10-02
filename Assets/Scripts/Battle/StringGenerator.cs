@@ -42,4 +42,12 @@ public class StringGenerator : MonoBehaviour
             GameObject.Find(i.ToString()).GetComponentInChildren<TMP_Text>().text = Letters[i].ToString();
         }
     }
+
+    public void ClearAllButtonLetters()
+    {
+        for (int i = 0; i <= 17; i++)
+        {
+            GameObject.Find(i.ToString()).GetComponentInChildren<TMP_Text>().text = "";
+        }
+    }
 }
