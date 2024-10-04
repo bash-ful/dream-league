@@ -2,11 +2,17 @@
     "moveList": [
         {
             "id": 0,
-            "name": "-",
+            "name": "Reflect",
             "type": "status",
             "baseDamage": 0,
-            "info": "-",
-            "effects": []
+            "info": "Reflects 50% of damage taken to enemy for 3 turns",
+            "effects": [
+                {
+                    "type": "ReflectDamage",
+                    "value": 0.5,
+                    "effectDuration": 3
+                }
+            ]
         },
         {
             "id": 1,
@@ -18,7 +24,7 @@
         },
         {
             "id": 2,
-            "name": "Defense Curl",
+            "name": "Buckle",
             "type": "status",
             "info": "Decrease damage taken for 2 turns.",
             "effects": [
@@ -28,6 +34,30 @@
                     "effectDuration": 2
                 }
             ]
+        },
+        {
+            "id": 3,
+            "name": "Cinder",
+            "type": "attack",
+            "info": "Hurl cinders at the enemy, dealing damage",
+            "baseDamage": 30,
+            "effects": []
+        },
+        {
+            "id": 4,
+            "name": "Poison Leaf",
+            "type": "attack",
+            "info": "Use poisonous leaves to slice through the enemy",
+            "baseDamage": 30,
+            "effects": []
+        },
+        {
+            "id": 5,
+            "name": "Water Jet",
+            "type": "attack",
+            "info": "Fire high-velocity aqua streams towards the enemy",
+            "baseDamage": 30,
+            "effects": []
         }
     ]
 }

@@ -21,7 +21,7 @@ public class MainMenuUI : MonoBehaviour
             yield return null;
         }
 
-        usernameText.text = $"Welcome, {DataSaver.Instance.dts.userName}!";
+        // usernameText.text = $"Welcome, {DataSaver.Instance.dts.userName}!";
         userIDText.text = $"UID: {FirebaseAuth.DefaultInstance.CurrentUser.UserId}";
     }
 }

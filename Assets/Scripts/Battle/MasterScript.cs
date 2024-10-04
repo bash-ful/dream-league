@@ -8,24 +8,23 @@ using UnityEngine.UI;
 public class MasterScript : MonoBehaviour
 {
     private const float BASE_ANSWER_TIME = 60;
-    private bool isSomeCoroutineRunning = false;
     private bool isPaused = false;
+    private bool isPlayerTurn = true;
+    private bool isSomeCoroutineRunning = false;
     public DialogueScript dialogueScript;
-    public QAManager qaManager;
-    public LetterScript letterScript;
-    public StringGenerator stringGenerator;
     public MonsterScript player, enemy;
     public SceneScript sceneScript;
     public TimerUI timerUI;
-
-    private float answerTime;
     public List<ActiveEffect> activeEffects = new();
 
     public GameObject playerBuffsPanel, enemyBuffsPanel;
+    public GameObject MovesPanel;
+    public GameObject EnemyMovePanel;
+    public TMP_Text EnemyMoveText;
     public List<Image> playerBuffImages, enemyBuffImages;
     private float totalElapsedTime;
 
-    public GameObject onCorrectSound, onIncorrectSound, onWinSound, onLoseSound, bgm;
+    public GameObject onWinSound, onLoseSound, bgm;
 
     #region MOVETHIS
     public GameObject winPanel, losePanel;
@@ -41,18 +40,15 @@ public class MasterScript : MonoBehaviour
         enemyBuffImages = new(enemyBuffsPanel.GetComponentsInChildren<Image>());
         GameObject.Find("GameWin").GetComponent<Image>().enabled = false;
         GameObject.Find("GameLose").GetComponent<Image>().enabled = false;
-        ResetAnswerTime(BASE_ANSWER_TIME);
         player.MonsterInit();
         enemy.MonsterInit();
 
-        qaManager.Init();
-        ResetQuestionnaire();
         UpdateBuffIcons();
-        dialogueScript.BeginDialogue();
-        StartCoroutine(TimerCoroutine());
+        // dialogueScript.BeginDialogue();
+        StartCoroutine(BattleCoroutine());
     }
 
-    IEnumerator TimerCoroutine()
+    IEnumerator BattleCoroutine()
     {
         while (true)
         {
@@ -60,6 +56,24 @@ public class MasterScript : MonoBehaviour
             if (isGameOver)
             {
                 yield break; // Exit the coroutine if game over
+            }
+
+            if (isPlayerTurn)
+            {
+                Button[] moves = MovesPanel.GetComponentsInChildren<Button>();
+                foreach (Button move in moves)
+                {
+                    move.interactable = true;
+                }
+            }
+            else
+            {
+                Button[] moves = MovesPanel.GetComponentsInChildren<Button>();
+                foreach (Button move in moves)
+                {
+                    move.interactable = false;
+                }
+                StartCoroutine(EnemyMove());
             }
 
             if (player.IsDead() || enemy.IsDead())
@@ -82,48 +96,13 @@ public class MasterScript : MonoBehaviour
                 continue;
             }
 
-            answerTime -= Time.deltaTime;
-            totalElapsedTime += Time.deltaTime;
-            timerUI.SetDisplayedTimeText(answerTime);
-
-            if (answerTime <= 0.0f)
-            {
-                yield return StartCoroutine(OnTimerEnd());
-                continue;
-            }
-
-            string answer = qaManager.Answer;
-            string inputtedAnswer = qaManager.InputtedAnswerText.text;
-            if (inputtedAnswer.Contains("_"))
-            {
-                yield return null;
-                continue;
-            }
-
-            if (answer.Equals(inputtedAnswer))
-            {
-                print("correct answer!");
-                yield return StartCoroutine(OnCorrectAnswer());
-            }
-            else
-            {
-                yield return StartCoroutine(OnTimerEnd());
-            }
-
             yield return null;
         }
     }
 
-    private void ResetButtonLetters()
-    {
-        stringGenerator.ApplyGeneratedStringToButtons(qaManager.Answer);
-    }
-
     private void HideUI()
     {
-        GameObject.Find("Letters").SetActive(false);
-        GameObject.Find("QA").SetActive(false);
-        GameObject.Find("Timer").SetActive(false);
+        GameObject.Find("Moves").SetActive(false);
         GameObject.Find("Player").SetActive(false);
         GameObject.Find("Enemy").SetActive(false);
         GameObject.Find("Return").SetActive(false);
@@ -131,82 +110,90 @@ public class MasterScript : MonoBehaviour
 
     private void GiveRewards()
     {
-        DataSaver.Instance.AddDreamCoins(qaManager.DreamCoins);
-        DataSaver.Instance.AddSpecialCurrency(qaManager.SpecialCurrency);
-        DataSaver.Instance.AddItemToInventory(qaManager.ItemID);
+        DataSaver.Instance.AddDreamCoins(500);
+        DataSaver.Instance.AddSpecialCurrency(500);
+        DataSaver.Instance.AddItemToInventory(2);
     }
 
-    public void UseItem(int itemID)
+    public void UseItem(int id)
     {
-        Item item = ItemManager.Instance.GetItemFromID(itemID);
-        print($"using item {item.name}");
-        foreach (var effect in item.effects)
+        ApplyEffects(id, true, player, enemy);
+    }
+    public void ApplyEffects(int id, bool isItem, MonsterScript user, MonsterScript target)
+    {
+        List<Effect> effects;
+        if (isItem)
+        {
+            effects = ItemManager.Instance.GetItemFromID(id).effects;
+        }
+        else
+        {
+            effects = MoveManager.Instance.GetMoveFromID(id).effects;
+        }
+        foreach (var effect in effects)
         {
             Enum.TryParse(effect.type, out EffectType eff);
             switch (eff)
             {
                 case EffectType.HealPlayerPercentageOfMaxHP:
-                    player.Heal(player.GetMaxHP() * effect.value / 100);
+                    user.Heal(user.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.HealEnemyPercentageOfMaxHP:
-                    enemy.Heal(enemy.GetMaxHP() * effect.value / 100);
+                    target.Heal(target.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.DamagePlayerPercentageOfMaxHP:
-                    player.TakeDamage(player.GetMaxHP() * effect.value / 100);
+                    user.TakeDamage(user.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.DamageEnemyPercentageOfMaxHP:
-                    enemy.TakeDamage(enemy.GetMaxHP() * effect.value / 100);
+                    target.TakeDamage(target.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.ModifySelfDamageTakenModifier:
-                    player.DamageTakenModifier = Mathf.Clamp(player.DamageTakenModifier + effect.value, 0, 999);
+                    user.DamageTakenModifier = Mathf.Clamp(user.DamageTakenModifier + effect.value, 0, 999);
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.ModifySelfDamageDealtModifier:
-                    player.DamageDealtModifier = Mathf.Clamp(player.DamageDealtModifier + effect.value, 0, 999);
+                    user.DamageDealtModifier = Mathf.Clamp(user.DamageDealtModifier + effect.value, 0, 999);
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.ModifyEnemyDamageTakenModifier:
-                    enemy.DamageTakenModifier = Mathf.Clamp(enemy.DamageTakenModifier + effect.value, 0, 999);
+                    target.DamageTakenModifier = Mathf.Clamp(target.DamageTakenModifier + effect.value, 0, 999);
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.ModifyEnemyDamageDealtModifier:
-                    enemy.DamageDealtModifier = Mathf.Clamp(enemy.DamageDealtModifier + effect.value, 0, 999);
+                    target.DamageDealtModifier = Mathf.Clamp(target.DamageDealtModifier + effect.value, 0, 999);
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.ReflectDamage:
                     // This actually adds to the damage reflect modifier
-                    player.DamageReflectModifier += effect.value;
+                    user.DamageReflectModifier += effect.value;
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.CheatDeath:
-                    player.CheatDeathCount = effect.effectDuration; // Set the number of times it can occur
-                    player.CheatDeathPercentage = effect.value; // Set the percentage for revival
+                    user.CheatDeathCount = effect.effectDuration; // Set the number of times it can occur
+                    user.CheatDeathPercentage = effect.value; // Set the percentage for revival
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.Stun:
-                    enemy.StunDuration = effect.effectDuration;
+                    target.StunDuration = effect.effectDuration;
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.PlayerVampirism:
-                    enemy.TakeDamage(enemy.GetMaxHP() * effect.value / 100);
-                    player.Heal(enemy.GetMaxHP() * effect.value / 100);
-                    break;
-                case EffectType.ModifyTimerBySeconds:
-                    answerTime += effect.value;
+                    target.TakeDamage(target.GetMaxHP() * effect.value / 100);
+                    user.Heal(target.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.AllIn:
-                    player.AllInExtraDamage = enemy.GetMaxHP() * 0.1f;
-                    player.AllInExtraDamageTaken = enemy.GetMaxHP() * 0.1f;
+                    user.AllInExtraDamage = target.GetMaxHP() * 0.1f;
+                    user.AllInExtraDamageTaken = target.GetMaxHP() * 0.1f;
                     break;
             }
         }
 
-        if (enemy.IsDead())
+        if (target.IsDead())
         {
             isGameOver = true;
             StartCoroutine(OnPlayerWin());
         }
-        else if (player.IsDead())
+        else if (user.IsDead())
         {
             isGameOver = true;
             StartCoroutine(OnPlayerLose());
@@ -272,23 +259,10 @@ public class MasterScript : MonoBehaviour
         player.DamageReflectModifier = Mathf.Max(0, selfReflectDamageModifier);
     }
 
-    public void ResetQuestionnaire()
-    {
-        letterScript.EnableAllButtons();
-        qaManager.ChangeQA();
-        qaManager.ResetAnswerText();
-        ResetButtonLetters();
-    }
-
     public IEnumerator ReturnToMainMenu()
     {
         yield return new WaitForSeconds(2);
         sceneScript.MoveScene(1);
-    }
-
-    public void ResetAnswerTime(float seconds)
-    {
-        answerTime = seconds;
     }
 
     private IEnumerator OnPlayerWin()
@@ -297,12 +271,12 @@ public class MasterScript : MonoBehaviour
         bgm.GetComponent<AudioSource>().Stop();
         onWinSound.GetComponent<AudioSource>().Play();
         GameObject.Find("GameWin").GetComponent<Image>().enabled = true;
-        dreamCoinText.text = qaManager.DreamCoins.ToString();
+        dreamCoinText.text = "500";
+        specialCurrencyText.text = "500";
         int seconds = (int)totalElapsedTime % 60;
         int minutes = (int)totalElapsedTime / 60;
         timeElapsedText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        specialCurrencyText.text = qaManager.SpecialCurrency.ToString();
-        itemImage.sprite = ItemManager.Instance.GetItemSprite(ItemManager.Instance.GetItemFromID(qaManager.ItemID));
+        itemImage.sprite = ItemManager.Instance.GetItemSprite(ItemManager.Instance.GetItemFromID(2));
         GiveRewards();
         yield return new WaitForSeconds(1);
         winPanel.SetActive(true);
@@ -317,83 +291,42 @@ public class MasterScript : MonoBehaviour
         losePanel.SetActive(true);
     }
 
-    private IEnumerator OnCorrectAnswer()
+    public void PlayerMove(int movesetIndex)
     {
+        Move move = MoveManager.Instance.GetMoveFromID(player.GetMoveID(movesetIndex));
+        Debug.Log($"Player uses {move.name}!");
+        if (move.type == "attack")
+        {
+            player.DealDamage(enemy, move.baseDamage);
+        }
+        ApplyEffects(move.id, false, player, enemy);
+        isPlayerTurn = false;
         isSomeCoroutineRunning = true;
-        onCorrectSound.GetComponent<AudioSource>().Play();
-        player.DealDamage(enemy);
-        if (enemy.IsDead())
-        {
-            StartCoroutine(OnPlayerWin());
-            yield break;
-        }
-        else if (player.IsDead())
-        {
-            StartCoroutine(OnPlayerLose());
-            yield break;
-        }
-        ResetQuestionnaire();
-        ResetAnswerTime(BASE_ANSWER_TIME);
-        ApplyActiveEffects();
-        if (enemy.IsDead())
-        {
-            StartCoroutine(OnPlayerWin());
-            yield break;
-        }
-        else if (player.IsDead())
-        {
-            StartCoroutine(OnPlayerLose());
-            yield break;
-        }
-        ResetBuffIcons();
-        LoadBuffIcons();
-        isSomeCoroutineRunning = false;
-    }
-    private IEnumerator OnTimerEnd()
-    {
-        isPaused = true; // Pause the timer and questionnaire generation
-        onIncorrectSound.GetComponent<AudioSource>().Play();
-
-        isSomeCoroutineRunning = true;
-        OnTurnEnd();
-        yield return new WaitForSeconds(1);
-        enemy.DealDamage(player);
-        if (player.IsDead())
-        {
-            OnPlayerLose();
-            yield break;
-        }
-        else if (enemy.IsDead())
-        {
-            OnPlayerWin();
-            yield break;
-        }
-        yield return new WaitForSeconds(1);
-        ResetQuestionnaire();
-        ResetAnswerTime(BASE_ANSWER_TIME);
-        ApplyActiveEffects();
-        if (enemy.IsDead())
-        {
-            StartCoroutine(OnPlayerWin());
-            yield break;
-        }
-        else if (player.IsDead())
-        {
-            StartCoroutine(OnPlayerLose());
-            yield break;
-        }
-        ResetBuffIcons();
-        LoadBuffIcons();
-        isSomeCoroutineRunning = false;
-        isPaused = false; // Resume the timer and questionnaire generation
     }
 
-    private void OnTurnEnd()
+    private IEnumerator EnemyMove()
     {
-        letterScript.DisableAllButtons();
-        stringGenerator.ClearAllButtonLetters();
-        qaManager.ClearQAText();
+        if (isSomeCoroutineRunning)
+        {
+            isSomeCoroutineRunning = false;
+            yield return new WaitForSeconds(1);
+            int randomNumber = UnityEngine.Random.Range(0, 4);
+            Move move = MoveManager.Instance.GetMoveFromID(enemy.GetMoveID(randomNumber));
+            EnemyMovePanel.SetActive(true);
+            EnemyMoveText.text = $"Enemy uses {move.name}!";
+            yield return new WaitForSeconds(1);
+            if (move.type == "attack")
+            {
+                enemy.DealDamage(player, move.baseDamage);
+            }
+            ApplyEffects(move.id, false, enemy, player);
+            yield return new WaitForSeconds(1);
+            EnemyMovePanel.SetActive(false);
+            isPlayerTurn = true;
+            ApplyActiveEffects();
+        }
     }
+
 
     private void LoadBuffIcons()
     {

@@ -31,7 +31,7 @@ public class MonsterScript : MonoBehaviour
 
     void Update()
     {
-        modifiedDamage = (baseDamage * damageDealtModifier) + AllInExtraDamage;
+        modifiedDamage = baseDamage * damageDealtModifier;
     }
 
     public void MonsterInit()
@@ -44,6 +44,10 @@ public class MonsterScript : MonoBehaviour
         spritePath = playerMonster.spritePath;
         Sprite newSprite = Resources.Load<Sprite>(spritePath);
         RuntimeAnimatorController animController = Resources.Load<RuntimeAnimatorController>(spritePath);
+        moves[0] = 1;
+        moves[1] = 2;
+        moves[2] = 3;
+        moves[3] = 0;
 
         if (animController != null)
         {
@@ -67,8 +71,8 @@ public class MonsterScript : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health = Mathf.Clamp(health - ((damage * damageTakenModifier) + AllInExtraDamageTaken), 0, health);
-        damageIndicator.ShowIndicator($"DMG {damage}", IndicatorType.BaseDamage, damageIndicatorSpawnPosition.transform.position);
+        health = Mathf.Clamp(health - (damage * damageTakenModifier), 0, health);
+        damageIndicator.ShowIndicator($"DMG {damage * damageTakenModifier}", IndicatorType.BaseDamage, damageIndicatorSpawnPosition.transform.position);
 
         if (health <= 0 && cheatDeathCount > 0)
         {
@@ -88,14 +92,14 @@ public class MonsterScript : MonoBehaviour
 
 
 
-    public void DealDamage(MonsterScript opponent)
+    public void DealDamage(MonsterScript opponent, float moveBaseDamage)
     {
         if (stunDuration > 0)
         {
             damageIndicator.ShowIndicator("STUNNED", IndicatorType.WeakenedDamage, damageIndicatorSpawnPosition.transform.position);
             return;
         }
-        opponent.TakeDamage(modifiedDamage);
+        opponent.TakeDamage(baseDamage + moveBaseDamage);
 
         if (opponent.DamageReflectModifier > 0)
         {
@@ -191,6 +195,10 @@ public class MonsterScript : MonoBehaviour
         if(movesetIndex < 4 && movesetIndex >= 0) {
             moves[movesetIndex] = moveIndex;
         }
+    }
+
+    public int GetMoveID(int movesetIndex) {
+        return moves[movesetIndex];
     }
 
 }
