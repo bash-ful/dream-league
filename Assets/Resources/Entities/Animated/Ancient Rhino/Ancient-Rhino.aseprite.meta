@@ -275,7 +275,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Ancient-Rhino_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -284,7 +284,7 @@ ScriptedImporter:
         width: 75
         height: 54
       spriteId: 476c4e951f9ecad41803e7311f141ac4
-    - name: Ancient-Rhino_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -293,7 +293,7 @@ ScriptedImporter:
         width: 75
         height: 53
       spriteId: 28a12a12fd56e6845923f2ad5627c53b
-    - name: Ancient-Rhino_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -302,7 +302,7 @@ ScriptedImporter:
         width: 75
         height: 53
       spriteId: 4f7defeddf6569d459c96e0dec8b85a3
-    - name: Ancient-Rhino_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -311,7 +311,7 @@ ScriptedImporter:
         width: 75
         height: 53
       spriteId: 6c58d5582c6d24a4ebe8925afc5322d0
-    - name: Ancient-Rhino_Frame_4
+    - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
@@ -320,7 +320,7 @@ ScriptedImporter:
         width: 75
         height: 53
       spriteId: b18e1c9f0f53df24882f8918d000827d
-    - name: Ancient-Rhino_Frame_5
+    - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
@@ -329,7 +329,7 @@ ScriptedImporter:
         width: 75
         height: 53
       spriteId: 31357698bf618c841a7f73ad33f3fd86
-    - name: Ancient-Rhino_Frame_6
+    - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:

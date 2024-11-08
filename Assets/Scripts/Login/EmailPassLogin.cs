@@ -1,14 +1,17 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Firebase.Extensions;
 using Firebase.Auth;
 using System;
-using Firebase.Database;
 using TMPro;
 
 public class EmailPassLogin : MonoBehaviour
 {
     #region variables
+    [Header("Panels")]
+    public GameObject loginPanel;
+    public GameObject registerPanel;
     [Header("Login")]
     public TMP_InputField loginEmail;
     public TMP_InputField loginPassword;
@@ -21,49 +24,28 @@ public class EmailPassLogin : MonoBehaviour
 
     [Header("Extra")]
     public GameObject loadingScreen;
+    public TMP_Text loginText, registerText;
     public DataSaver dataSaver;
     public SceneScript sceneScript;
-    public LoginUIManager uiManager;
 
     #endregion
+
+
 
     #region register 
     public void Register()
     {
         string email = registerEmail.text;
-        string username = registerUsername.text;
         string password = registerPassword.text;
         string passwordConfirm = registerPasswordConfirm.text;
-
         if (!password.Equals(passwordConfirm))
         {
-            uiManager.ShowRegisterTextResult("Passwords do not match");
-            return;
-        }
-
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(passwordConfirm) || string.IsNullOrEmpty(username))
-        {
-            uiManager.ShowRegisterTextResult("Please fill all fields");
+            ShowRegisterTextResult("Passwords do not match");
             return;
         }
 
         loadingScreen.SetActive(true);
 
-        CheckUsernameExists(username, (exists) =>
-        {
-            if (exists)
-            {
-                loadingScreen.SetActive(false);
-                uiManager.ShowRegisterTextResult("Username already exists");
-                return;
-            }
-
-            CreateFirebaseUser(email, password, username);
-        });
-    }
-
-    private void CreateFirebaseUser(string email, string password, string username)
-    {
         FirebaseAuth auth = FirebaseAuth.DefaultInstance;
 
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
@@ -75,71 +57,38 @@ public class EmailPassLogin : MonoBehaviour
                 Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
                 return;
             }
-
             if (task.IsFaulted)
             {
-                HandleAuthRegisterError(task.Exception);
+                if (CheckError(task.Exception, (int)AuthError.EmailAlreadyInUse))
+                {
+                    ShowRegisterTextResult("Email already in use");
+                }
+                Debug.LogError("UpdateEmailAsync encountered an error: " + task.Exception);
                 return;
             }
 
             AuthResult result = task.Result;
-            Debug.LogFormat("Firebase user created successfully: {0} ({1})", result.User.DisplayName, result.User.UserId);
+            Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+                result.User.DisplayName, result.User.UserId);
+
 
             if (result.User.IsEmailVerified)
             {
-                uiManager.ShowLoginTextResult("Sign up successful");
+                ShowLoginTextResult("Sign up successful");
             }
             else
             {
-                uiManager.ShowRegisterTextResult("Sending verification email...");
+                ShowRegisterTextResult("Sending verification email...");
                 SendEmailVerification();
             }
 
-            dataSaver.dts.userName = username;
+            dataSaver.dts.userName = registerUsername.text;
             dataSaver.SaveDataFn();
             dataSaver.dts.userName = "";
 
-            uiManager.ClearRegisterText();
+            ClearRegisterInputFields();
         });
     }
-
-    private void HandleAuthRegisterError(AggregateException exception)
-    {
-        int errorCode = GetErrorCode(exception);
-        string errorDisplay = "An error occurred!";
-        switch (errorCode)
-        {
-            case (int)AuthError.InvalidEmail:
-                errorDisplay = "Invalid email";
-                break;
-            case (int)AuthError.EmailAlreadyInUse:
-                errorDisplay = "This email is already in use";
-                break;
-            case (int)AuthError.WeakPassword:
-                errorDisplay = "Password must be at least 6 characters long";
-                break;
-        }
-        uiManager.ShowRegisterTextResult(errorDisplay);
-        Debug.LogError("UpdateEmailAsync encountered an error: " + exception);
-    }
-
-    private void CheckUsernameExists(string username, Action<bool> callback)
-    {
-        FirebaseDatabase.DefaultInstance.GetReference("users").OrderByChild("userName").EqualTo(username).GetValueAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("Error checking username: " + task.Exception);
-                callback(false);
-                return;
-            }
-
-            DataSnapshot snapshot = task.Result;
-            callback(snapshot.Exists);
-        });
-    }
-
-
 
     public void SendEmailVerification()
     {
@@ -151,16 +100,18 @@ public class EmailPassLogin : MonoBehaviour
         FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
         if (user != null)
         {
+            Debug.Log("Sending verification email...");
             var sendEmailTask = user.SendEmailVerificationAsync();
             yield return new WaitUntil(() => sendEmailTask.IsCompleted);
 
             if (sendEmailTask.Exception != null)
             {
-                uiManager.ShowRegisterTextResult("Error in sending email verification");
+                // Debug.LogError("Failed to send verification email: " + sendEmailTask.Exception);
+                ShowRegisterTextResult("Error in sending email verification");
             }
             else
             {
-                uiManager.ShowRegisterTextResult("Verification email sent successfully");
+                ShowRegisterTextResult("Verification email sent successfully");
             }
         }
     }
@@ -189,7 +140,8 @@ public class EmailPassLogin : MonoBehaviour
             if (task.IsFaulted)
             {
                 Debug.LogError("SignInAndRetrieveDataWithCredentialAsync encountered an error: " + task.Exception.ToString());
-                HandleAuthLoginError(task.Exception);
+                ShowLoginTextResult("An error has occured!");
+                return;
             }
 
             AuthResult result = task.Result;
@@ -198,48 +150,42 @@ public class EmailPassLogin : MonoBehaviour
 
             if (result.User.IsEmailVerified)
             {
-                uiManager.ShowLoginTextResult("Login Success!");
+                ShowLoginTextResult("Login Success!");
                 dataSaver.LoadDataFn();
                 sceneScript.MoveScene(1);
+                // loginPanel.SetActive(false);
+                // registerPanel.SetActive(false);
+                // mainMenuPanel.SetActive(true);
 
             }
             else
             {
-                uiManager.ShowLoginTextResult("Verify your e-mail");
+                ShowLoginTextResult("Please verify your e-mail!");
             }
         });
-    }
-
-    private void HandleAuthLoginError(AggregateException exception)
-    {
-        int errorCode = GetErrorCode(exception);
-        string errorDisplay;
-        switch (errorCode)
-        {
-            case (int)AuthError.InvalidEmail:
-                errorDisplay = "Invalid email";
-                break;
-            case (int)AuthError.MissingEmail:
-                errorDisplay = "Enter your email on the field";
-                break;
-            case (int)AuthError.UnverifiedEmail:
-                errorDisplay = "Please verify your email";
-                break;
-            case (int)AuthError.MissingPassword:
-                errorDisplay = "Enter your password on the field";
-                break;
-            default:
-                errorDisplay = "An error has occured";
-                break;
-
-        }
-        uiManager.ShowLoginTextResult(errorDisplay);
-        return;
     }
     #endregion
 
     #region extra
-    int GetErrorCode(AggregateException exception)
+    void ShowLoginTextResult(string msg)
+    {
+        loginText.text = msg;
+    }
+
+    void ShowRegisterTextResult(string msg)
+    {
+        registerText.text = msg;
+    }
+
+    void ClearRegisterInputFields()
+    {
+        registerEmail.text = "";
+        registerUsername.text = "";
+        registerPassword.text = "";
+        registerPasswordConfirm.text = "";
+    }
+
+    bool CheckError(AggregateException exception, int firebaseExceptionCode)
     {
         Firebase.FirebaseException fbEx = null;
         foreach (Exception e in exception.Flatten().InnerExceptions)
@@ -251,9 +197,16 @@ public class EmailPassLogin : MonoBehaviour
 
         if (fbEx != null)
         {
-            return fbEx.ErrorCode;
+            if (fbEx.ErrorCode == firebaseExceptionCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        return 0; // Return -1 or another value to indicate no FirebaseException was found
+        return false;
     }
     #endregion
 }

@@ -4084,10 +4084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b672f44d6f07248bc22c4d6ff2e7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allConfigData:
-    userName: 
-    maxLevelCleared: 0
-    tutorialCleared: 0
 --- !u!4 &1371039949
 Transform:
   m_ObjectHideFlags: 0
@@ -5973,6 +5969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215d6a29a35d17c45b1bd8cfc9cf9c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loginPanel: {fileID: 767580738}
+  registerPanel: {fileID: 312915066}
   loginEmail: {fileID: 440245270}
   loginPassword: {fileID: 1873169566}
   registerEmail: {fileID: 1210326182}
@@ -5980,9 +5978,10 @@ MonoBehaviour:
   registerPassword: {fileID: 1468272299}
   registerPasswordConfirm: {fileID: 1606158999}
   loadingScreen: {fileID: 512307910}
+  loginText: {fileID: 322404195}
+  registerText: {fileID: 275684334}
   dataSaver: {fileID: 302018077}
   sceneScript: {fileID: 680791428}
-  uiManager: {fileID: 1890018911}
 --- !u!4 &1932378091
 Transform:
   m_ObjectHideFlags: 0

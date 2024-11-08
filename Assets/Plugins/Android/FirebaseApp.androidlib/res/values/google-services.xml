@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
-  <string name="firebase_database_url" translatable="false">https://dream-league-8604a-default-rtdb.asia-southeast1.firebasedatabase.app</string>
-  <string name="gcm_defaultSenderId" translatable="false">353750873554</string>
-  <string name="google_storage_bucket" translatable="false">dream-league-8604a.appspot.com</string>
-  <string name="project_id" translatable="false">dream-league-8604a</string>
-  <string name="google_api_key" translatable="false">AIzaSyCySwd9L0c042Mm4caJyPTJiJyZ14h9KJM</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCySwd9L0c042Mm4caJyPTJiJyZ14h9KJM</string>
-  <string name="google_app_id" translatable="false">1:353750873554:android:5bde1f8b5677af27bc440b</string>
+  <string name="firebase_database_url" translatable="false">https://dreamleague-86ce9-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+  <string name="gcm_defaultSenderId" translatable="false">627922779373</string>
+  <string name="google_storage_bucket" translatable="false">dreamleague-86ce9.firebasestorage.app</string>
+  <string name="project_id" translatable="false">dreamleague-86ce9</string>
+  <string name="google_api_key" translatable="false">AIzaSyCKYgL7xR3223q39PT5mUY7n336XyvKTUY</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCKYgL7xR3223q39PT5mUY7n336XyvKTUY</string>
+  <string name="google_app_id" translatable="false">1:627922779373:android:98435b2731cdfa5ba360e4</string>
 </resources>

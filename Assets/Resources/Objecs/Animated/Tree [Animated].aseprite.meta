@@ -670,7 +670,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Tree [Animated]_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -679,7 +679,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 14a83acc2d31e5b4cb73951f802d3aa9
-    - name: Tree [Animated]_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -688,7 +688,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 9abf53d4cdf0471429bbc6da3d2c4d71
-    - name: Tree [Animated]_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -697,7 +697,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: cdb8e3a8d5e08f84598384cab3d8260a
-    - name: Tree [Animated]_Frame_4
+    - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
@@ -706,7 +706,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 7dc2ced43c656254089003d8b27223a3
-    - name: Tree [Animated]_Frame_5
+    - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
@@ -715,7 +715,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 4e7976e1ef4aed04fa8ed2c1777675b3
-    - name: Tree [Animated]_Frame_6
+    - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:
@@ -724,7 +724,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: da01293eeed09174292b9a449124e2a0
-    - name: Tree [Animated]_Frame_7
+    - name: Frame_7
       frameIndex: 7
       additiveSortOrder: 0
       cellRect:
@@ -733,7 +733,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: e24f6b7a4a20db74ead0c65877465bbc
-    - name: Tree [Animated]_Frame_8
+    - name: Frame_8
       frameIndex: 8
       additiveSortOrder: 0
       cellRect:
@@ -742,7 +742,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 94096f3b26f2ec84696ad1ab426e62c9
-    - name: Tree [Animated]_Frame_9
+    - name: Frame_9
       frameIndex: 9
       additiveSortOrder: 0
       cellRect:
@@ -751,7 +751,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: c2dcb4855789cba4b9cec42e913031c3
-    - name: Tree [Animated]_Frame_10
+    - name: Frame_10
       frameIndex: 10
       additiveSortOrder: 0
       cellRect:
@@ -760,7 +760,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 36afd5807a85c8342989b6e84e527bb1
-    - name: Tree [Animated]_Frame_11
+    - name: Frame_11
       frameIndex: 11
       additiveSortOrder: 0
       cellRect:
@@ -769,7 +769,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: e111a4c17d4b4d14d9452c3a1f6b790f
-    - name: Tree [Animated]_Frame_12
+    - name: Frame_12
       frameIndex: 12
       additiveSortOrder: 0
       cellRect:
@@ -778,7 +778,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 66a64a9413628864b958862188116c1a
-    - name: Tree [Animated]_Frame_13
+    - name: Frame_13
       frameIndex: 13
       additiveSortOrder: 0
       cellRect:
@@ -787,7 +787,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: a0bfb808423107c46a3d6ced100a2800
-    - name: Tree [Animated]_Frame_14
+    - name: Frame_14
       frameIndex: 14
       additiveSortOrder: 0
       cellRect:
@@ -796,7 +796,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 7fa5f08e4db09ae4bbadcf9e70e5816d
-    - name: Tree [Animated]_Frame_15
+    - name: Frame_15
       frameIndex: 15
       additiveSortOrder: 0
       cellRect:
@@ -805,7 +805,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 7354b64636a09444988dfba803c6f417
-    - name: Tree [Animated]_Frame_16
+    - name: Frame_16
       frameIndex: 16
       additiveSortOrder: 0
       cellRect:
@@ -814,7 +814,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 4692165ba6354634b8895aa693e4f32a
-    - name: Tree [Animated]_Frame_17
+    - name: Frame_17
       frameIndex: 17
       additiveSortOrder: 0
       cellRect:
@@ -823,7 +823,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: c454dba3fca544f4f819919cf74926a4
-    - name: Tree [Animated]_Frame_18
+    - name: Frame_18
       frameIndex: 18
       additiveSortOrder: 0
       cellRect:
@@ -832,7 +832,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 38d2b8828897dfd4f9a298010b54c872
-    - name: Tree [Animated]_Frame_19
+    - name: Frame_19
       frameIndex: 19
       additiveSortOrder: 0
       cellRect:
@@ -841,7 +841,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 20a6931a77a6a3946909348dd1e701e6
-    - name: Tree [Animated]_Frame_20
+    - name: Frame_20
       frameIndex: 20
       additiveSortOrder: 0
       cellRect:
@@ -850,7 +850,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 3e306df441065a34c94b8af466c5847b
-    - name: Tree [Animated]_Frame_21
+    - name: Frame_21
       frameIndex: 21
       additiveSortOrder: 0
       cellRect:
@@ -859,7 +859,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 770369d02d0b3d74a9fa05e9a1b85aee
-    - name: Tree [Animated]_Frame_22
+    - name: Frame_22
       frameIndex: 22
       additiveSortOrder: 0
       cellRect:
@@ -868,7 +868,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 9e2fe8e0ae9bd2149af0e65ab3476197
-    - name: Tree [Animated]_Frame_23
+    - name: Frame_23
       frameIndex: 23
       additiveSortOrder: 0
       cellRect:
@@ -877,7 +877,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 2cd480dbdf4d6dd42bbb08d9b8df4128
-    - name: Tree [Animated]_Frame_24
+    - name: Frame_24
       frameIndex: 24
       additiveSortOrder: 0
       cellRect:
@@ -886,7 +886,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 036a23f1e2ab6b94e90d1f89fbea6dbb
-    - name: Tree [Animated]_Frame_25
+    - name: Frame_25
       frameIndex: 25
       additiveSortOrder: 0
       cellRect:
@@ -895,7 +895,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 1f86786576860b0409fe705c47bddc33
-    - name: Tree [Animated]_Frame_26
+    - name: Frame_26
       frameIndex: 26
       additiveSortOrder: 0
       cellRect:
@@ -904,7 +904,7 @@ ScriptedImporter:
         width: 60
         height: 106
       spriteId: 57eed301fc316f64e979894d03330785
-    - name: Tree [Animated]_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:

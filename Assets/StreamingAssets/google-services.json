@@ -1,22 +1,22 @@
 {
   "project_info": {
-    "project_number": "353750873554",
-    "firebase_url": "https://dream-league-8604a-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "dream-league-8604a",
-    "storage_bucket": "dream-league-8604a.appspot.com"
+    "project_number": "627922779373",
+    "firebase_url": "https://dreamleague-86ce9-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "dreamleague-86ce9",
+    "storage_bucket": "dreamleague-86ce9.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:353750873554:android:5bde1f8b5677af27bc440b",
+        "mobilesdk_app_id": "1:627922779373:android:98435b2731cdfa5ba360e4",
         "android_client_info": {
-          "package_name": "com.Group8.DreamLeague"
+          "package_name": "com.ThesisGroup8.DreamLeague"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCySwd9L0c042Mm4caJyPTJiJyZ14h9KJM"
+          "current_key": "AIzaSyCKYgL7xR3223q39PT5mUY7n336XyvKTUY"
         }
       ],
       "services": {

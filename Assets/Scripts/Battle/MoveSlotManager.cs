@@ -20,7 +20,6 @@ public class MoveSlotManager : MonoBehaviour
 
     void Start()
     {
-
         Init();
     }
 

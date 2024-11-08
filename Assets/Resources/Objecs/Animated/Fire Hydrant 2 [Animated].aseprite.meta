@@ -470,7 +470,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Fire Hydrant 2 [Animated]_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -479,7 +479,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: dd582b7cae3bb1b4797706d35855a7b7
-    - name: Fire Hydrant 2 [Animated]_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -488,7 +488,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 2b0671d39fec6304580a7156ea2a4658
-    - name: Fire Hydrant 2 [Animated]_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -497,7 +497,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: b066ce697b7de7b49a97b509c9d39d68
-    - name: Fire Hydrant 2 [Animated]_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -506,7 +506,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: fd99d5159a4d4fa48ac34ed0b89ddf4e
-    - name: Fire Hydrant 2 [Animated]_Frame_4
+    - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
@@ -515,7 +515,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: e0cad46b9b46e174c8f3d1061b0c9e58
-    - name: Fire Hydrant 2 [Animated]_Frame_5
+    - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
@@ -524,7 +524,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: d7617fc91426ece4b876110863f6858c
-    - name: Fire Hydrant 2 [Animated]_Frame_6
+    - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:
@@ -533,7 +533,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 627ab994ed94b3046aa1a939b8cfe170
-    - name: Fire Hydrant 2 [Animated]_Frame_7
+    - name: Frame_7
       frameIndex: 7
       additiveSortOrder: 0
       cellRect:
@@ -542,7 +542,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 8defcfdae757efe4582de5734ebbd7de
-    - name: Fire Hydrant 2 [Animated]_Frame_8
+    - name: Frame_8
       frameIndex: 8
       additiveSortOrder: 0
       cellRect:
@@ -551,7 +551,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 342248062fa28014aaa84e6616621c6a
-    - name: Fire Hydrant 2 [Animated]_Frame_9
+    - name: Frame_9
       frameIndex: 9
       additiveSortOrder: 0
       cellRect:
@@ -560,7 +560,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: b3ca95980b56dd1499ed37194c5c7ca8
-    - name: Fire Hydrant 2 [Animated]_Frame_10
+    - name: Frame_10
       frameIndex: 10
       additiveSortOrder: 0
       cellRect:
@@ -569,7 +569,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: f4194ba7651901b498ffa67b8e261a75
-    - name: Fire Hydrant 2 [Animated]_Frame_11
+    - name: Frame_11
       frameIndex: 11
       additiveSortOrder: 0
       cellRect:
@@ -578,7 +578,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: ec51a76a33479ce40a9bf9da97562689
-    - name: Fire Hydrant 2 [Animated]_Frame_12
+    - name: Frame_12
       frameIndex: 12
       additiveSortOrder: 0
       cellRect:
@@ -587,7 +587,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 04895041f1aec044195a1f7111fb0773
-    - name: Fire Hydrant 2 [Animated]_Frame_13
+    - name: Frame_13
       frameIndex: 13
       additiveSortOrder: 0
       cellRect:
@@ -596,7 +596,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 0430e0f78e179ee4b926f596d4983a1a
-    - name: Fire Hydrant 2 [Animated]_Frame_14
+    - name: Frame_14
       frameIndex: 14
       additiveSortOrder: 0
       cellRect:
@@ -605,7 +605,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 2bd6313a514db284ca00581fa0bb7f8b
-    - name: Fire Hydrant 2 [Animated]_Frame_15
+    - name: Frame_15
       frameIndex: 15
       additiveSortOrder: 0
       cellRect:
@@ -614,7 +614,7 @@ ScriptedImporter:
         width: 14
         height: 24
       spriteId: 0483dd1a54b896c4e8b17d19b4d730b6
-    - name: Fire Hydrant 2 [Animated]_Frame_16
+    - name: Frame_16
       frameIndex: 16
       additiveSortOrder: 0
       cellRect:
