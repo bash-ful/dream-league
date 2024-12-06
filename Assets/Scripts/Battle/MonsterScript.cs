@@ -6,8 +6,9 @@ public class MonsterScript : MonoBehaviour
     public bool isPlayer;
     public int monsterID;
     #region Monster Stats
+    private string elementType;
 
-    private float health, maxHP, baseDamage, modifiedDamage;
+    public float health, maxHP, baseDamage, modifiedDamage;
     private float damageTakenModifier = 1;
     private float damageDealtModifier = 1;
     private float damageReflectModifier = 0;
@@ -38,15 +39,19 @@ public class MonsterScript : MonoBehaviour
     public void MonsterInit()
     {
         Monster playerMonster;
-        if(isPlayer) {
-            playerMonster = MonsterManager.Instance.GetMonsterFromID(DataSaver.Instance.dts.equippedMonster[0]);
-
-        } else {
+        if (isPlayer)
+        {
+            // playerMonster = MonsterManager.Instance.GetMonsterFromID(DataSaver.Instance.dts.equippedMonster[0]);
+            playerMonster = MonsterManager.Instance.GetMonsterFromID(0);
+        }
+        else
+        {
             playerMonster = MonsterManager.Instance.GetMonsterFromID(monsterID);
         }
         playerName = playerMonster.name;
         health = playerMonster.baseHealth;
         maxHP = health;
+        elementType = playerMonster.elementType;
         baseDamage = playerMonster.baseDamage;
         spritePath = playerMonster.spritePath;
         Sprite newSprite = Resources.Load<Sprite>(spritePath);
@@ -76,10 +81,10 @@ public class MonsterScript : MonoBehaviour
 
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, IndicatorType type)
     {
         health = Mathf.Clamp(health - (damage * damageTakenModifier), 0, health);
-        damageIndicator.ShowIndicator($"DMG {damage * damageTakenModifier}", IndicatorType.BaseDamage, damageIndicatorSpawnPosition.transform.position);
+        damageIndicator.ShowIndicator($"DMG {damage * damageTakenModifier}", type, damageIndicatorSpawnPosition.transform.position);
 
         if (health <= 0 && cheatDeathCount > 0)
         {
@@ -99,19 +104,40 @@ public class MonsterScript : MonoBehaviour
 
 
 
-    public void DealDamage(MonsterScript opponent, float moveBaseDamage)
+    public void DealDamage(MonsterScript opponent, float moveBaseDamage, string moveElementType)
     {
+        IndicatorType type = IndicatorType.BaseDamage;
+        float elementModifier = 1f;
+        if ((moveElementType == "fire" && opponent.elementType == "grass") ||
+            (moveElementType == "grass" && opponent.elementType == "rock") ||
+            (moveElementType == "rock" && opponent.elementType == "water") ||
+            (moveElementType == "water" && opponent.elementType == "fire"))
+        {
+            Debug.Log("super effective");
+            elementModifier = 2f;
+            type = IndicatorType.SuperEffectiveDamage;
+        }
+        else if ((moveElementType == "grass" && opponent.elementType == "fire") ||
+            (moveElementType == "rock" && opponent.elementType == "grass") ||
+            (moveElementType == "water" && opponent.elementType == "rock") ||
+            (moveElementType == "fire" && opponent.elementType == "water"))
+        {
+            Debug.Log("not effective");
+            elementModifier = 0.5f;
+            type = IndicatorType.NotEffectiveDamage;
+        }
+
         if (stunDuration > 0)
         {
             damageIndicator.ShowIndicator("STUNNED", IndicatorType.WeakenedDamage, damageIndicatorSpawnPosition.transform.position);
             return;
         }
-        opponent.TakeDamage(baseDamage + moveBaseDamage);
+        opponent.TakeDamage((baseDamage + moveBaseDamage) * elementModifier, type);
 
         if (opponent.DamageReflectModifier > 0)
         {
             float reflectDamage = baseDamage * opponent.DamageReflectModifier;
-            TakeDamage(reflectDamage);
+            TakeDamage(reflectDamage, IndicatorType.BaseDamage);
         }
 
     }
@@ -134,7 +160,7 @@ public class MonsterScript : MonoBehaviour
 
     public bool IsDead()
     {
-        return health == 0 && cheatDeathCount <= 0; ;
+        return health <= 0 && cheatDeathCount <= 0; ;
     }
 
     public float GetHealth()
@@ -198,17 +224,21 @@ public class MonsterScript : MonoBehaviour
 
     }
 
-    public void LearnMove(int movesetIndex, int moveIndex){
-        if(movesetIndex < 4 && movesetIndex >= 0) {
+    public void LearnMove(int movesetIndex, int moveIndex)
+    {
+        if (movesetIndex < 4 && movesetIndex >= 0)
+        {
             moves[movesetIndex] = moveIndex;
         }
     }
 
-    public int[] GetMovesID() {
+    public int[] GetMovesID()
+    {
         return moves;
     }
 
-    public int GetMoveID(int movesetIndex) {
+    public int GetMoveID(int movesetIndex)
+    {
         return moves[movesetIndex];
     }
 

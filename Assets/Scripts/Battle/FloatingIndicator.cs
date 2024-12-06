@@ -8,6 +8,8 @@ public enum IndicatorType
     BaseDamage,
     WeakenedDamage,
     BoostedDamage,
+    SuperEffectiveDamage,
+    NotEffectiveDamage,
     Heal
 }
 public class FloatingIndicator : MonoBehaviour
@@ -35,6 +37,8 @@ public class FloatingIndicator : MonoBehaviour
             IndicatorType.Heal => Color.green,
             IndicatorType.WeakenedDamage => Color.blue,
             IndicatorType.BoostedDamage => Color.red,
+            IndicatorType.SuperEffectiveDamage => Color.yellow,
+            IndicatorType.NotEffectiveDamage => Color.gray,
             _ => Color.white,
         };
     }

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class MasterScript : MonoBehaviour
 {
     // private const float BASE_ANSWER_TIME = 60;
+    
     public int stageLevel;
     private bool isPaused = false;
     private bool isPlayerTurn = true;
@@ -45,17 +46,18 @@ public class MasterScript : MonoBehaviour
         enemy.MonsterInit();
 
         UpdateBuffIcons();
-        if(DataSaver.Instance.dts.maxLevelCleared < stageLevel) {
+        if (DataSaver.Instance.dts.maxLevelCleared < stageLevel)
+        {
             dialogueScript.BeginDialogue();
-            StartCoroutine(BattleCoroutine());
         }
+        StartCoroutine(BattleCoroutine());
+
     }
 
     IEnumerator BattleCoroutine()
     {
         while (true)
         {
-
             if (isGameOver)
             {
                 yield break; // Exit the coroutine if game over
@@ -79,15 +81,18 @@ public class MasterScript : MonoBehaviour
                 StartCoroutine(EnemyMove());
             }
 
+
             if (player.IsDead() || enemy.IsDead())
             {
                 isGameOver = true;
                 if (player.IsDead())
                 {
+                    Debug.Log("player dead");
                     StartCoroutine(OnPlayerLose());
                 }
-                else if (enemy.IsDead())
+                else
                 {
+                    Debug.Log("enemy dead");
                     StartCoroutine(OnPlayerWin());
                 }
                 yield break; // Exit the coroutine if either player or enemy is dead
@@ -145,10 +150,10 @@ public class MasterScript : MonoBehaviour
                     target.Heal(target.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.DamagePlayerPercentageOfMaxHP:
-                    user.TakeDamage(user.GetMaxHP() * effect.value / 100);
+                    user.TakeDamage(user.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
                     break;
                 case EffectType.DamageEnemyPercentageOfMaxHP:
-                    target.TakeDamage(target.GetMaxHP() * effect.value / 100);
+                    target.TakeDamage(target.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
                     break;
                 case EffectType.ModifySelfDamageTakenModifier:
                     user.DamageTakenModifier = Mathf.Clamp(user.DamageTakenModifier + effect.value, 0, 999);
@@ -181,7 +186,7 @@ public class MasterScript : MonoBehaviour
                     activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
                     break;
                 case EffectType.PlayerVampirism:
-                    target.TakeDamage(target.GetMaxHP() * effect.value / 100);
+                    target.TakeDamage(target.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
                     user.Heal(target.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.AllIn:
@@ -191,12 +196,12 @@ public class MasterScript : MonoBehaviour
             }
         }
 
-        if (target.IsDead())
+        if (enemy.IsDead())
         {
             isGameOver = true;
             StartCoroutine(OnPlayerWin());
         }
-        else if (user.IsDead())
+        else if (player.IsDead())
         {
             isGameOver = true;
             StartCoroutine(OnPlayerLose());
@@ -301,7 +306,7 @@ public class MasterScript : MonoBehaviour
         Debug.Log($"Player uses {move.name}!");
         if (move.type == "attack")
         {
-            player.DealDamage(enemy, move.baseDamage);
+            player.DealDamage(enemy, move.baseDamage, move.elementType);
         }
         ApplyEffects(move.id, false, player, enemy);
         isPlayerTurn = false;
@@ -321,7 +326,7 @@ public class MasterScript : MonoBehaviour
             yield return new WaitForSeconds(1);
             if (move.type == "attack")
             {
-                enemy.DealDamage(player, move.baseDamage);
+                enemy.DealDamage(player, move.baseDamage, move.elementType);
             }
             ApplyEffects(move.id, false, enemy, player);
             yield return new WaitForSeconds(1);

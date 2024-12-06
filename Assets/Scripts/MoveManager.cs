@@ -7,6 +7,7 @@ public class Move
     public int id;
     public string name;
     public string type;
+    public string elementType;
     public int baseDamage;
     public string info;
     public List<Effect> effects;
