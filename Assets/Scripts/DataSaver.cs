@@ -17,6 +17,7 @@ public class DataToSave
     public List<InventoryItem> inventory;
     public List<InventoryItem> equippedItems;
     public List<int> equippedMonster;
+    public List<int> unlockedMonsters;
 
 }
 

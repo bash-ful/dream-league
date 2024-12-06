@@ -15,8 +15,8 @@
                 }
             ],
             "moveTypeIconPath": "UI Scenes/NEW/statuses/thorn",
-            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock",
-            "tooltip"
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock"
+            
 
         },
         {
