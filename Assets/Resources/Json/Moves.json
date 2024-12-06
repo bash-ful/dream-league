@@ -13,7 +13,11 @@
                     "value": 0.5,
                     "effectDuration": 3
                 }
-            ]
+            ],
+            "moveTypeIconPath": "UI Scenes/NEW/statuses/thorn",
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock",
+            "tooltip"
+
         },
         {
             "id": 1,
@@ -22,7 +26,9 @@
             "elementType": "neutral",
             "baseDamage": 10,
             "info": "Deal damage to the enemy.",
-            "effects": []
+            "effects": [],
+            "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/neutral"
         },
         {
             "id": 2,
@@ -36,7 +42,9 @@
                     "value": -0.25,
                     "effectDuration": 2
                 }
-            ]
+            ],
+            "moveTypeIconPath": "UI Scenes/NEW/statuses/resistance",
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock"
         },
         {
             "id": 3,
@@ -45,25 +53,31 @@
             "elementType": "fire",
             "info": "Hurl cinders at the enemy, dealing damage",
             "baseDamage": 30,
-            "effects": []
+            "effects": [],
+            "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/fire"
         },
         {
             "id": 4,
             "name": "Poison Leaf",
             "type": "attack",
-            "elementType": "neutral",
+            "elementType": "grass",
             "info": "Use poisonous leaves to slice through the enemy",
             "baseDamage": 30,
-            "effects": []
+            "effects": [],
+            "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock"
         },
         {
             "id": 5,
             "name": "Water Jet",
             "type": "attack",
-            "elementType": "neutral",
+            "elementType": "water",
             "info": "Fire high-velocity aqua streams towards the enemy",
             "baseDamage": 30,
-            "effects": []
+            "effects": [],
+            "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/water"
         }
     ]
 }

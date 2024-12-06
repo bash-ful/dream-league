@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class MasterScript : MonoBehaviour
 {
-    // private const float BASE_ANSWER_TIME = 60;
-    
+
     public int stageLevel;
     private bool isPaused = false;
     private bool isPlayerTurn = true;
@@ -16,7 +15,6 @@ public class MasterScript : MonoBehaviour
     public DialogueScript dialogueScript;
     public MonsterScript player, enemy;
     public SceneScript sceneScript;
-    // public TimerUI timerUI;
     public List<ActiveEffect> activeEffects = new();
 
     public GameObject playerBuffsPanel, enemyBuffsPanel;

@@ -11,6 +11,9 @@ public class Move
     public int baseDamage;
     public string info;
     public List<Effect> effects;
+    public string moveTypeIconPath;
+    public string moveElementTypeIconPath;
+    
 }
 
 [System.Serializable]
@@ -65,5 +68,13 @@ public class MoveManager : MonoBehaviour
         get { return new List<Move>(moveList.moveList); }
     }
 
+    public Sprite GetMoveTypeIcon(Move move)
+    {
+        return Resources.Load<Sprite>(move.moveTypeIconPath);
+    }
+    public Sprite GetMoveElementTypeIcon(Move move)
+    {
+        return Resources.Load<Sprite>(move.moveElementTypeIconPath);
+    }
 
 }
