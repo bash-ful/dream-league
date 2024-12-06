@@ -4,6 +4,7 @@
             "id": 0,
             "name": "Reflect",
             "type": "status",
+            "element": "neutral",
             "baseDamage": 0,
             "info": "Reflects 50% of damage taken to enemy for 3 turns",
             "effects": [
@@ -18,6 +19,7 @@
             "id": 1,
             "name": "Tackle",
             "type": "attack",
+            "element": "neutral",
             "baseDamage": 10,
             "info": "Deal damage to the enemy.",
             "effects": []
@@ -26,6 +28,7 @@
             "id": 2,
             "name": "Buckle",
             "type": "status",
+            "element": "neutral",
             "info": "Decrease damage taken for 2 turns.",
             "effects": [
                 {
@@ -39,6 +42,7 @@
             "id": 3,
             "name": "Cinder",
             "type": "attack",
+            "element": "neutral",
             "info": "Hurl cinders at the enemy, dealing damage",
             "baseDamage": 30,
             "effects": []
@@ -47,6 +51,7 @@
             "id": 4,
             "name": "Poison Leaf",
             "type": "attack",
+            "element": "neutral",
             "info": "Use poisonous leaves to slice through the enemy",
             "baseDamage": 30,
             "effects": []
@@ -55,6 +60,7 @@
             "id": 5,
             "name": "Water Jet",
             "type": "attack",
+            "element": "neutral",
             "info": "Fire high-velocity aqua streams towards the enemy",
             "baseDamage": 30,
             "effects": []

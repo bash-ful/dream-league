@@ -7,14 +7,15 @@ using UnityEngine.UI;
 
 public class MasterScript : MonoBehaviour
 {
-    private const float BASE_ANSWER_TIME = 60;
+    // private const float BASE_ANSWER_TIME = 60;
+    public int stageLevel;
     private bool isPaused = false;
     private bool isPlayerTurn = true;
     private bool isSomeCoroutineRunning = false;
     public DialogueScript dialogueScript;
     public MonsterScript player, enemy;
     public SceneScript sceneScript;
-    public TimerUI timerUI;
+    // public TimerUI timerUI;
     public List<ActiveEffect> activeEffects = new();
 
     public GameObject playerBuffsPanel, enemyBuffsPanel;
@@ -44,8 +45,10 @@ public class MasterScript : MonoBehaviour
         enemy.MonsterInit();
 
         UpdateBuffIcons();
-        // dialogueScript.BeginDialogue();
-        StartCoroutine(BattleCoroutine());
+        if(DataSaver.Instance.dts.maxLevelCleared < stageLevel) {
+            dialogueScript.BeginDialogue();
+            StartCoroutine(BattleCoroutine());
+        }
     }
 
     IEnumerator BattleCoroutine()
@@ -277,6 +280,7 @@ public class MasterScript : MonoBehaviour
         int minutes = (int)totalElapsedTime / 60;
         timeElapsedText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         itemImage.sprite = ItemManager.Instance.GetItemSprite(ItemManager.Instance.GetItemFromID(2));
+        DataSaver.Instance.UpdateMaxLevelCleared(stageLevel);
         GiveRewards();
         yield return new WaitForSeconds(1);
         winPanel.SetActive(true);

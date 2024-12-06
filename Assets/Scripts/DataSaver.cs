@@ -16,6 +16,7 @@ public class DataToSave
     public int dreamCoinAmount, specialCurrencyAmount;
     public List<InventoryItem> inventory;
     public List<InventoryItem> equippedItems;
+    public List<int> equippedMonster;
 
 }
 
@@ -66,6 +67,11 @@ public class DataSaver : MonoBehaviour
     public void AddDreamCoins(int amount)
     {
         Instance.dts.dreamCoinAmount += amount;
+        SaveDataFn();
+    }
+
+    public void UpdateMaxLevelCleared(int level){
+        Instance.dts.maxLevelCleared = level;
         SaveDataFn();
     }
 

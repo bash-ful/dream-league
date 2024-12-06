@@ -1543,7 +1543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90415d253cf56c045bae7898af1a50d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 1
   monsterID: 18
   cheatDeathCount: 0
   AllInExtraDamage: 0
@@ -1893,7 +1892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8548447412628921102, guid: 6c173628f6773184b80baae0a5567469, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2417,7 +2416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5269686d4027c4fada513d620b1e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageLevel: 1
   dialogueScript: {fileID: 1519036305}
   player: {fileID: 360375546}
   enemy: {fileID: 1966046006}
@@ -2508,7 +2506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 98a77468a4304da4d8e3e7c50baa689c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5055,7 +5053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4314975071180514999, guid: 946f13cbb1ec19a41b25eba549c5b03d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8545,7 +8543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.7949219, y: 0}
+  m_AnchoredPosition: {x: -3.59, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519036305
@@ -8978,7 +8976,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4314975071180514999, guid: 946f13cbb1ec19a41b25eba549c5b03d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9694,7 +9692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8548447412628921102, guid: 6c173628f6773184b80baae0a5567469, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11128,7 +11126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90415d253cf56c045bae7898af1a50d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
   monsterID: 666
   cheatDeathCount: 0
   AllInExtraDamage: 0

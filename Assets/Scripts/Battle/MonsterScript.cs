@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MonsterScript : MonoBehaviour
 {
+    public bool isPlayer;
     public int monsterID;
     #region Monster Stats
 
@@ -36,7 +37,13 @@ public class MonsterScript : MonoBehaviour
 
     public void MonsterInit()
     {
-        Monster playerMonster = MonsterManager.Instance.GetMonsterFromID(monsterID);
+        Monster playerMonster;
+        if(isPlayer) {
+            playerMonster = MonsterManager.Instance.GetMonsterFromID(DataSaver.Instance.dts.equippedMonster[0]);
+
+        } else {
+            playerMonster = MonsterManager.Instance.GetMonsterFromID(monsterID);
+        }
         playerName = playerMonster.name;
         health = playerMonster.baseHealth;
         maxHP = health;
@@ -44,10 +51,10 @@ public class MonsterScript : MonoBehaviour
         spritePath = playerMonster.spritePath;
         Sprite newSprite = Resources.Load<Sprite>(spritePath);
         RuntimeAnimatorController animController = Resources.Load<RuntimeAnimatorController>(spritePath);
-        moves[0] = 1;
-        moves[1] = 2;
-        moves[2] = 3;
-        moves[3] = 0;
+        moves[0] = playerMonster.moves[0];
+        moves[1] = playerMonster.moves[1];
+        moves[2] = playerMonster.moves[2];
+        moves[3] = playerMonster.moves[3];
 
         if (animController != null)
         {
@@ -195,6 +202,10 @@ public class MonsterScript : MonoBehaviour
         if(movesetIndex < 4 && movesetIndex >= 0) {
             moves[movesetIndex] = moveIndex;
         }
+    }
+
+    public int[] GetMovesID() {
+        return moves;
     }
 
     public int GetMoveID(int movesetIndex) {

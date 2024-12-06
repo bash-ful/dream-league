@@ -27,9 +27,10 @@ public class MoveSlotManager : MonoBehaviour
     {
         DataSaver.Instance.LoadDataFn();
         Move move;
+        int[] playerMoves = masterScript.player.GetMovesID();
         for (int i = 0; i < 4; i++)
         {
-            move = MoveManager.Instance.GetMoveFromID(masterScript.player.GetMoveID(i));
+            move = MoveManager.Instance.GetMoveFromID(playerMoves[i]);
             moveSlots.moveSlots[i].move = move;
             moveSlots.moveSlots[i].moveName.text = move.name;
         }
