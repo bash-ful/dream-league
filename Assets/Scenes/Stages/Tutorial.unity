@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 22967209}
   - component: {fileID: 22967208}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ecc32f85394d43c47b260e523c6431e6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.66
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -387,6 +387,10 @@ PrefabInstance:
     - target: {fileID: 226793672096603886, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777720958662026336, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
+      propertyPath: m_Volume
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 7777720958662026336, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_audioClip
@@ -910,6 +914,10 @@ PrefabInstance:
     - target: {fileID: 226793672096603886, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777720958662026336, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
+      propertyPath: m_Volume
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 7927572093066201318, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_Name
@@ -2648,6 +2656,8 @@ MonoBehaviour:
   onWinSound: {fileID: 595253926}
   onLoseSound: {fileID: 1340667980}
   bgm: {fileID: 22967207}
+  hit: {fileID: 1642938150}
+  dmg: {fileID: 1012884084}
   winPanel: {fileID: 2011258618}
   losePanel: {fileID: 1034859344}
   timeElapsedText: {fileID: 999812138}
@@ -4691,7 +4701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7777720958662026336, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_Volume
-      value: 0.66
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7777720958662026336, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_audioClip
@@ -5501,6 +5511,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999812136}
   m_CullTransparentMesh: 1
+--- !u!82 &1012884084 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 354120344782657987, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+  m_PrefabInstance: {fileID: 9121372417385726558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1028766889
 GameObject:
   m_ObjectHideFlags: 0
@@ -7758,7 +7773,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &1360570561
@@ -7811,7 +7826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7777720958662026336, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_Volume
-      value: 0.66
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7777720958662026336, guid: 8b7f82c42e8375343939cbe14471766f, type: 3}
       propertyPath: m_audioClip
@@ -7841,7 +7856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1360963951
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9128,52 +9143,48 @@ MonoBehaviour:
     dialogueList:
     - name: Marion
       dialogue: Your monster is on the left,
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 2327986633878593159, guid: ae8bba8cf3c56114f9aea5138f9e1c19, type: 3}
     - name: Marion
       dialogue: and your opponent's is on the right.
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 8945879706046800180, guid: fe8a6e17426035442b748f964a958cfb, type: 3}
     - name: Marion
       dialogue: This is the status bar. Here you can various information,
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 661236011665326912, guid: f2ee84d1b4cfd7b428c34f27973ffc34, type: 3}
     - name: Marion
       dialogue: like your name,
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 730446444735455684, guid: c309317e166f9f24db93e750b8557dca, type: 3}
     - name: Marion
       dialogue: Monster HP,
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: -2439418397561638552, guid: e228087b4fb1bd04d9106e05ae542cdf, type: 3}
     - name: Marion
       dialogue: Monster Attack Damage,
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 3234947742710675397, guid: 8d0eefa7729934546919b5c8c6102e77, type: 3}
     - name: Marion
       dialogue: as well as the buffs and debuffs the monster has.
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 735212972950431408, guid: 7639d84c3ce022046889e36b89cc9d41, type: 3}
     - name: Marion
       dialogue: These are the moves your monster can use.
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: -8215497479125382362, guid: 057e88ac6fc3b934c92fd2ad60299b11, type: 3}
     - name: Marion
       dialogue: There are many types of moves. Some damage your foe, some afflict
         effects to you or your foe.
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 7042980034530856553, guid: 8fa5a199e03c1b44397a97d60c9c2771, type: 3}
     - name: Marion
-      dialogue: Your answer will be shown here.
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
-      tutorialImage: {fileID: 3052669062728682506, guid: d8236869bcc5412468c83711ab9b4695, type: 3}
-    - name: Marion
       dialogue: You win when the enemy monster's HP reaches 0,
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 661236011665326912, guid: f2ee84d1b4cfd7b428c34f27973ffc34, type: 3}
     - name: Marion
       dialogue: You can do it!
-      characterImage: {fileID: -4046358609830844224, guid: 499dbce9baedbdf43b92b663cb7c59e4, type: 3}
+      characterImage: {fileID: -2548028274923479054, guid: 912d484deda606f4989244e892a822d8, type: 3}
       tutorialImage: {fileID: 661236011665326912, guid: f2ee84d1b4cfd7b428c34f27973ffc34, type: 3}
   NameText: {fileID: 1598612945}
   DialogueText: {fileID: 1520262325}
@@ -10276,6 +10287,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640540194}
   m_CullTransparentMesh: 1
+--- !u!82 &1642938150 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 464335293282717434, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+  m_PrefabInstance: {fileID: 6922303744245517544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1743833567
 GameObject:
   m_ObjectHideFlags: 0
@@ -12914,6 +12930,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3689b57f81a03349b3075d5fe8de295, type: 3}
+--- !u!1001 &6922303744245517544
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 938.2363
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 533.6164
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.37214854
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354217461888246071, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718047869188143353, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
+      propertyPath: m_Name
+      value: Hit
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d5bcab5accfe6445aeb4b7365d0ddf9, type: 3}
 --- !u!1001 &7684414191607735756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13035,6 +13108,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceb4a92c6d34e914b8e0c24c530a6371, type: 3}
+--- !u!1001 &9121372417385726558
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 938.2363
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 533.6164
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.37214854
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148488434848178230, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726727202651761952, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
+      propertyPath: m_Name
+      value: Dmg
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 747b672bb53d1814eb16b77c32417204, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13055,3 +13185,5 @@ SceneRoots:
   - {fileID: 1360570561}
   - {fileID: 913147689}
   - {fileID: 22967209}
+  - {fileID: 6922303744245517544}
+  - {fileID: 9121372417385726558}

@@ -10,14 +10,23 @@ public class MonsterSelector : MonoBehaviour
     private int offset = 30;
     public GameObject[] borders;
     public GameObject MonsterSelectMenu;
-    void Start()
+    void Awake() {
+        StartCoroutine(WaitForStatus());
+    }
+
+    private IEnumerator WaitForStatus()
     {
+        while (string.IsNullOrEmpty(DataSaver.Instance.dts.userName))
+        {
+            yield return null;
+        }
         DataSaver.Instance.LoadDataFn();
         if(DataSaver.Instance.dts.starterReceived) {
-            return;
+            yield break;
         }
         MonsterSelectMenu.SetActive(true);
         SelectMonster(1);
+        
     }
 
     public void SelectMonster(int index) {

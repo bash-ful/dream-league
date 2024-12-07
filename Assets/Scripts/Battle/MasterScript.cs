@@ -25,6 +25,7 @@ public class MasterScript : MonoBehaviour
     private float totalElapsedTime;
 
     public GameObject onWinSound, onLoseSound, bgm;
+    public AudioSource hit, dmg;
 
     #region MOVETHIS
     public GameObject winPanel, losePanel;
@@ -305,6 +306,8 @@ public class MasterScript : MonoBehaviour
         if (move.type == "attack")
         {
             player.DealDamage(enemy, move.baseDamage, move.elementType);
+            hit.Play();
+
         }
         ApplyEffects(move.id, false, player, enemy);
         isPlayerTurn = false;
@@ -325,6 +328,8 @@ public class MasterScript : MonoBehaviour
             if (move.type == "attack")
             {
                 enemy.DealDamage(player, move.baseDamage, move.elementType);
+                hit.Play();
+                dmg.Play();
             }
             ApplyEffects(move.id, false, enemy, player);
             yield return new WaitForSeconds(1);

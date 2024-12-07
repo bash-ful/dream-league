@@ -50,7 +50,6 @@ public class InventoryManager : MonoBehaviour
         inventoryList = DataSaver.Instance.dts.inventory;
         InventoryItem inventoryItem;
         Transform parentTransform = ItemsPanel.transform;
-        int childCount = parentTransform.childCount;
 
         for (int i = 0; i < 40; i++)
         {

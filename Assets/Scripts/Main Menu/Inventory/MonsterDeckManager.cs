@@ -7,13 +7,11 @@ using UnityEngine.UI;
 
 public class MonsterDeckManager : MonoBehaviour
 {
-    public GameObject ItemsPanel;
-    public TMP_Text dreamCoinAmountText, specialCurrencyAmountText;
-    public SelectedItemInfoCard card;
+    public GameObject MonsterDeckPanel;
+    public SelectedMonsterCard card;
 
-    private List<InventoryItem> inventoryList;
-
-    public int selectedInventorySlot = -1;
+    private List<Monster> monsterList;
+    public int selectedMonsterSlot = -1;
 
     void Awake()
     {
@@ -23,17 +21,6 @@ public class MonsterDeckManager : MonoBehaviour
     public void ReloadInventory()
     {
         StartCoroutine(WaitForInventoryLoad());
-        StartCoroutine(WaitForUserCoins());
-    }
-
-    private IEnumerator WaitForUserCoins()
-    {
-        while (string.IsNullOrEmpty(DataSaver.Instance.dts.userName))
-        {
-            yield return null;
-        }
-        dreamCoinAmountText.text = DataSaver.Instance.dts.dreamCoinAmount.ToString();
-        specialCurrencyAmountText.text = DataSaver.Instance.dts.specialCurrencyAmount.ToString();
     }
 
     private IEnumerator WaitForInventoryLoad()
@@ -43,69 +30,49 @@ public class MonsterDeckManager : MonoBehaviour
             yield return null;
         }
         DataSaver.Instance.LoadDataFn();
-        inventoryList = DataSaver.Instance.dts.inventory;
-        InventoryItem inventoryItem;
-        Transform parentTransform = ItemsPanel.transform;
-        int childCount = parentTransform.childCount;
+        monsterList = DataSaver.Instance.dts.unlockedMonsters;
+        Transform parentTransform = MonsterDeckPanel.transform;
+        Monster monster;
 
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 9; i++)
         {
             Transform child = parentTransform.GetChild(i);
-            InventoryEntry inventoryEntry = child.GetComponent<InventoryEntry>();
-            inventoryEntry.GetComponent<Button>().interactable = false;
-            inventoryEntry.invItem = null;
-            inventoryEntry.UpdateEntry();
+            MonsterDeckEntry monsterDeckEntry = child.GetComponent<MonsterDeckEntry>();
+            monsterDeckEntry.GetComponent<Button>().interactable = false;
+            monsterDeckEntry.monster = null;
+            monsterDeckEntry.UpdateEntry();
         }
 
-        for (int index = 0; index < inventoryList.Count; index++)
+        for (int index = 0; index < monsterList.Count; index++)
         {
             Transform child = parentTransform.GetChild(index);
-            InventoryEntry inventoryEntry = child.GetComponent<InventoryEntry>();
-            inventoryEntry.GetComponent<Button>().interactable = true;
-            inventoryItem = inventoryList[index];
-
-
-            inventoryEntry.invItem = inventoryItem;
-            inventoryEntry.UpdateEntry();
-
+            MonsterDeckEntry monsterDeckEntry = child.GetComponent<MonsterDeckEntry>();
+            monsterDeckEntry.GetComponent<Button>().interactable = true;
+            monster = monsterList[index];
+            monsterDeckEntry.monster = monster;
+            monsterDeckEntry.UpdateEntry();
         }
     }
 
-    public void SellItem()
+    public void EquipMonster()
     {
-        if (selectedInventorySlot == -1)
+        if (selectedMonsterSlot == -1)
         {
             return;
         }
-        InventoryEntry entry = ItemsPanel.transform.GetChild(selectedInventorySlot).GetComponent<InventoryEntry>();
-        InventoryItem invItem = DataSaver.Instance.dts.inventory.Find(x => x.uniqueId == entry.invItem.uniqueId);
-        Item item = ItemManager.Instance.GetItemFromID(invItem.itemId);
-        DataSaver.Instance.AddDreamCoins(item.price / 2);
-        ItemsPanel.transform.GetChild(selectedInventorySlot).GetComponent<InventoryEntry>().ClearEntry();
-        DataSaver.Instance.RemoveItemFromInventory(invItem.uniqueId);
-        ReloadInventory();
-        card.ResetCard();
-        selectedInventorySlot = -1;
-    }
-
-    public void EquipItem()
-    {
-        if (selectedInventorySlot == -1)
+        MonsterDeckEntry entry = MonsterDeckPanel.transform.GetChild(selectedMonsterSlot).GetComponent<MonsterDeckEntry>();
+        
+        Monster monster = entry.monster;
+        if (DataSaver.Instance.IsMonsterEquipped(monster.id))
         {
-            return;
-        }
-        InventoryEntry entry = ItemsPanel.transform.GetChild(selectedInventorySlot).GetComponent<InventoryEntry>();
-        InventoryItem invItem = DataSaver.Instance.dts.inventory.Find(x => x.uniqueId == entry.invItem.uniqueId);
-        if (DataSaver.Instance.IsItemEquipped(invItem.uniqueId))
-        {
-            DataSaver.Instance.RemoveItemFromEquipped(invItem.uniqueId);
+            DataSaver.Instance.RemoveMonsterFromEquipped(monster.id);
         }
         else
         {
-            DataSaver.Instance.AddItemToEquipped(invItem.uniqueId);
+            DataSaver.Instance.AddMonsterToEquipped(monster.id);
         }
         ReloadInventory();
-        card.UpdateCard(invItem.uniqueId, true, false);
+        card.UpdateCard(DataSaver.Instance.dts.unlockedMonsters.FindIndex(x => x.id == monster.id));
     }
 
 }

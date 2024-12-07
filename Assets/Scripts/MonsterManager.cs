@@ -43,10 +43,6 @@ public class MonsterManager : MonoBehaviour
         if (monstersJson != null)
         {
             monsterList = JsonUtility.FromJson<MonsterList>(monstersJson.text);
-            // foreach (Monster monster in monsterList.monsterList)
-            // {
-            //     print($"name: {monster.name}");
-            // }
         }
         else
         {

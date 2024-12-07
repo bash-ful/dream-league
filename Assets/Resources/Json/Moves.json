@@ -59,7 +59,7 @@
         },
         {
             "id": 4,
-            "name": "Poison Leaf",
+            "name": "Sharpgrass",
             "type": "attack",
             "elementType": "grass",
             "info": "Use poisonous leaves to slice through the enemy",

@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Transactions;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +11,6 @@ public class SelectedItemInfoCard : MonoBehaviour
     public TMP_Text isEquippedText;
     private Image[] starImages, buffImages;
     public Button transactionButton, equipButton;
-    public int invEntry;
-    public InventoryManager inventoryManager;
 
     #region REMOVETHIS
     public ShopManager shopManager;

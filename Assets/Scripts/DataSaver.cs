@@ -198,6 +198,11 @@ public class DataSaver : MonoBehaviour
 
     public void AddMonsterToInventory(int monsterId)
     {
+        Monster monsterToEquip = dts.unlockedMonsters.Find(monster => monster.id == monsterId);
+        if (monsterToEquip != null)
+        {
+            return;
+        }
         dts.unlockedMonsters.Add(MonsterManager.Instance.GetMonsterFromID(monsterId));
         SaveDataFn();
     }
@@ -215,7 +220,21 @@ public class DataSaver : MonoBehaviour
             dts.equippedMonsters.Add(monsterToEquip);
         }
         SaveDataFn();
+    }
 
+    public void RemoveMonsterFromEquipped(int monsterId)
+    {
+        Monster monsterToRemove = dts.equippedMonsters.Find(x => x.id == monsterId);
+        if (monsterToRemove != null)
+        {
+            dts.equippedMonsters.Remove(monsterToRemove);
+        }
+        SaveDataFn();
+
+    }
+
+    public bool IsMonsterEquipped(int monsterId) {
+        return dts.equippedMonsters.Any(x => x.id == monsterId);
     }
 
     public void ShowInventoryFullPanel()
