@@ -84,7 +84,6 @@ public class EmailPassLogin : MonoBehaviour
 
             dataSaver.dts.userName = registerUsername.text;
             dataSaver.SaveDataFn();
-            dataSaver.dts.userName = "";
 
             ClearRegisterInputFields();
         });

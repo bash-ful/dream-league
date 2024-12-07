@@ -11,13 +11,15 @@ using System.Linq;
 public class DataToSave
 {
     public string userName;
-    public int maxLevelCleared;
-    public bool tutorialCleared;
-    public int dreamCoinAmount, specialCurrencyAmount;
+    public int maxLevelCleared = 0;
+    public bool starterReceived = false;
+    public bool tutorialCleared = false;
+    public int dreamCoinAmount = 0;
+    public int specialCurrencyAmount = 0;
     public List<InventoryItem> inventory;
     public List<InventoryItem> equippedItems;
-    public List<int> equippedMonster;
-    public List<int> unlockedMonsters;
+    public List<Monster> equippedMonsters;
+    public List<Monster> unlockedMonsters;
 
 }
 
@@ -192,6 +194,28 @@ public class DataSaver : MonoBehaviour
     public bool IsItemEquipped(string uniqueId)
     {
         return dts.equippedItems.Any(x => x.uniqueId == uniqueId);
+    }
+
+    public void AddMonsterToInventory(int monsterId)
+    {
+        dts.unlockedMonsters.Add(MonsterManager.Instance.GetMonsterFromID(monsterId));
+        SaveDataFn();
+    }
+
+    public void AddMonsterToEquipped(int monsterId)
+    {
+        if (dts.equippedMonsters.Count >= 3)
+        {
+            Debug.LogError("maximum equipped monsters reached.");
+            return;
+        }
+        Monster monsterToEquip = dts.unlockedMonsters.Find(monster => monster.id == monsterId);
+        if (monsterToEquip != null)
+        {
+            dts.equippedMonsters.Add(monsterToEquip);
+        }
+        SaveDataFn();
+
     }
 
     public void ShowInventoryFullPanel()

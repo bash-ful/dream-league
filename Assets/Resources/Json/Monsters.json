@@ -4,11 +4,11 @@
             "id": 0,
             "name": "Feral Wolf",
             "baseHealth": 100,
-            "baseDamage": 20,
+            "baseDamage": 10,
             "elementType": "neutral",
             "abilityName": "Ferocious Bite",
             "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word within the time limit.",
-            "spritePath": "Entities/Animated/Feral Wolf",
+            "spritePath": "Entities/Animated/Chapter 1/feral_wolf_v2 - luprex",
             "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 1/Monster_Profile/Feral_Wolf",
             "moves": [0, 1, 2, 3]
         },
@@ -359,6 +359,42 @@
             "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word.",
             "spritePath": "Entities/Static/Chapter 3/Oracle_Parrot",
             "profileSpritePath": "UI Scenes/Bestiary/HUD/Chapter 3/Monster_Profile/Oracle_Parrot",
+            "moves": [0, 1, 2, 3]
+        },
+        {
+            "id": 30,
+            "name": "Igneody",
+            "baseHealth": 200,
+            "baseDamage": 100,
+            "elementType": "fire",
+            "abilityName": "Mystical Chant",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word.",
+            "spritePath": "Entities/Animated/Starter Monsters/Starter_3",
+            "profileSpritePath": "",
+            "moves": [0, 1, 2, 3]
+        },
+        {
+            "id": 31,
+            "name": "Leafrith",
+            "baseHealth": 200,
+            "baseDamage": 100,
+            "elementType": "grass",
+            "abilityName": "Mystical Chant",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word.",
+            "spritePath": "Entities/Animated/Starter Monsters/Starter_1",
+            "profileSpritePath": "",
+            "moves": [0, 1, 2, 3]
+        },
+        {
+            "id": 32,
+            "name": "Manthypy",
+            "baseHealth": 200,
+            "baseDamage": 100,
+            "elementType": "water",
+            "abilityName": "Mystical Chant",
+            "abilityDescription": "Deals double damage to the opponent if opponent fail to input a word.",
+            "spritePath": "Entities/Animated/Starter Monsters/Starter_2",
+            "profileSpritePath": "",
             "moves": [0, 1, 2, 3]
         },
         {

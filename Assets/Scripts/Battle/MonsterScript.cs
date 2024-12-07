@@ -15,7 +15,7 @@ public class MonsterScript : MonoBehaviour
     public int cheatDeathCount = 0;
     private float cheatDeathPercentage = 0;
     private int stunDuration = 0;
-    private readonly int[] moves = new int[4];
+    private int[] moves = new int[4];
 
     public float AllInExtraDamage = 0;
     public float AllInExtraDamageTaken = 0;
@@ -41,8 +41,7 @@ public class MonsterScript : MonoBehaviour
         Monster playerMonster;
         if (isPlayer)
         {
-            // playerMonster = MonsterManager.Instance.GetMonsterFromID(DataSaver.Instance.dts.equippedMonster[0]);
-            playerMonster = MonsterManager.Instance.GetMonsterFromID(0);
+            playerMonster = DataSaver.Instance.dts.equippedMonsters[0];
         }
         else
         {
@@ -56,10 +55,7 @@ public class MonsterScript : MonoBehaviour
         spritePath = playerMonster.spritePath;
         Sprite newSprite = Resources.Load<Sprite>(spritePath);
         RuntimeAnimatorController animController = Resources.Load<RuntimeAnimatorController>(spritePath);
-        moves[0] = playerMonster.moves[0];
-        moves[1] = playerMonster.moves[1];
-        moves[2] = playerMonster.moves[2];
-        moves[3] = playerMonster.moves[3];
+        moves = playerMonster.moves;
 
         if (animController != null)
         {
