@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Frame_0
     originalName: 
-    pivot: {x: 0.4318182, y: -0.09803922}
+    pivot: {x: 0.5681818, y: -0.09803922}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -143,7 +143,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: Frame_1
     originalName: 
-    pivot: {x: 0.4318182, y: -0.09803922}
+    pivot: {x: 0.5681818, y: -0.09803922}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -163,7 +163,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 63}
   - name: Frame_2
     originalName: 
-    pivot: {x: 0.4318182, y: -0.099999994}
+    pivot: {x: 0.5681818, y: -0.099999994}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -183,7 +183,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 122}
   - name: Frame_3
     originalName: 
-    pivot: {x: 0.4318182, y: -0.10204081}
+    pivot: {x: 0.5681818, y: -0.10204081}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -203,7 +203,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 180}
   - name: Frame_4
     originalName: 
-    pivot: {x: 0.4318182, y: -0.10204081}
+    pivot: {x: 0.5681818, y: -0.10204081}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -223,7 +223,7 @@ ScriptedImporter:
     uvTransform: {x: 56, y: 4}
   - name: Frame_5
     originalName: 
-    pivot: {x: 0.4318182, y: -0.10204081}
+    pivot: {x: 0.5681818, y: -0.10204081}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -254,7 +254,7 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 13
+        x: 7
         y: 5
         width: 44
         height: 51
@@ -263,7 +263,7 @@ ScriptedImporter:
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 13
+        x: 7
         y: 5
         width: 44
         height: 51
@@ -272,7 +272,7 @@ ScriptedImporter:
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 13
+        x: 7
         y: 5
         width: 44
         height: 50
@@ -281,7 +281,7 @@ ScriptedImporter:
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 13
+        x: 7
         y: 5
         width: 44
         height: 49
@@ -290,7 +290,7 @@ ScriptedImporter:
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
-        x: 13
+        x: 7
         y: 5
         width: 44
         height: 49
@@ -299,7 +299,7 @@ ScriptedImporter:
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
-        x: 13
+        x: 7
         y: 5
         width: 44
         height: 49
