@@ -13,7 +13,9 @@ public class Move
     public List<Effect> effects;
     public string moveTypeIconPath;
     public string moveElementTypeIconPath;
-    
+    public string tooltip;
+
+
 }
 
 [System.Serializable]

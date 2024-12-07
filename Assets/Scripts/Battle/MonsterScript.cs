@@ -80,7 +80,7 @@ public class MonsterScript : MonoBehaviour
     public void TakeDamage(float damage, IndicatorType type)
     {
         health = Mathf.Clamp(health - (damage * damageTakenModifier), 0, health);
-        damageIndicator.ShowIndicator($"DMG {damage * damageTakenModifier}", type, damageIndicatorSpawnPosition.transform.position);
+        damageIndicator.ShowIndicator($"{damage * damageTakenModifier}", type, damageIndicatorSpawnPosition.transform.position);
 
         if (health <= 0 && cheatDeathCount > 0)
         {
@@ -151,7 +151,7 @@ public class MonsterScript : MonoBehaviour
         float amountHealed = Mathf.Min(healAmount, maxHP - currentHealth); // Calculate actual amount that can be healed
 
         health += amountHealed; // Increase health by the healed amount
-        damageIndicator.ShowIndicator($"HEAL {amountHealed}", IndicatorType.Heal, damageIndicatorSpawnPosition.transform.position);
+        damageIndicator.ShowIndicator(amountHealed.ToString(), IndicatorType.Heal, damageIndicatorSpawnPosition.transform.position);
     }
 
     public bool IsDead()

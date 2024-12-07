@@ -19,6 +19,7 @@ public class ItemSlotManager : MonoBehaviour
 
     public ItemSlots itemSlots;
     public MasterScript masterScript;
+    public AudioSource itemUse;
 
     void Start()
     {
@@ -65,6 +66,7 @@ public class ItemSlotManager : MonoBehaviour
     public void OnItemSlotClick(int buttonIndex)
     {
         masterScript.UseItem(itemSlots.itemSlots[buttonIndex].item.itemID);
+        itemUse.Play();
         DataSaver.Instance.RemoveItemFromInventory(itemSlots.itemSlots[buttonIndex].itemGUID);
         itemSlots.itemSlots[buttonIndex].button.image.sprite = null;
         ImageTransparencyScript.UpdateImageTransparency(itemSlots.itemSlots[buttonIndex].button.image);

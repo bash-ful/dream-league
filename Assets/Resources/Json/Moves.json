@@ -2,7 +2,7 @@
     "moveList": [
         {
             "id": 0,
-            "name": "Reflect",
+            "name": "Thorns",
             "type": "status",
             "elementType": "neutral",
             "baseDamage": 0,
@@ -15,27 +15,27 @@
                 }
             ],
             "moveTypeIconPath": "UI Scenes/NEW/statuses/thorn",
-            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock"
-            
-
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock",
+            "tooltip": "REF 50%"
         },
         {
             "id": 1,
             "name": "Tackle",
             "type": "attack",
             "elementType": "neutral",
-            "baseDamage": 10,
+            "baseDamage": 20,
             "info": "Deal damage to the enemy.",
             "effects": [],
             "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
-            "moveElementTypeIconPath": "UI Scenes/NEW/elements/neutral"
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/neutral",
+            "tooltip": "DMG 20"
         },
         {
             "id": 2,
             "name": "Buckle",
             "type": "status",
             "elementType": "neutral",
-            "info": "Decrease damage taken for 2 turns.",
+            "info": "Decrease damage taken by 25% for 2 turns.",
             "effects": [
                 {
                     "type": "ModifySelfDamageTakenModifier",
@@ -44,7 +44,8 @@
                 }
             ],
             "moveTypeIconPath": "UI Scenes/NEW/statuses/resistance",
-            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock"
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock",
+            "tooltip": "DEF +25%"
         },
         {
             "id": 3,
@@ -55,7 +56,8 @@
             "baseDamage": 30,
             "effects": [],
             "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
-            "moveElementTypeIconPath": "UI Scenes/NEW/elements/fire"
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/fire",
+            "tooltip": "DMG 30"
         },
         {
             "id": 4,
@@ -66,7 +68,8 @@
             "baseDamage": 30,
             "effects": [],
             "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
-            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock"
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/rock",
+            "tooltip": "DMG 30"
         },
         {
             "id": 5,
@@ -77,7 +80,8 @@
             "baseDamage": 30,
             "effects": [],
             "moveTypeIconPath": "UI Scenes/NEW/statuses/strength",
-            "moveElementTypeIconPath": "UI Scenes/NEW/elements/water"
+            "moveElementTypeIconPath": "UI Scenes/NEW/elements/water",
+            "tooltip": "DMG 30"
         }
     ]
 }

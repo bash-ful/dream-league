@@ -64,6 +64,7 @@ public class MasterScript : MonoBehaviour
 
             if (isPlayerTurn)
             {
+                MovesPanel.SetActive(true);
                 Button[] moves = MovesPanel.GetComponentsInChildren<Button>();
                 foreach (Button move in moves)
                 {
@@ -77,6 +78,7 @@ public class MasterScript : MonoBehaviour
                 {
                     move.interactable = false;
                 }
+                MovesPanel.SetActive(false);
                 StartCoroutine(EnemyMove());
             }
 
@@ -302,7 +304,6 @@ public class MasterScript : MonoBehaviour
     public void PlayerMove(int movesetIndex)
     {
         Move move = MoveManager.Instance.GetMoveFromID(player.GetMoveID(movesetIndex));
-        Debug.Log($"Player uses {move.name}!");
         if (move.type == "attack")
         {
             player.DealDamage(enemy, move.baseDamage, move.elementType);

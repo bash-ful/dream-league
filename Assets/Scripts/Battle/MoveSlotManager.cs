@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MoveSlot
 {
     public Move move;
-    public TMP_Text moveName;
+    public TMP_Text moveName, moveTooltip;
     public Image moveTypeIcon;
     public Image moveElementTypeIcon;
 }
@@ -38,6 +38,8 @@ public class MoveSlotManager : MonoBehaviour
             moveSlots.moveSlots[i].moveElementTypeIcon.sprite = MoveManager.Instance.GetMoveElementTypeIcon(move);
             moveSlots.moveSlots[i].move = move;
             moveSlots.moveSlots[i].moveName.text = move.name;
+            moveSlots.moveSlots[i].moveTooltip.text = move.tooltip;
+
         }
     }
 }
