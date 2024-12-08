@@ -19,13 +19,14 @@ public enum EffectType
     AllIn
 }
 
+
 [System.Serializable]
 public class Effect
 {
     public string type;
     public float value;
-    public int effectDuration;
-    public bool keepStacking;
+    public int duration;
+    
 }
 
 [System.Serializable]
@@ -34,5 +35,5 @@ public class ActiveEffect
     public EffectType type;
     public float value;
     public int remainingDuration;
-    public bool keepStacking;
+    public string source;
 }

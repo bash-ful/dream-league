@@ -15,7 +15,9 @@ public class MasterScript : MonoBehaviour
     public DialogueScript dialogueScript;
     public MonsterScript player, enemy;
     public SceneScript sceneScript;
-    public List<ActiveEffect> activeEffects = new();
+    public List<ActiveEffect> playerActiveEffects = new();
+    public List<ActiveEffect> enemyActiveEffects = new();
+
 
     public GameObject playerBuffsPanel, enemyBuffsPanel;
     public GameObject MovesPanel;
@@ -59,7 +61,8 @@ public class MasterScript : MonoBehaviour
         {
             if (isGameOver)
             {
-                yield break; // Exit the coroutine if game over
+                yield return null;
+                continue;
             }
 
             if (isPlayerTurn)
@@ -88,12 +91,10 @@ public class MasterScript : MonoBehaviour
                 isGameOver = true;
                 if (player.IsDead())
                 {
-                    Debug.Log("player dead");
                     StartCoroutine(OnPlayerLose());
                 }
                 else
                 {
-                    Debug.Log("enemy dead");
                     StartCoroutine(OnPlayerWin());
                 }
                 yield break; // Exit the coroutine if either player or enemy is dead
@@ -126,18 +127,37 @@ public class MasterScript : MonoBehaviour
 
     public void UseItem(int id)
     {
-        ApplyEffects(id, true, player, enemy);
+        ApplyPlayerEffects(id, true);
     }
-    public void ApplyEffects(int id, bool isItem, MonsterScript user, MonsterScript target)
+
+    public void UpdateActiveEffects(Effect effect, EffectType effectType, string source, List<ActiveEffect> activeEffects)
     {
-        List<Effect> effects;
-        if (isItem)
+        int existingEffectIndex = activeEffects.FindIndex(eff => eff.source == source);
+        if (existingEffectIndex >= 0)
         {
-            effects = ItemManager.Instance.GetItemFromID(id).effects;
+            activeEffects[existingEffectIndex].remainingDuration = effect.duration;
         }
         else
         {
-            effects = MoveManager.Instance.GetMoveFromID(id).effects;
+            activeEffects.Add(new ActiveEffect { type = effectType, value = effect.value, remainingDuration = effect.duration, source = source });
+        }
+    }
+
+    public void ApplyPlayerEffects(int id, bool isItem)
+    {
+        List<Effect> effects;
+        string source;
+        if (isItem)
+        {
+            Item item = ItemManager.Instance.GetItemFromID(id);
+            effects = item.effects;
+            source = item.name;
+        }
+        else
+        {
+            Move move = MoveManager.Instance.GetMoveFromID(id);
+            effects = move.effects;
+            source = move.name;
         }
         foreach (var effect in effects)
         {
@@ -145,54 +165,54 @@ public class MasterScript : MonoBehaviour
             switch (eff)
             {
                 case EffectType.HealPlayerPercentageOfMaxHP:
-                    user.Heal(user.GetMaxHP() * effect.value / 100);
+                    player.Heal(player.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.HealEnemyPercentageOfMaxHP:
-                    target.Heal(target.GetMaxHP() * effect.value / 100);
+                    enemy.Heal(enemy.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.DamagePlayerPercentageOfMaxHP:
-                    user.TakeDamage(user.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
+                    player.TakeDamage(player.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
                     break;
                 case EffectType.DamageEnemyPercentageOfMaxHP:
-                    target.TakeDamage(target.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
+                    enemy.TakeDamage(enemy.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
                     break;
                 case EffectType.ModifySelfDamageTakenModifier:
-                    user.DamageTakenModifier = Mathf.Clamp(user.DamageTakenModifier + effect.value, 0, 999);
-                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
+                    player.DamageTakenModifier = Mathf.Clamp(player.DamageTakenModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, playerActiveEffects);
                     break;
                 case EffectType.ModifySelfDamageDealtModifier:
-                    user.DamageDealtModifier = Mathf.Clamp(user.DamageDealtModifier + effect.value, 0, 999);
-                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
+                    player.DamageDealtModifier = Mathf.Clamp(player.DamageDealtModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, enemyActiveEffects);
                     break;
                 case EffectType.ModifyEnemyDamageTakenModifier:
-                    target.DamageTakenModifier = Mathf.Clamp(target.DamageTakenModifier + effect.value, 0, 999);
-                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
+                    enemy.DamageTakenModifier = Mathf.Clamp(enemy.DamageTakenModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, enemyActiveEffects);
                     break;
                 case EffectType.ModifyEnemyDamageDealtModifier:
-                    target.DamageDealtModifier = Mathf.Clamp(target.DamageDealtModifier + effect.value, 0, 999);
-                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
+                    enemy.DamageDealtModifier = Mathf.Clamp(enemy.DamageDealtModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, enemyActiveEffects);
                     break;
                 case EffectType.ReflectDamage:
                     // This actually adds to the damage reflect modifier
-                    user.DamageReflectModifier += effect.value;
-                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
+                    player.DamageReflectModifier += effect.value;
+                    UpdateActiveEffects(effect, eff, source, playerActiveEffects);
                     break;
                 case EffectType.CheatDeath:
-                    user.CheatDeathCount = effect.effectDuration; // Set the number of times it can occur
-                    user.CheatDeathPercentage = effect.value; // Set the percentage for revival
-                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
+                    player.CheatDeathCount = effect.duration; // Set the number of times it can occur
+                    player.CheatDeathPercentage = effect.value; // Set the percentage for revival
+                    UpdateActiveEffects(effect, eff, source, playerActiveEffects);
                     break;
                 case EffectType.Stun:
-                    target.StunDuration = effect.effectDuration;
-                    activeEffects.Add(new ActiveEffect { type = eff, value = effect.value, remainingDuration = effect.effectDuration, keepStacking = effect.keepStacking });
+                    enemy.StunDuration = effect.duration;
+                    UpdateActiveEffects(effect, eff, source, enemyActiveEffects);
                     break;
                 case EffectType.PlayerVampirism:
-                    target.TakeDamage(target.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
-                    user.Heal(target.GetMaxHP() * effect.value / 100);
+                    enemy.TakeDamage(enemy.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
+                    player.Heal(enemy.GetMaxHP() * effect.value / 100);
                     break;
                 case EffectType.AllIn:
-                    user.AllInExtraDamage = target.GetMaxHP() * 0.1f;
-                    user.AllInExtraDamageTaken = target.GetMaxHP() * 0.1f;
+                    player.AllInExtraDamage = enemy.GetMaxHP() * 0.1f;
+                    player.AllInExtraDamageTaken = enemy.GetMaxHP() * 0.1f;
                     break;
             }
         }
@@ -211,23 +231,104 @@ public class MasterScript : MonoBehaviour
         LoadBuffIcons();
     }
 
-    private void ApplyActiveEffects()
+    public void ApplyEnemyEffects(int id, bool isItem)
+    {
+        List<Effect> effects;
+        string source;
+        if (isItem)
+        {
+            Item item = ItemManager.Instance.GetItemFromID(id);
+            effects = item.effects;
+            source = item.name;
+        }
+        else
+        {
+            Move move = MoveManager.Instance.GetMoveFromID(id);
+            effects = move.effects;
+            source = move.name;
+        }
+        foreach (var effect in effects)
+        {
+            Enum.TryParse(effect.type, out EffectType eff);
+            switch (eff)
+            {
+                case EffectType.HealPlayerPercentageOfMaxHP:
+                    enemy.Heal(enemy.GetMaxHP() * effect.value / 100);
+                    break;
+                case EffectType.HealEnemyPercentageOfMaxHP:
+                    player.Heal(player.GetMaxHP() * effect.value / 100);
+                    break;
+                case EffectType.DamagePlayerPercentageOfMaxHP:
+                    enemy.TakeDamage(player.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
+                    break;
+                case EffectType.DamageEnemyPercentageOfMaxHP:
+                    player.TakeDamage(enemy.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
+                    break;
+                case EffectType.ModifySelfDamageTakenModifier:
+                    enemy.DamageTakenModifier = Mathf.Clamp(enemy.DamageTakenModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, enemyActiveEffects);
+                    break;
+                case EffectType.ModifySelfDamageDealtModifier:
+                    enemy.DamageDealtModifier = Mathf.Clamp(enemy.DamageDealtModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, playerActiveEffects);
+                    break;
+                case EffectType.ModifyEnemyDamageTakenModifier:
+                    player.DamageTakenModifier = Mathf.Clamp(player.DamageTakenModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, playerActiveEffects);
+                    break;
+                case EffectType.ModifyEnemyDamageDealtModifier:
+                    player.DamageDealtModifier = Mathf.Clamp(player.DamageDealtModifier + effect.value, 0, 999);
+                    UpdateActiveEffects(effect, eff, source, playerActiveEffects);
+                    break;
+                case EffectType.ReflectDamage:
+                    // This actually adds to the damage reflect modifier
+                    enemy.DamageReflectModifier += effect.value;
+                    UpdateActiveEffects(effect, eff, source, enemyActiveEffects);
+                    break;
+                case EffectType.CheatDeath:
+                    enemy.CheatDeathCount = effect.duration; // Set the number of times it can occur
+                    enemy.CheatDeathPercentage = effect.value; // Set the percentage for revival
+                    UpdateActiveEffects(effect, eff, source, enemyActiveEffects);
+                    break;
+                case EffectType.Stun:
+                    player.StunDuration = effect.duration;
+                    UpdateActiveEffects(effect, eff, source, playerActiveEffects);
+                    break;
+                case EffectType.PlayerVampirism:
+                    player.TakeDamage(player.GetMaxHP() * effect.value / 100, IndicatorType.BaseDamage);
+                    enemy.Heal(player.GetMaxHP() * effect.value / 100);
+                    break;
+                case EffectType.AllIn:
+                    enemy.AllInExtraDamage = player.GetMaxHP() * 0.1f;
+                    enemy.AllInExtraDamageTaken = player.GetMaxHP() * 0.1f;
+                    break;
+            }
+        }
+
+        if (enemy.IsDead())
+        {
+            isGameOver = true;
+            StartCoroutine(OnPlayerWin());
+        }
+        else if (player.IsDead())
+        {
+            isGameOver = true;
+            StartCoroutine(OnPlayerLose());
+        }
+        ResetBuffIcons();
+        LoadBuffIcons();
+    }
+
+    private void ApplyPlayerActiveEffects()
     {
         float selfTotalDamageDealtModifier = 1;
         float selfTotalDamageTakenModifier = 1;
         float selfReflectDamageModifier = 0;
-        float enemyTotalDamageDealtModifier = 1;
-        float enemyTotalDamageTakenModifier = 1;
-        float enemyReflectDamageModifier = 0;
-        float enemyStunDuration = 0;
-        List<EffectType> playerBuffList = new();
-        List<EffectType> enemyBuffList = new();
 
-        for (int i = activeEffects.Count - 1; i >= 0; i--)
+        for (int i = playerActiveEffects.Count - 1; i >= 0; i--)
         {
-            var effect = activeEffects[i];
+            var effect = playerActiveEffects[i];
             effect.remainingDuration--;
-
             switch (effect.type)
             {
                 case EffectType.ModifySelfDamageTakenModifier:
@@ -237,10 +338,10 @@ public class MasterScript : MonoBehaviour
                     selfTotalDamageDealtModifier += effect.value;
                     break;
                 case EffectType.ModifyEnemyDamageTakenModifier:
-                    enemyTotalDamageTakenModifier += effect.value;
+                    selfTotalDamageTakenModifier += effect.value;
                     break;
                 case EffectType.ModifyEnemyDamageDealtModifier:
-                    enemyTotalDamageDealtModifier += effect.value;
+                    selfTotalDamageDealtModifier += effect.value;
                     break;
                 case EffectType.ReflectDamage:
                     selfReflectDamageModifier += effect.value;
@@ -250,6 +351,54 @@ public class MasterScript : MonoBehaviour
                     player.CheatDeathPercentage = effect.value;
                     break;
                 case EffectType.Stun:
+                    player.StunDuration = effect.remainingDuration;
+                    break;
+
+            }
+
+            if (effect.remainingDuration == 0)
+            {
+                playerActiveEffects.RemoveAt(i);
+            }
+        }
+
+        player.DamageTakenModifier = Mathf.Max(0, selfTotalDamageTakenModifier);
+        player.DamageDealtModifier = Mathf.Max(0, selfTotalDamageDealtModifier);
+        player.DamageReflectModifier = Mathf.Max(0, selfReflectDamageModifier);
+    }
+
+    private void ApplyEnemyActiveEffects()
+    {
+        float selfTotalDamageDealtModifier = 1;
+        float selfTotalDamageTakenModifier = 1;
+        float selfReflectDamageModifier = 0;
+
+        for (int i = enemyActiveEffects.Count - 1; i >= 0; i--)
+        {
+            var effect = enemyActiveEffects[i];
+            effect.remainingDuration--;
+            switch (effect.type)
+            {
+                case EffectType.ModifySelfDamageTakenModifier:
+                    selfTotalDamageTakenModifier += effect.value;
+                    break;
+                case EffectType.ModifySelfDamageDealtModifier:
+                    selfTotalDamageDealtModifier += effect.value;
+                    break;
+                case EffectType.ModifyEnemyDamageTakenModifier:
+                    selfTotalDamageTakenModifier += effect.value;
+                    break;
+                case EffectType.ModifyEnemyDamageDealtModifier:
+                    selfTotalDamageDealtModifier += effect.value;
+                    break;
+                case EffectType.ReflectDamage:
+                    selfReflectDamageModifier += effect.value;
+                    break;
+                case EffectType.CheatDeath:
+                    effect.remainingDuration = enemy.CheatDeathCount;
+                    enemy.CheatDeathPercentage = effect.value;
+                    break;
+                case EffectType.Stun:
                     enemy.StunDuration = effect.remainingDuration;
                     break;
 
@@ -257,16 +406,15 @@ public class MasterScript : MonoBehaviour
 
             if (effect.remainingDuration == 0)
             {
-                activeEffects.RemoveAt(i);
+                enemyActiveEffects.RemoveAt(i);
             }
         }
 
-        player.DamageTakenModifier = Mathf.Max(0, selfTotalDamageTakenModifier);
-        player.DamageDealtModifier = Mathf.Max(0, selfTotalDamageDealtModifier);
-        enemy.DamageTakenModifier = Mathf.Max(0, enemyTotalDamageTakenModifier);
-        enemy.DamageDealtModifier = Mathf.Max(0, enemyTotalDamageDealtModifier);
-        player.DamageReflectModifier = Mathf.Max(0, selfReflectDamageModifier);
+        enemy.DamageTakenModifier = Mathf.Max(0, selfTotalDamageTakenModifier);
+        enemy.DamageDealtModifier = Mathf.Max(0, selfTotalDamageDealtModifier);
+        enemy.DamageReflectModifier = Mathf.Max(0, selfReflectDamageModifier);
     }
+
 
     public IEnumerator ReturnToMainMenu()
     {
@@ -310,7 +458,7 @@ public class MasterScript : MonoBehaviour
             hit.Play();
 
         }
-        ApplyEffects(move.id, false, player, enemy);
+        ApplyPlayerEffects(move.id, false);
         isPlayerTurn = false;
         isSomeCoroutineRunning = true;
     }
@@ -321,6 +469,7 @@ public class MasterScript : MonoBehaviour
         {
             isSomeCoroutineRunning = false;
             yield return new WaitForSeconds(1);
+            ApplyEnemyActiveEffects();
             int randomNumber = UnityEngine.Random.Range(0, 4);
             Move move = MoveManager.Instance.GetMoveFromID(enemy.GetMoveID(randomNumber));
             EnemyMovePanel.SetActive(true);
@@ -332,20 +481,20 @@ public class MasterScript : MonoBehaviour
                 hit.Play();
                 dmg.Play();
             }
-            ApplyEffects(move.id, false, enemy, player);
+            ApplyEnemyEffects(move.id, false);
             yield return new WaitForSeconds(1);
             EnemyMovePanel.SetActive(false);
             isPlayerTurn = true;
-            ApplyActiveEffects();
+            ApplyPlayerActiveEffects();
         }
     }
 
 
     private void LoadBuffIcons()
     {
-        for (int i = activeEffects.Count - 1; i >= 0; i--)
+        for (int i = playerActiveEffects.Count - 1; i >= 0; i--)
         {
-            var effect = activeEffects[i];
+            var effect = playerActiveEffects[i];
 
             switch (effect.type)
             {
@@ -368,6 +517,50 @@ public class MasterScript : MonoBehaviour
                 case EffectType.ModifyEnemyDamageDealtModifier:
                     if (effect.value > 1)
                     {
+                        AddToPlayerBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stronger Damage"));
+                    }
+                    else
+                    {
+                        AddToPlayerBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Weaker Damage"));
+                    }
+                    break;
+                case EffectType.ReflectDamage:
+                    AddToPlayerBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Reflect Damage"));
+                    break;
+                case EffectType.CheatDeath:
+                    AddToPlayerBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Instant Health"));
+                    break;
+                case EffectType.Stun:
+                    AddToPlayerBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stun"));
+                    break;
+            }
+        }
+
+        for (int i = enemyActiveEffects.Count - 1; i >= 0; i--)
+        {
+            var effect = enemyActiveEffects[i];
+
+            switch (effect.type)
+            {
+                case EffectType.ModifySelfDamageTakenModifier:
+                    if (effect.value > 1)
+                    {
+                        AddToEnemyBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stronger Damage"));
+                    }
+                    else
+                    {
+                        AddToEnemyBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Weaker Damage"));
+                    }
+                    break;
+                case EffectType.ModifySelfDamageDealtModifier:
+
+                    break;
+                case EffectType.ModifyEnemyDamageTakenModifier:
+
+                    break;
+                case EffectType.ModifyEnemyDamageDealtModifier:
+                    if (effect.value > 1)
+                    {
                         AddToEnemyBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stronger Damage"));
                     }
                     else
@@ -376,10 +569,10 @@ public class MasterScript : MonoBehaviour
                     }
                     break;
                 case EffectType.ReflectDamage:
-                    AddToPlayerBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Reflect Damage"));
+                    AddToEnemyBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Reflect Damage"));
                     break;
                 case EffectType.CheatDeath:
-                    AddToPlayerBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Instant Health"));
+                    AddToEnemyBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Instant Health"));
                     break;
                 case EffectType.Stun:
                     AddToEnemyBuffIcons(Resources.Load<Sprite>("UI Scenes/Shop/Card/Item Effects Icon/Stun"));
