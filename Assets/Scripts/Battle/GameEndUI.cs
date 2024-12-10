@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// I want to kill myself
 public class GameEndUI : MonoBehaviour
 {
     public void Win(){
