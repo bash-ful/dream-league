@@ -20,6 +20,8 @@ public class DataToSave
     public List<InventoryItem> equippedItems;
     public List<Monster> equippedMonsters;
     public List<Monster> unlockedMonsters;
+    public bool isBanned = false;
+    public bool isAdmin = false;
 
 }
 

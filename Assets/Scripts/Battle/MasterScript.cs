@@ -27,7 +27,7 @@ public class MasterScript : MonoBehaviour
     private float totalElapsedTime;
 
     public GameObject onWinSound, onLoseSound, bgm;
-    public AudioSource hit, dmg;
+    public AudioSource hit, dmg, status;
 
     #region MOVETHIS
     public GameObject winPanel, losePanel;
@@ -112,7 +112,14 @@ public class MasterScript : MonoBehaviour
 
     private void HideUI()
     {
-        GameObject.Find("Moves").SetActive(false);
+        if (GameObject.Find("Moves") != null)
+        {
+            GameObject.Find("Moves").SetActive(false);
+
+        }
+        if (GameObject.Find("EnemyMovePanel") != null) {
+            GameObject.Find("EnemyMovePanel").SetActive(false);
+        }
         GameObject.Find("Player").SetActive(false);
         GameObject.Find("Enemy").SetActive(false);
         GameObject.Find("Return").SetActive(false);
@@ -449,17 +456,34 @@ public class MasterScript : MonoBehaviour
         losePanel.SetActive(true);
     }
 
+
     public void PlayerMove(int movesetIndex)
     {
+        StartCoroutine(PlayerMoveC(movesetIndex));
+    }
+
+    private IEnumerator PlayerMoveC(int movesetIndex)
+    {
+        isPlayerTurn = false;
+        yield return new WaitForSeconds(0.5f);
         Move move = MoveManager.Instance.GetMoveFromID(player.GetMoveID(movesetIndex));
+        EnemyMovePanel.SetActive(true);
+        EnemyMoveText.text = $"{player.name} uses {move.name}!";
+        yield return new WaitForSeconds(1);
         if (move.type == "attack")
         {
             player.DealDamage(enemy, move.baseDamage, move.elementType);
             hit.Play();
 
         }
+        else
+        {
+            status.Play();
+        }
+
         ApplyPlayerEffects(move.id, false);
-        isPlayerTurn = false;
+        yield return new WaitForSeconds(1);
+        EnemyMovePanel.SetActive(false);
         isSomeCoroutineRunning = true;
     }
 
@@ -473,13 +497,16 @@ public class MasterScript : MonoBehaviour
             int randomNumber = UnityEngine.Random.Range(0, 4);
             Move move = MoveManager.Instance.GetMoveFromID(enemy.GetMoveID(randomNumber));
             EnemyMovePanel.SetActive(true);
-            EnemyMoveText.text = $"Enemy uses {move.name}!";
+            EnemyMoveText.text = $"{enemy.name} uses {move.name}!";
             yield return new WaitForSeconds(1);
             if (move.type == "attack")
             {
                 enemy.DealDamage(player, move.baseDamage, move.elementType);
                 hit.Play();
-                dmg.Play();
+            }
+            else
+            {
+                status.Play();
             }
             ApplyEnemyEffects(move.id, false);
             yield return new WaitForSeconds(1);

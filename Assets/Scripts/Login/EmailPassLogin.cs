@@ -117,7 +117,7 @@ public class EmailPassLogin : MonoBehaviour
 
     #endregion
 
-    #region Login
+    #region login
     public void Login()
     {
         loadingScreen.SetActive(true);
@@ -144,23 +144,24 @@ public class EmailPassLogin : MonoBehaviour
             }
 
             AuthResult result = task.Result;
-            Debug.LogFormat("User signed in successfully: {0} ({1})",
-                result.User.DisplayName, result.User.UserId);
-
-            if (result.User.IsEmailVerified)
-            {
-                ShowLoginTextResult("Login Success!");
-                dataSaver.LoadDataFn();
-                sceneScript.MoveScene(1);
-                // loginPanel.SetActive(false);
-                // registerPanel.SetActive(false);
-                // mainMenuPanel.SetActive(true);
-
-            }
-            else
+            // Debug.LogFormat("User signed in successfully: {0} ({1})",
+            //     result.User.DisplayName, result.User.UserId);
+            if (!result.User.IsEmailVerified)
             {
                 ShowLoginTextResult("Please verify your e-mail!");
+                return;
             }
+
+            dataSaver.LoadDataFn();
+
+            if (DataSaver.Instance.dts.isBanned)
+            {
+                ShowLoginTextResult("You are banned! Contact support");
+                return;
+            }
+
+            ShowLoginTextResult("Login Success!");
+            sceneScript.MoveScene(1);
         });
     }
     #endregion
@@ -170,7 +171,6 @@ public class EmailPassLogin : MonoBehaviour
     {
         loginText.text = msg;
     }
-
     void ShowRegisterTextResult(string msg)
     {
         registerText.text = msg;

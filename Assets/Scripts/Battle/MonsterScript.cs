@@ -28,6 +28,7 @@ public class MonsterScript : MonoBehaviour
     public FloatingIndicator damageIndicator;
 
     public GameObject damageIndicatorSpawnPosition;
+    public MonsterSprite monsterSprite;
 
     #endregion
 
@@ -81,7 +82,7 @@ public class MonsterScript : MonoBehaviour
     {
         health = Mathf.Clamp(health - (damage * damageTakenModifier), 0, health);
         damageIndicator.ShowIndicator($"{damage * damageTakenModifier}", type, damageIndicatorSpawnPosition.transform.position);
-
+        monsterSprite.ChangeSpriteColor(type);
         if (health <= 0 && cheatDeathCount > 0)
         {
             StartCoroutine(WaitAndRevive());

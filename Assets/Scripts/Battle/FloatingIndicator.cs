@@ -10,7 +10,9 @@ public enum IndicatorType
     BoostedDamage,
     SuperEffectiveDamage,
     NotEffectiveDamage,
-    Heal
+    Heal,
+    Buff,
+    Debuff
 }
 public class FloatingIndicator : MonoBehaviour
 {
@@ -29,7 +31,7 @@ public class FloatingIndicator : MonoBehaviour
         StartCoroutine(AnimateIndicator(instance, type));
     }
 
-    private Color GetColor(IndicatorType type)
+    public Color GetColor(IndicatorType type)
     {
         return type switch
         {
