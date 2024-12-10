@@ -5,6 +5,7 @@ using Firebase.Auth;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 
 [System.Serializable]
@@ -75,7 +76,8 @@ public class DataSaver : MonoBehaviour
         SaveDataFn();
     }
 
-    public void UpdateMaxLevelCleared(int level){
+    public void UpdateMaxLevelCleared(int level)
+    {
         Instance.dts.maxLevelCleared = level;
         SaveDataFn();
     }
@@ -101,26 +103,20 @@ public class DataSaver : MonoBehaviour
         return dts.inventory;
     }
 
-    public void LoadDataFn()
-    {
-        StartCoroutine(LoadDataEnum());
-    }
-
-    IEnumerator LoadDataEnum()
+    public async Task LoadDataFn()
     {
         string userId = GetUserId();
         if (userId == null)
         {
             Debug.LogError("No user is logged in.");
-            yield break;
+            return;
         }
 
-        var serverData = dbRef.Child("users").Child(userId).GetValueAsync();
-        yield return new WaitUntil(predicate: () => serverData.IsCompleted);
+        var serverData = await dbRef.Child("users").Child(userId).GetValueAsync();
 
         print("process is complete");
 
-        DataSnapshot snapshot = serverData.Result;
+        DataSnapshot snapshot = serverData;
         string jsonData = snapshot.GetRawJsonValue();
 
         if (jsonData != null)
@@ -235,7 +231,8 @@ public class DataSaver : MonoBehaviour
 
     }
 
-    public bool IsMonsterEquipped(int monsterId) {
+    public bool IsMonsterEquipped(int monsterId)
+    {
         return dts.equippedMonsters.Any(x => x.id == monsterId);
     }
 

@@ -118,52 +118,55 @@ public class EmailPassLogin : MonoBehaviour
     #endregion
 
     #region login
-    public void Login()
-    {
-        loadingScreen.SetActive(true);
+    public async void Login()
+{
+    loadingScreen.SetActive(true);
 
+    try
+    {
         FirebaseAuth auth = FirebaseAuth.DefaultInstance;
         string email = loginEmail.text;
         string password = loginPassword.text;
 
         Credential credential = EmailAuthProvider.GetCredential(email, password);
-        auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWithOnMainThread(task =>
+        AuthResult result = await auth.SignInAndRetrieveDataWithCredentialAsync(credential);
+
+        loadingScreen.SetActive(false);
+
+        if (!result.User.IsEmailVerified)
         {
-            loadingScreen.SetActive(false);
+            ShowLoginTextResult("Please verify your e-mail!");
+            return;
+        }
 
-            if (task.IsCanceled)
-            {
-                Debug.LogError("SignInAndRetrieveDataWithCredentialAsync was canceled.");
-                return;
-            }
-            if (task.IsFaulted)
-            {
-                Debug.LogError("SignInAndRetrieveDataWithCredentialAsync encountered an error: " + task.Exception.ToString());
-                ShowLoginTextResult("An error has occured!");
-                return;
-            }
+        await dataSaver.LoadDataFn();
 
-            AuthResult result = task.Result;
-            // Debug.LogFormat("User signed in successfully: {0} ({1})",
-            //     result.User.DisplayName, result.User.UserId);
-            if (!result.User.IsEmailVerified)
-            {
-                ShowLoginTextResult("Please verify your e-mail!");
-                return;
-            }
+        if (DataSaver.Instance.dts.isBanned)
+        {
+            ShowLoginTextResult("You are banned");
+            return;
+        }
 
-            dataSaver.LoadDataFn();
-
-            if (DataSaver.Instance.dts.isBanned)
-            {
-                ShowLoginTextResult("You are banned! Contact support");
-                return;
-            }
-
-            ShowLoginTextResult("Login Success!");
-            sceneScript.MoveScene(1);
-        });
+        ShowLoginTextResult("Login Success!");
+        sceneScript.MoveScene(1);
     }
+    catch (Exception ex)
+    {
+        loadingScreen.SetActive(false);
+
+        if (ex is AggregateException aggregateEx)
+        {
+            Debug.LogError("SignIn encountered an error: " + aggregateEx.Flatten().ToString());
+        }
+        else
+        {
+            Debug.LogError("SignIn encountered an error: " + ex.Message);
+        }
+
+        ShowLoginTextResult("Incorrect Credentials");
+    }
+}
+
     #endregion
 
     #region extra
